@@ -1,0 +1,619 @@
+[
+  {
+    "turn": 1,
+    "player": 1,
+    "action": "Turn 1 Start Phase",
+    "timestamp": 1768160839173
+  },
+  {
+    "turn": 1,
+    "player": 1,
+    "action": "Drew a card",
+    "details": {
+      "cardName": "Dragon Heal"
+    },
+    "timestamp": 1768160839173
+  },
+  {
+    "turn": 1,
+    "player": 1,
+    "action": "Gained energy",
+    "details": {
+      "amount": 6,
+      "total": 6
+    },
+    "timestamp": 1768160839173
+  },
+  {
+    "turn": 1,
+    "player": 1,
+    "action": "Entered Action Phase",
+    "timestamp": 1768160839173
+  },
+  {
+    "turn": 1,
+    "player": 1,
+    "action": "Played Shield Disruptor",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Removed 2 shields from enemy Dragon"
+      ]
+    },
+    "timestamp": 1768160882630
+  },
+  {
+    "turn": 1,
+    "player": 1,
+    "action": "Played Dual Strike",
+    "details": {
+      "cost": 1,
+      "morrikBonus": 0,
+      "effects": [
+        "Dealt 1 to Dragon and 1 to Rider"
+      ]
+    },
+    "timestamp": 1768160887461
+  },
+  {
+    "turn": 1,
+    "player": 1,
+    "action": "Played Precision Strike",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Dealt 2 damage to enemy Rider"
+      ]
+    },
+    "timestamp": 1768160912277
+  },
+  {
+    "turn": 1,
+    "player": 1,
+    "action": "Passed",
+    "timestamp": 1768160924012
+  },
+  {
+    "turn": 1,
+    "player": 1,
+    "action": "End Phase",
+    "timestamp": 1768160924012
+  },
+  {
+    "turn": 1,
+    "player": 2,
+    "action": "Turn ended",
+    "details": {
+      "nextPlayer": 2,
+      "turn": 1
+    },
+    "timestamp": 1768160924012
+  },
+  {
+    "turn": 1,
+    "player": 2,
+    "action": "Turn 1 Start Phase",
+    "timestamp": 1768160924012
+  },
+  {
+    "turn": 1,
+    "player": 2,
+    "action": "Drew a card",
+    "details": {
+      "cardName": "Burning Hit"
+    },
+    "timestamp": 1768160924012
+  },
+  {
+    "turn": 1,
+    "player": 2,
+    "action": "Gained energy",
+    "details": {
+      "amount": 5,
+      "total": 5
+    },
+    "timestamp": 1768160924012
+  },
+  {
+    "turn": 1,
+    "player": 2,
+    "action": "Entered Action Phase",
+    "timestamp": 1768160924012
+  },
+  {
+    "turn": 1,
+    "player": 2,
+    "action": "Played Freeze Ray",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Froze enemy Dragon"
+      ]
+    },
+    "timestamp": 1768160960249
+  },
+  {
+    "turn": 1,
+    "player": 2,
+    "action": "Played Burning Hit",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Dealt 0 damage and applied 1 Burn to enemy Dragon"
+      ]
+    },
+    "timestamp": 1768160990864
+  },
+  {
+    "turn": 1,
+    "player": 2,
+    "action": "Passed",
+    "timestamp": 1768161016377
+  },
+  {
+    "turn": 1,
+    "player": 2,
+    "action": "End Phase",
+    "timestamp": 1768161016377
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "Turn ended",
+    "details": {
+      "nextPlayer": 1,
+      "turn": 2
+    },
+    "timestamp": 1768161016377
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "Turn 2 Start Phase",
+    "timestamp": 1768161016377
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "Drew a card",
+    "details": {
+      "cardName": "Freeze Ray"
+    },
+    "timestamp": 1768161016377
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "Gained energy",
+    "details": {
+      "amount": 6,
+      "total": 7
+    },
+    "timestamp": 1768161016377
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "Dragon took burn damage",
+    "details": {
+      "damage": 1,
+      "hp": 34
+    },
+    "timestamp": 1768161016377
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "Entered Action Phase",
+    "timestamp": 1768161016377
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "Played Chain Bolt",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Dealt 2 to Dragon and 1 to Rider"
+      ]
+    },
+    "timestamp": 1768161051953
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "Passed",
+    "timestamp": 1768161061285
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "End Phase",
+    "timestamp": 1768161061285
+  },
+  {
+    "turn": 2,
+    "player": 1,
+    "action": "Dragon thawed and gained freeze immunity",
+    "timestamp": 1768161061285
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "Turn ended",
+    "details": {
+      "nextPlayer": 2,
+      "turn": 2
+    },
+    "timestamp": 1768161061285
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "Turn 2 Start Phase",
+    "timestamp": 1768161061285
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "Drew a card",
+    "details": {
+      "cardName": "Shield Up"
+    },
+    "timestamp": 1768161061285
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "Gained energy",
+    "details": {
+      "amount": 5,
+      "total": 6
+    },
+    "timestamp": 1768161061285
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "Entered Action Phase",
+    "timestamp": 1768161061285
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "Played Shield Up",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Dragon gained 2 shields"
+      ]
+    },
+    "timestamp": 1768161068961
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "Attacked rider",
+    "details": {
+      "damage": 3,
+      "kaelBonus": null,
+      "dragonAbility": "Cryowyrm froze target"
+    },
+    "timestamp": 1768161108534
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "Played Rider Heal",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Healed Rider for 3 HP"
+      ]
+    },
+    "timestamp": 1768161142211
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "Passed",
+    "timestamp": 1768161145333
+  },
+  {
+    "turn": 2,
+    "player": 2,
+    "action": "End Phase",
+    "timestamp": 1768161145333
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Turn ended",
+    "details": {
+      "nextPlayer": 1,
+      "turn": 3
+    },
+    "timestamp": 1768161145333
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Turn 3 Start Phase",
+    "timestamp": 1768161145333
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Drew a card",
+    "details": {
+      "cardName": "Shield Up"
+    },
+    "timestamp": 1768161145333
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Gained energy",
+    "details": {
+      "amount": 6,
+      "total": 11
+    },
+    "timestamp": 1768161145333
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Dragon took burn damage",
+    "details": {
+      "damage": 1,
+      "hp": 33
+    },
+    "timestamp": 1768161145333
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Entered Action Phase",
+    "timestamp": 1768161145333
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Played Freeze Ray",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Froze enemy Dragon"
+      ]
+    },
+    "timestamp": 1768161182250
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Played Shield Up",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Dragon gained 2 shields"
+      ]
+    },
+    "timestamp": 1768161185867
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Attacked rider",
+    "details": {
+      "damage": 3,
+      "kaelBonus": null,
+      "dragonAbility": "Voltwing dealt 2 splash to dragon"
+    },
+    "timestamp": 1768161189886
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Attacked rider",
+    "details": {
+      "damage": 3,
+      "kaelBonus": null,
+      "dragonAbility": "Voltwing dealt 2 splash to dragon"
+    },
+    "timestamp": 1768161191046
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Passed",
+    "timestamp": 1768161195826
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "End Phase",
+    "timestamp": 1768161195826
+  },
+  {
+    "turn": 3,
+    "player": 1,
+    "action": "Rider thawed and gained freeze immunity",
+    "timestamp": 1768161195826
+  },
+  {
+    "turn": 3,
+    "player": 2,
+    "action": "Turn ended",
+    "details": {
+      "nextPlayer": 2,
+      "turn": 3
+    },
+    "timestamp": 1768161195826
+  },
+  {
+    "turn": 3,
+    "player": 2,
+    "action": "Turn 3 Start Phase",
+    "timestamp": 1768161195826
+  },
+  {
+    "turn": 3,
+    "player": 2,
+    "action": "Drew a card",
+    "details": {
+      "cardName": "Firebreak"
+    },
+    "timestamp": 1768161195826
+  },
+  {
+    "turn": 3,
+    "player": 2,
+    "action": "Gained energy",
+    "details": {
+      "amount": 5,
+      "total": 5
+    },
+    "timestamp": 1768161195826
+  },
+  {
+    "turn": 3,
+    "player": 2,
+    "action": "Entered Action Phase",
+    "timestamp": 1768161195826
+  },
+  {
+    "turn": 3,
+    "player": 2,
+    "action": "Played Weakening Strike",
+    "details": {
+      "cost": 2,
+      "morrikBonus": 0,
+      "effects": [
+        "Dealt 2 damage to enemy Rider"
+      ]
+    },
+    "timestamp": 1768161246045
+  },
+  {
+    "turn": 3,
+    "player": 2,
+    "action": "Passed",
+    "timestamp": 1768161274406
+  },
+  {
+    "turn": 3,
+    "player": 2,
+    "action": "End Phase",
+    "timestamp": 1768161274406
+  },
+  {
+    "turn": 3,
+    "player": 2,
+    "action": "Dragon thawed and gained freeze immunity",
+    "timestamp": 1768161274406
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Turn ended",
+    "details": {
+      "nextPlayer": 1,
+      "turn": 4
+    },
+    "timestamp": 1768161274406
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Turn 4 Start Phase",
+    "timestamp": 1768161274406
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Drew a card",
+    "details": {
+      "cardName": "Dragon Heal"
+    },
+    "timestamp": 1768161274406
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Gained energy",
+    "details": {
+      "amount": 5,
+      "total": 8
+    },
+    "timestamp": 1768161274406
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Dragon took burn damage",
+    "details": {
+      "damage": 1,
+      "hp": 32
+    },
+    "timestamp": 1768161274406
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Entered Action Phase",
+    "timestamp": 1768161274406
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Attacked rider",
+    "details": {
+      "damage": 3,
+      "kaelBonus": null,
+      "dragonAbility": "Voltwing dealt 2 splash to dragon"
+    },
+    "timestamp": 1768161296635
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Attacked rider",
+    "details": {
+      "damage": 3,
+      "kaelBonus": null,
+      "dragonAbility": "Voltwing dealt 2 splash to dragon"
+    },
+    "timestamp": 1768161297680
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Attacked rider",
+    "details": {
+      "damage": 3,
+      "kaelBonus": null,
+      "dragonAbility": "Voltwing dealt 2 splash to dragon"
+    },
+    "timestamp": 1768161298813
+  },
+  {
+    "turn": 4,
+    "player": 1,
+    "action": "Attacked rider",
+    "details": {
+      "damage": 3,
+      "kaelBonus": null,
+      "dragonAbility": "Voltwing dealt 2 splash to dragon"
+    },
+    "timestamp": 1768161300762
+  }
+]
