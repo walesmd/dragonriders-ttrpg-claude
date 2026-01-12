@@ -61,7 +61,11 @@ export default function MultiplayerLobby({ onCancel }: MultiplayerLobbyProps) {
   };
 
   const shareUrl = roomId
-    ? `${window.location.origin}${window.location.pathname}?room=${roomId}`
+    ? (() => {
+        const url = new URL(window.location.href);
+        url.searchParams.set('room', roomId);
+        return url.toString();
+      })()
     : '';
 
   const copyShareUrl = () => {
