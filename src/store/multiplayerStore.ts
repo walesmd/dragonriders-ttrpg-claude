@@ -84,7 +84,7 @@ function generateRoomId(): string {
 }
 
 // PartyKit host - change this when deploying
-const PARTYKIT_HOST = import.meta.env.VITE_PARTYKIT_HOST || 'localhost:1999';
+const PARTYKIT_HOST = 'dragonriders.walesmd.partykit.dev';
 
 export const useMultiplayerStore = create<MultiplayerStore>((set, get) => ({
   socket: null,
