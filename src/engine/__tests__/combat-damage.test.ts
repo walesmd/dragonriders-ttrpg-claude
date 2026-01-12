@@ -7,7 +7,7 @@ import {
   healRider,
   addShields,
 } from '../combat';
-import { createTestGameState, setPlayerHp } from './testUtils';
+import { createTestGameState } from './testUtils';
 
 describe('Damage Calculation', () => {
   describe('damageDragon', () => {

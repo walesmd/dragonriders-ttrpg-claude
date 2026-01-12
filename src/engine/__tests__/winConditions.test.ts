@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { checkWinConditions, applyWinCondition } from '../winConditions';
-import { createTestGameState, setPlayerHp } from './testUtils';
+import { createTestGameState } from './testUtils';
 
 describe('Win Conditions', () => {
   describe('checkWinConditions', () => {

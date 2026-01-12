@@ -1,7 +1,5 @@
 import type { GameState, PlayerState, RiderName, DragonName, Card } from '../../data/types';
-import { createPlayerState, createInitialGameState } from '../state';
-import { createRider } from '../../data/riders';
-import { createDragon } from '../../data/dragons';
+import { createInitialGameState } from '../state';
 
 /**
  * Creates a minimal game state for testing.
