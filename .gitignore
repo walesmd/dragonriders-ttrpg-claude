@@ -37,6 +37,7 @@ lerna-debug.log*
 
 # PartyKit
 .party/
+.partykit/
 
 # OS
 Thumbs.db
