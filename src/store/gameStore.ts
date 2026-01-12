@@ -12,6 +12,7 @@ import { canAttack, canPlayCard, getAttackCost, getCardCost } from '../engine/va
 import { applyWinCondition } from '../engine/winConditions';
 import { deepClone } from '../utils/helpers';
 import { useSetupStore } from './setupStore';
+import { initializeLogger, getLogger, clearLogger } from '../logging';
 
 interface GameStore {
   state: GameState | null;
@@ -47,6 +48,19 @@ export const useGameStore = create<GameStore>((set, get) => ({
       return;
     }
 
+    // Initialize the unified logger
+    const mode = setup.gameMode === 'ai' ? 'ai' : 'local';
+    initializeLogger(
+      mode,
+      setup.player1Rider,
+      setup.player1Dragon,
+      setup.player1Deck,
+      setup.player2Rider,
+      setup.player2Dragon,
+      setup.player2Deck,
+      setup.gameMode === 'ai' ? setup.aiDifficulty : undefined
+    );
+
     const gameState = createInitialGameState(
       setup.player1Rider!,
       setup.player1Dragon!,
@@ -56,7 +70,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       setup.player2Deck
     );
 
-    // Execute first start phase
+    // Execute first start phase (this will log via the logger)
     executeStartPhase(gameState);
 
     set({
@@ -76,21 +90,25 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const result = executeAttack(state, state.activePlayer, target);
 
     if (result.success) {
-      // Log the attack
-      state.actionLog.push({
-        turn: state.turn,
-        player: state.activePlayer,
-        action: `Attacked ${target}`,
-        details: {
-          damage: result.damage?.finalDamage,
-          kaelBonus: result.kaelBonus,
-          dragonAbility: result.dragonAbility,
-        },
-        timestamp: Date.now(),
+      // Log the attack via unified logger
+      const logger = getLogger();
+      logger?.logAttack(state, target, result.damage?.finalDamage || 0, {
+        damageBeforeReduction: result.damage?.rawDamage,
+        shieldsAbsorbed: result.damage?.shieldAbsorbed,
+        dragonAbility: result.dragonAbility || undefined,
+        kaelBonus: result.kaelBonus,
+        bronnReduction: result.damage?.damageReduction,
+        burnApplied: result.burnApplied,
+        freezeApplied: result.frozeTarget,
+        splashDamage: result.splashDamage?.finalDamage,
+        energyStolen: result.energyStolen,
       });
 
       // Check win conditions
-      applyWinCondition(state);
+      const gameEnded = applyWinCondition(state);
+      if (gameEnded) {
+        logger?.logGameEnd(state, state.winner!, state.winType!);
+      }
 
       set({
         state: { ...state },
@@ -110,21 +128,29 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const result = executeCard(state, state.activePlayer, cardId, target);
 
     if (result.success) {
-      // Log the card play
-      state.actionLog.push({
-        turn: state.turn,
-        player: state.activePlayer,
-        action: `Played ${result.cardName}`,
-        details: {
-          cost: result.energySpent,
+      // Log the card play via unified logger
+      const logger = getLogger();
+      logger?.logCardPlayed(
+        state,
+        result.cardName || 'Unknown',
+        result.energySpent || 0,
+        result.effects || [],
+        {
           morrikBonus: result.morrikBonus,
-          effects: result.effects,
-        },
-        timestamp: Date.now(),
-      });
+          damage: result.totalDamage,
+          target: result.damageTarget === 'both' ? undefined : result.damageTarget,
+          healing: result.healingDone,
+          shieldsGained: result.shieldsGained,
+          burnApplied: result.burnApplied,
+          freezeApplied: result.freezeApplied,
+        }
+      );
 
       // Check win conditions
-      applyWinCondition(state);
+      const gameEnded = applyWinCondition(state);
+      if (gameEnded) {
+        logger?.logGameEnd(state, state.winner!, state.winType!);
+      }
 
       set({
         state: { ...state },
@@ -169,6 +195,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   reset: () => {
+    clearLogger();
     set({
       state: null,
       history: [],

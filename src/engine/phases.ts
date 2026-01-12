@@ -1,24 +1,10 @@
-import type { GameState, LogEntry } from '../data/types';
+import type { GameState } from '../data/types';
 import { getPlayer, getOpponentPlayer, drawCard } from './state';
-import { gainStartOfTurnEnergy } from './economy';
+import { gainStartOfTurnEnergy, calculateEnergyBreakdown } from './economy';
 import { clearFreezeImmunity, grantFreezeImmunity, clearFreeze, damageDragon } from './combat';
 import { applyWinCondition } from './winConditions';
 import { getOpponent } from '../utils/helpers';
-
-// ============================================================================
-// LOGGING
-// ============================================================================
-
-function log(state: GameState, action: string, details?: Record<string, unknown>): void {
-  const entry: LogEntry = {
-    turn: state.turn,
-    player: state.activePlayer,
-    action,
-    details,
-    timestamp: Date.now(),
-  };
-  state.actionLog.push(entry);
-}
+import { getLogger } from '../logging';
 
 // ============================================================================
 // START PHASE
@@ -27,8 +13,9 @@ function log(state: GameState, action: string, details?: Record<string, unknown>
 export function executeStartPhase(state: GameState): void {
   const player = getPlayer(state, state.activePlayer);
   const opponent = getOpponentPlayer(state, state.activePlayer);
+  const logger = getLogger();
 
-  log(state, `Turn ${state.turn} Start Phase`);
+  logger?.logTurnStart(state);
 
   // 1. Clear freeze immunity from opponent (it was granted when they ended their turn)
   clearFreezeImmunity(opponent);
@@ -36,30 +23,31 @@ export function executeStartPhase(state: GameState): void {
   // 2. Draw a card
   const drawnCard = drawCard(player);
   if (drawnCard) {
-    log(state, 'Drew a card', { cardName: drawnCard.name });
+    logger?.logDrawCard(state, drawnCard.name);
   }
 
   // 3. Gain energy (base + rider economy)
+  const energyBreakdown = calculateEnergyBreakdown(player);
   const energyGained = gainStartOfTurnEnergy(player);
-  log(state, 'Gained energy', { amount: energyGained, total: player.energy });
+  logger?.logEnergyGain(state, energyGained, player.energy, energyBreakdown);
 
   // 4. Apply burn damage
   if (player.dragonBurn > 0) {
     player.dragon.hp -= player.dragonBurn;
-    log(state, 'Dragon took burn damage', { damage: player.dragonBurn, hp: player.dragon.hp });
+    logger?.logBurnDamage(state, 'dragon', player.dragonBurn, player.dragon.hp);
   }
   if (player.riderBurn > 0) {
     player.rider.hp -= player.riderBurn;
-    log(state, 'Rider took burn damage', { damage: player.riderBurn, hp: player.rider.hp });
+    logger?.logBurnDamage(state, 'rider', player.riderBurn, player.rider.hp);
   }
 
   // 5. Dragon start-of-turn abilities
   if (player.dragon.name === 'Voidmaw') {
     if (player.energy > opponent.energy) {
       damageDragon(state, opponent, 2, state.activePlayer);
-      log(state, 'Voidmaw dealt 2 damage (energy advantage)', {
-        playerEnergy: player.energy,
-        opponentEnergy: opponent.energy
+      logger?.logDragonAbility(state, 'Voidmaw dealt 2 damage (energy advantage)', {
+        damage: 2,
+        dragonAbility: 'Voidmaw energy advantage',
       });
     }
   }
@@ -71,13 +59,13 @@ export function executeStartPhase(state: GameState): void {
 
   // 7. Check win conditions
   if (applyWinCondition(state)) {
-    log(state, 'Game ended', { winner: state.winner, winType: state.winType });
+    logger?.logGameEnd(state, state.winner!, state.winType!);
     return;
   }
 
   // 8. Transition to action phase
   state.turnPhase = 'action';
-  log(state, 'Entered Action Phase');
+  logger?.logActionPhase(state);
 }
 
 // ============================================================================
@@ -86,27 +74,26 @@ export function executeStartPhase(state: GameState): void {
 
 export function executeEndPhase(state: GameState): void {
   const player = getPlayer(state, state.activePlayer);
-
-  log(state, 'End Phase');
+  const logger = getLogger();
 
   // 1. Discard down to hand limit (5 cards)
   while (player.hand.length > 5) {
     // For now, auto-discard last card. UI should let player choose.
     const discarded = player.hand.pop()!;
     player.discard.push(discarded);
-    log(state, 'Discarded to hand limit', { cardName: discarded.name });
+    logger?.logDiscard(state, discarded.name);
   }
 
   // 2. Handle freeze: remove freeze, grant immunity
   if (player.dragonFrozen) {
     clearFreeze(player, 'dragon');
     grantFreezeImmunity(player, 'dragon');
-    log(state, 'Dragon thawed and gained freeze immunity');
+    logger?.logFreezeThaw(state, 'dragon');
   }
   if (player.riderFrozen) {
     clearFreeze(player, 'rider');
     grantFreezeImmunity(player, 'rider');
-    log(state, 'Rider thawed and gained freeze immunity');
+    logger?.logFreezeThaw(state, 'rider');
   }
 
   // 3. Switch active player and increment turn
@@ -117,7 +104,7 @@ export function executeEndPhase(state: GameState): void {
   }
   state.turnPhase = 'start';
 
-  log(state, 'Turn ended', { nextPlayer, turn: state.turn });
+  logger?.logEndTurn(state, nextPlayer, state.turn);
 }
 
 // ============================================================================
@@ -125,7 +112,6 @@ export function executeEndPhase(state: GameState): void {
 // ============================================================================
 
 export function passTurn(state: GameState): void {
-  log(state, 'Passed');
   state.turnPhase = 'end';
   executeEndPhase(state);
 

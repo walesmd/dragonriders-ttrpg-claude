@@ -7,6 +7,7 @@ import { executeStartPhase, passTurn } from '../../engine/phases';
 import { executeAttack } from '../../engine/combat';
 import { executeCard } from '../../engine/cards';
 import { applyWinCondition } from '../../engine/winConditions';
+import { initializeLogger, getLogger } from '../../logging';
 import GameBoard from '../game/GameBoard';
 import type { Card, RiderName, DragonName, TargetType, GameState } from '../../data/types';
 
@@ -49,6 +50,17 @@ export default function MultiplayerGame() {
     // Build decks from card IDs
     const p1Deck = p1.deck.map(id => getCardById(id)).filter((c): c is Card => c !== undefined);
     const p2Deck = p2.deck.map(id => getCardById(id)).filter((c): c is Card => c !== undefined);
+
+    // Initialize the unified logger for multiplayer mode
+    initializeLogger(
+      'multiplayer',
+      p1.rider as RiderName,
+      p1.dragon as DragonName,
+      p1Deck,
+      p2.rider as RiderName,
+      p2.dragon as DragonName,
+      p2Deck
+    );
 
     // Create game state
     const state = createInitialGameState(
@@ -106,22 +118,23 @@ export default function MultiplayerGame() {
 
       // Execute the action
       let success = false;
+      const logger = getLogger();
 
       switch (action) {
         case 'attack_dragon':
           const attackDragonResult = executeAttack(currentState, playerNum, 'dragon');
           success = attackDragonResult.success;
           if (success) {
-            currentState.actionLog.push({
-              turn: currentState.turn,
-              player: playerNum,
-              action: 'Attacked dragon',
-              details: {
-                damage: attackDragonResult.damage?.finalDamage,
-                kaelBonus: attackDragonResult.kaelBonus,
-                dragonAbility: attackDragonResult.dragonAbility,
-              },
-              timestamp: Date.now(),
+            logger?.logAttack(currentState, 'dragon', attackDragonResult.damage?.finalDamage || 0, {
+              damageBeforeReduction: attackDragonResult.damage?.rawDamage,
+              shieldsAbsorbed: attackDragonResult.damage?.shieldAbsorbed,
+              dragonAbility: attackDragonResult.dragonAbility || undefined,
+              kaelBonus: attackDragonResult.kaelBonus,
+              bronnReduction: attackDragonResult.damage?.damageReduction,
+              burnApplied: attackDragonResult.burnApplied,
+              freezeApplied: attackDragonResult.frozeTarget,
+              splashDamage: attackDragonResult.splashDamage?.finalDamage,
+              energyStolen: attackDragonResult.energyStolen,
             });
           }
           break;
@@ -130,16 +143,16 @@ export default function MultiplayerGame() {
           const attackRiderResult = executeAttack(currentState, playerNum, 'rider');
           success = attackRiderResult.success;
           if (success) {
-            currentState.actionLog.push({
-              turn: currentState.turn,
-              player: playerNum,
-              action: 'Attacked rider',
-              details: {
-                damage: attackRiderResult.damage?.finalDamage,
-                kaelBonus: attackRiderResult.kaelBonus,
-                dragonAbility: attackRiderResult.dragonAbility,
-              },
-              timestamp: Date.now(),
+            logger?.logAttack(currentState, 'rider', attackRiderResult.damage?.finalDamage || 0, {
+              damageBeforeReduction: attackRiderResult.damage?.rawDamage,
+              shieldsAbsorbed: attackRiderResult.damage?.shieldAbsorbed,
+              dragonAbility: attackRiderResult.dragonAbility || undefined,
+              kaelBonus: attackRiderResult.kaelBonus,
+              bronnReduction: attackRiderResult.damage?.damageReduction,
+              burnApplied: attackRiderResult.burnApplied,
+              freezeApplied: attackRiderResult.frozeTarget,
+              splashDamage: attackRiderResult.splashDamage?.finalDamage,
+              energyStolen: attackRiderResult.energyStolen,
             });
           }
           break;
@@ -149,17 +162,21 @@ export default function MultiplayerGame() {
             const cardResult = executeCard(currentState, playerNum, cardId, target as TargetType | undefined);
             success = cardResult.success;
             if (success) {
-              currentState.actionLog.push({
-                turn: currentState.turn,
-                player: playerNum,
-                action: `Played ${cardResult.cardName}`,
-                details: {
-                  cost: cardResult.energySpent,
+              logger?.logCardPlayed(
+                currentState,
+                cardResult.cardName || 'Unknown',
+                cardResult.energySpent || 0,
+                cardResult.effects || [],
+                {
                   morrikBonus: cardResult.morrikBonus,
-                  effects: cardResult.effects,
-                },
-                timestamp: Date.now(),
-              });
+                  damage: cardResult.totalDamage,
+                  target: cardResult.damageTarget === 'both' ? undefined : cardResult.damageTarget,
+                  healing: cardResult.healingDone,
+                  shieldsGained: cardResult.shieldsGained,
+                  burnApplied: cardResult.burnApplied,
+                  freezeApplied: cardResult.freezeApplied,
+                }
+              );
             }
           }
           break;
@@ -172,7 +189,11 @@ export default function MultiplayerGame() {
 
       if (success) {
         // Check win condition
-        applyWinCondition(currentState);
+        const gameEnded = applyWinCondition(currentState);
+
+        if (gameEnded && currentState.winner && currentState.winType) {
+          logger?.logGameEnd(currentState, currentState.winner, currentState.winType);
+        }
 
         // Update local state
         setGameState({ state: { ...currentState } });

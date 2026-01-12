@@ -25,8 +25,16 @@ export interface CardEffectResult {
   energySpent: number;
   morrikBonus: number;
   effects: string[];
+  // Raw damage results
   damageDealt?: DamageResult;
   secondaryDamage?: DamageResult;
+  // Aggregated tracking for logging
+  totalDamage?: number;
+  damageTarget?: 'dragon' | 'rider' | 'both';
+  healingDone?: number;
+  shieldsGained?: number;
+  burnApplied?: number;
+  freezeApplied?: boolean;
 }
 
 // ============================================================================
@@ -89,9 +97,13 @@ export function executeCard(
     case 'damage':
       if (card.target === 'dragon' || target === 'dragon') {
         result.damageDealt = damageDragon(state, opponent, card.value, playerNum);
+        result.totalDamage = result.damageDealt.finalDamage;
+        result.damageTarget = 'dragon';
         result.effects.push(`Dealt ${result.damageDealt.finalDamage} damage to enemy Dragon`);
       } else {
         result.damageDealt = damageRider(opponent, card.value);
+        result.totalDamage = result.damageDealt.finalDamage;
+        result.damageTarget = 'rider';
         result.effects.push(`Dealt ${result.damageDealt.finalDamage} damage to enemy Rider`);
       }
       break;
@@ -100,10 +112,16 @@ export function executeCard(
       if (card.target === 'dragon' || target === 'dragon') {
         result.damageDealt = damageDragon(state, opponent, card.value, playerNum);
         applyBurn(opponent, 'dragon', card.secondaryValue);
+        result.totalDamage = result.damageDealt.finalDamage;
+        result.damageTarget = 'dragon';
+        result.burnApplied = card.secondaryValue;
         result.effects.push(`Dealt ${result.damageDealt.finalDamage} damage and applied ${card.secondaryValue} Burn to enemy Dragon`);
       } else {
         result.damageDealt = damageRider(opponent, card.value);
         applyBurn(opponent, 'rider', card.secondaryValue);
+        result.totalDamage = result.damageDealt.finalDamage;
+        result.damageTarget = 'rider';
+        result.burnApplied = card.secondaryValue;
         result.effects.push(`Dealt ${result.damageDealt.finalDamage} damage and applied ${card.secondaryValue} Burn to enemy Rider`);
       }
       break;
@@ -111,12 +129,14 @@ export function executeCard(
     case 'freeze':
       if (card.target === 'dragon' || target === 'dragon') {
         if (applyFreeze(opponent, 'dragon')) {
+          result.freezeApplied = true;
           result.effects.push('Froze enemy Dragon');
         } else {
           result.effects.push('Enemy Dragon was immune to freeze');
         }
       } else {
         if (applyFreeze(opponent, 'rider')) {
+          result.freezeApplied = true;
           result.effects.push('Froze enemy Rider');
         } else {
           result.effects.push('Enemy Rider was immune to freeze');
@@ -126,15 +146,18 @@ export function executeCard(
 
     case 'shield':
       const shieldsAdded = addShields(player, card.value);
+      result.shieldsGained = shieldsAdded;
       result.effects.push(`Dragon gained ${shieldsAdded} shields`);
       break;
 
     case 'heal':
       if (card.target === 'dragon') {
         const healed = healDragon(player, card.value);
+        result.healingDone = healed;
         result.effects.push(`Healed Dragon for ${healed} HP`);
       } else if (card.target === 'rider') {
         const healed = healRider(player, card.value);
+        result.healingDone = healed;
         result.effects.push(`Healed Rider for ${healed} HP`);
       }
       break;
@@ -165,6 +188,8 @@ export function executeCard(
       // Damage dragon first, then rider
       result.damageDealt = damageDragon(state, opponent, card.value, playerNum);
       result.secondaryDamage = damageRider(opponent, card.secondaryValue);
+      result.totalDamage = result.damageDealt.finalDamage + result.secondaryDamage.finalDamage;
+      result.damageTarget = 'both';
       result.effects.push(
         `Dealt ${result.damageDealt.finalDamage} to Dragon and ${result.secondaryDamage.finalDamage} to Rider`
       );
@@ -174,6 +199,8 @@ export function executeCard(
       // Equal damage to both
       result.damageDealt = damageDragon(state, opponent, card.value, playerNum);
       result.secondaryDamage = damageRider(opponent, card.secondaryValue);
+      result.totalDamage = result.damageDealt.finalDamage + result.secondaryDamage.finalDamage;
+      result.damageTarget = 'both';
       result.effects.push(
         `Dealt ${result.damageDealt.finalDamage} to Dragon and ${result.secondaryDamage.finalDamage} to Rider`
       );
@@ -182,6 +209,8 @@ export function executeCard(
     case 'cripple':
       result.damageDealt = damageRider(opponent, card.value);
       opponent.rider.forceWounded = true;
+      result.totalDamage = result.damageDealt.finalDamage;
+      result.damageTarget = 'rider';
       result.effects.push(
         `Dealt ${result.damageDealt.finalDamage} to Rider and forced Wounded state`
       );

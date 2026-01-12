@@ -29,6 +29,31 @@ export function calculateEconomy(player: PlayerState): number {
   return Math.max(0, eco);
 }
 
+export function calculateEnergyBreakdown(player: PlayerState): {
+  base: number;
+  riderBonus: number;
+  dragonAliveBonus?: number;
+} {
+  const { rider, dragon } = player;
+  let riderBonus = rider.baseEconomy;
+  let dragonAliveBonus: number | undefined;
+
+  if (rider.name === 'Talia') {
+    if (isWounded(rider)) {
+      riderBonus -= 1;
+    }
+    if (!isCritical(rider) && dragon.hp > 0) {
+      dragonAliveBonus = 1;
+    }
+  }
+
+  return {
+    base: BASE_ENERGY,
+    riderBonus: Math.max(0, riderBonus),
+    dragonAliveBonus,
+  };
+}
+
 export function gainStartOfTurnEnergy(player: PlayerState): number {
   const base = BASE_ENERGY;
   const economy = calculateEconomy(player);
