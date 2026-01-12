@@ -1,8 +1,15 @@
+import { useState } from 'react';
 import { useSetupStore } from '../../store/setupStore';
 import HelpPanel from '../ui/HelpPanel';
+import CardLibrary from './CardLibrary';
 
 export default function MainMenu() {
   const setGameMode = useSetupStore((s) => s.setGameMode);
+  const [showCardLibrary, setShowCardLibrary] = useState(false);
+
+  if (showCardLibrary) {
+    return <CardLibrary onBack={() => setShowCardLibrary(false)} />;
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 px-4">
@@ -55,7 +62,7 @@ export default function MainMenu() {
       </div>
 
       {/* How to Play */}
-      <div className="w-full max-w-md mb-8">
+      <div className="w-full max-w-md mb-4">
         <HelpPanel title="How to Play" defaultOpen={false}>
           <div className="space-y-3">
             <div>
@@ -81,6 +88,22 @@ export default function MainMenu() {
             </div>
           </div>
         </HelpPanel>
+      </div>
+
+      {/* Card Library Button */}
+      <div className="w-full max-w-md mb-8">
+        <button
+          onClick={() => setShowCardLibrary(true)}
+          className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-6 py-4 rounded-lg font-bold transition-all hover:scale-105"
+        >
+          <div className="flex items-center justify-center gap-2">
+            <span className="text-2xl">📚</span>
+            <span>Explore Card Library</span>
+          </div>
+          <div className="text-sm text-indigo-200 font-normal mt-1">
+            Browse all Riders, Dragons, and Cards
+          </div>
+        </button>
       </div>
 
       {/* Footer */}
