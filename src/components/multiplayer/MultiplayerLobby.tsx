@@ -68,8 +68,28 @@ export default function MultiplayerLobby({ onCancel }: MultiplayerLobbyProps) {
       })()
     : '';
 
-  const copyShareUrl = () => {
-    navigator.clipboard.writeText(shareUrl);
+  const copyShareUrl = async () => {
+    try {
+      // Try modern Clipboard API first (requires HTTPS)
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        // Fallback for older browsers or non-HTTPS contexts
+        const textArea = document.createElement('textarea');
+        textArea.value = shareUrl;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      // Could show a toast notification here
+    }
   };
 
   // If connected to a room, show waiting screen
