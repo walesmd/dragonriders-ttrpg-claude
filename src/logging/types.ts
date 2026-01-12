@@ -121,6 +121,7 @@ export interface ActionDetails {
   winner?: PlayerNumber;
   winType?: WinType;
   nextPlayer?: PlayerNumber;
+  nextTurn?: number;
 }
 
 // ============================================================================

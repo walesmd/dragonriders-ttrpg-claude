@@ -335,7 +335,7 @@ export class GameLogger {
   }
 
   logEndTurn(state: GameState, nextPlayer: PlayerNumber, nextTurn: number): void {
-    this.logAction(state, 'end_turn', 'Passed', { nextPlayer });
+    this.logAction(state, 'end_turn', 'Passed', { nextPlayer, nextTurn });
   }
 
   logFreezeThaw(state: GameState, target: 'dragon' | 'rider'): void {
