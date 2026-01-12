@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetupStore } from '../../store/setupStore';
 import { useGameStore } from '../../store/gameStore';
 import { DECK_SIZE } from '../../data/cards';
 import CardComponent from '../game/CardComponent';
+import HelpPanel from '../ui/HelpPanel';
 
 export default function DraftScreen() {
   const draftPool = useSetupStore((s) => s.draftPool);
@@ -19,6 +20,8 @@ export default function DraftScreen() {
   const player2Dragon = useSetupStore((s) => s.player2Dragon);
 
   const initializeGame = useGameStore((s) => s.initializeGame);
+
+  const [showTips, setShowTips] = useState(true);
 
   // AI auto-drafts
   useEffect(() => {
@@ -53,7 +56,7 @@ export default function DraftScreen() {
     <div className="min-h-screen bg-gray-900 p-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-4">
           <h1 className="text-2xl font-bold text-white mb-2">Card Draft</h1>
           <p className="text-gray-400">
             {gameMode === 'ai' && currentDrafter === 2 ? (
@@ -65,6 +68,25 @@ export default function DraftScreen() {
             )}
           </p>
         </div>
+
+        {/* Draft Instructions */}
+        {showTips && (
+          <div className="mb-4">
+            <HelpPanel title="Draft Instructions" defaultOpen={true}>
+              <div className="space-y-2">
+                <p><strong>Goal:</strong> Build a 20-card deck. Players alternate picking cards.</p>
+                <p><strong>Strategy:</strong> Balance damage, defense (shields/heal), energy, and control (freeze/burn)</p>
+                <p><strong>Tip:</strong> Consider your Rider and Dragon abilities when drafting</p>
+                <button
+                  onClick={() => setShowTips(false)}
+                  className="mt-2 text-xs text-blue-400 hover:text-blue-300 underline"
+                >
+                  Hide tips
+                </button>
+              </div>
+            </HelpPanel>
+          </div>
+        )}
 
         {/* Progress bars */}
         <div className="flex justify-center gap-8 mb-4">

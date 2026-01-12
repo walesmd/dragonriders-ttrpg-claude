@@ -1,6 +1,7 @@
 import { useSetupStore } from '../../store/setupStore';
 import { DRAGONS } from '../../data/dragons';
 import type { DragonName } from '../../data/types';
+import HelpPanel from '../ui/HelpPanel';
 
 interface DragonSelectProps {
   player: 1 | 2;
@@ -31,7 +32,7 @@ export default function DragonSelect({ player }: DragonSelectProps) {
   return (
     <div className="min-h-screen bg-gray-900 p-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-white mb-2">
             Player {player}: Choose Your Dragon
           </h1>
@@ -41,6 +42,18 @@ export default function DragonSelect({ player }: DragonSelectProps) {
           <p className="text-gray-500 text-sm mt-1">
             Your Dragon is your main combat unit
           </p>
+        </div>
+
+        {/* Dragon Tips */}
+        <div className="mb-6">
+          <HelpPanel title="Dragon Tips">
+            <div className="space-y-2">
+              <p><strong>Attacking:</strong> Costs 2 energy, deals 3 damage by default</p>
+              <p><strong>Shields:</strong> Starting shields absorb damage before HP loss</p>
+              <p><strong>Abilities:</strong> Each dragon has a unique combat ability</p>
+              <p><strong>Strategy:</strong> Emberfang for DoT, Cryowyrm for control, Voltwing for spread damage, Steelhorn for defense, Voidmaw for energy advantage</p>
+            </div>
+          </HelpPanel>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">

@@ -5,6 +5,7 @@ import PlayerArea from './PlayerArea';
 import HandDisplay from './HandDisplay';
 import ActionBar from './ActionBar';
 import GameLog from './GameLog';
+import HelpPanel from '../ui/HelpPanel';
 
 interface GameBoardProps {
   multiplayerMode?: boolean;
@@ -170,6 +171,40 @@ export default function GameBoard({
       <div className="w-64">
         <GameLog entries={state.actionLog} currentTurn={state.turn} />
       </div>
+
+      {/* Floating help panel */}
+      <HelpPanel title="Gameplay Guide" variant="floating">
+        <div className="space-y-3">
+          <div>
+            <h4 className="font-bold text-white mb-1">Your Turn</h4>
+            <p className="text-xs">1. Draw card & gain energy</p>
+            <p className="text-xs">2. Attack or play cards</p>
+            <p className="text-xs">3. Click "End Turn"</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-white mb-1">Attacking</h4>
+            <p className="text-xs">• Click dragon/rider portraits to attack</p>
+            <p className="text-xs">• Default cost: 2 energy, 3 damage</p>
+            <p className="text-xs">• Can't attack if frozen</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-white mb-1">Playing Cards</h4>
+            <p className="text-xs">• Click card in hand to select</p>
+            <p className="text-xs">• Target cards: click enemy dragon/rider</p>
+            <p className="text-xs">• Self cards: auto-cast</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-white mb-1">Status Effects</h4>
+            <p className="text-xs">• 🧊 <strong>Frozen:</strong> Can't attack, play 1 card max</p>
+            <p className="text-xs">• 🔥 <strong>Burn:</strong> Damage each turn start</p>
+            <p className="text-xs">• 🛡️ <strong>Shields:</strong> Block damage before HP</p>
+          </div>
+          <div>
+            <h4 className="font-bold text-white mb-1">Win Condition</h4>
+            <p className="text-xs">Reduce enemy Dragon OR Rider HP to 0</p>
+          </div>
+        </div>
+      </HelpPanel>
     </div>
   );
 }
