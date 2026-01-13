@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSetupStore } from '../../store/setupStore';
 import HelpPanel from '../ui/HelpPanel';
 import CardLibrary from './CardLibrary';
+import { LOG_VERSION } from '../../logging/types';
 
 export default function MainMenu() {
   const setGameMode = useSetupStore((s) => s.setGameMode);
@@ -108,7 +109,7 @@ export default function MainMenu() {
 
       {/* Footer */}
       <div className="text-gray-600 text-sm">
-        v0.8 - Playtest Build
+        v{LOG_VERSION} - Playtest Build
       </div>
     </div>
   );
