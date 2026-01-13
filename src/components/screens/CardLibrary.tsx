@@ -16,7 +16,7 @@ const RIDER_COLORS: Record<string, string> = {
   Kael: 'from-amber-600 to-amber-800',
   Bronn: 'from-slate-600 to-slate-800',
   Lyra: 'from-cyan-600 to-cyan-800',
-  Morrik: 'from-purple-600 to-purple-800',
+  Morrik: 'from-purple-600 to-violet-800',
 };
 
 const DRAGON_COLORS: Record<string, string> = {

@@ -9,14 +9,6 @@ interface RiderCardProps {
   isOpponent?: boolean;
 }
 
-const RIDER_COLORS: Record<string, string> = {
-  Talia: 'from-emerald-600 to-emerald-800',
-  Kael: 'from-amber-600 to-amber-800',
-  Bronn: 'from-slate-600 to-slate-800',
-  Lyra: 'from-cyan-600 to-cyan-800',
-  Morrik: 'from-purple-600 to-purple-800',
-};
-
 export default function RiderCard({
   rider,
   frozen,
@@ -27,12 +19,13 @@ export default function RiderCard({
   const wounded = isWounded(rider);
   const critical = isCritical(rider);
 
+  const gradientClasses = `from-${def.visualTheme.primary[0]} to-${def.visualTheme.primary[1]}`;
   const statusText = critical ? 'CRITICAL' : wounded ? 'WOUNDED' : '';
   const statusColor = critical ? 'text-red-400' : wounded ? 'text-yellow-400' : '';
 
   return (
     <div
-      className={`relative rounded-xl p-3 bg-gradient-to-br ${RIDER_COLORS[rider.name]}
+      className={`relative rounded-xl p-3 bg-gradient-to-br ${gradientClasses}
         ${frozen ? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-gray-900' : ''}
         ${isOpponent ? 'opacity-90' : ''}`}
     >

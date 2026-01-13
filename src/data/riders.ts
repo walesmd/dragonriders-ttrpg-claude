@@ -10,6 +10,10 @@ export const RIDERS: Record<RiderName, RiderDefinition> = {
     passive: '+1 Economy while Dragon is alive',
     woundedEffect: 'Economy reduced by 1',
     criticalEffect: 'Loses Dragon bonus',
+    visualTheme: {
+      primary: ['emerald-600', 'emerald-800'],
+      hover: ['emerald-500', 'emerald-700'],
+    },
   },
   Kael: {
     name: 'Kael',
@@ -20,6 +24,10 @@ export const RIDERS: Record<RiderName, RiderDefinition> = {
     passive: 'First attack each turn: +2 damage, Dragon gains 2 shields',
     woundedEffect: 'Bonus reduced to +1 damage, +1 shield',
     criticalEffect: 'Attack costs +1 energy',
+    visualTheme: {
+      primary: ['amber-600', 'amber-800'],
+      hover: ['amber-500', 'amber-700'],
+    },
   },
   Bronn: {
     name: 'Bronn',
@@ -30,6 +38,10 @@ export const RIDERS: Record<RiderName, RiderDefinition> = {
     passive: 'Reduce all damage to Dragon and Rider by 1',
     woundedEffect: 'Only Dragon damage reduced',
     criticalEffect: 'No damage reduction',
+    visualTheme: {
+      primary: ['slate-600', 'slate-800'],
+      hover: ['slate-500', 'slate-700'],
+    },
   },
   Lyra: {
     name: 'Lyra',
@@ -40,6 +52,10 @@ export const RIDERS: Record<RiderName, RiderDefinition> = {
     passive: 'Freeze effects last an additional turn',
     woundedEffect: 'Freeze cards cost +1 energy',
     criticalEffect: 'Cannot play Freeze cards',
+    visualTheme: {
+      primary: ['cyan-600', 'cyan-800'],
+      hover: ['cyan-500', 'cyan-700'],
+    },
   },
   Morrik: {
     name: 'Morrik',
@@ -50,6 +66,10 @@ export const RIDERS: Record<RiderName, RiderDefinition> = {
     passive: '+1 energy when playing Shield cards',
     woundedEffect: 'Shield cards only grant half shields (rounded up)',
     criticalEffect: 'Cannot play Shield cards',
+    visualTheme: {
+      primary: ['purple-600', 'violet-800'],
+      hover: ['purple-500', 'violet-700'],
+    },
   },
 };
 

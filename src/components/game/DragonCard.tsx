@@ -11,14 +11,6 @@ interface DragonCardProps {
   highlighted?: boolean;
 }
 
-const DRAGON_COLORS: Record<string, string> = {
-  Emberfang: 'from-orange-600 to-red-800',
-  Cryowyrm: 'from-blue-500 to-cyan-700',
-  Voltwing: 'from-yellow-500 to-amber-700',
-  Steelhorn: 'from-gray-500 to-zinc-700',
-  Voidmaw: 'from-purple-600 to-indigo-900',
-};
-
 export default function DragonCard({
   dragon,
   frozen,
@@ -28,11 +20,12 @@ export default function DragonCard({
   highlighted = false,
 }: DragonCardProps) {
   const def = DRAGONS[dragon.name];
+  const gradientClasses = `from-${def.visualTheme.primary[0]} to-${def.visualTheme.primary[1]}`;
 
   return (
     <div
       onClick={onClick}
-      className={`relative rounded-xl p-4 bg-gradient-to-br ${DRAGON_COLORS[dragon.name]}
+      className={`relative rounded-xl p-4 bg-gradient-to-br ${gradientClasses}
         ${frozen ? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-gray-900' : ''}
         ${highlighted ? 'ring-2 ring-yellow-400 ring-offset-2 ring-offset-gray-900 cursor-pointer hover:scale-105' : ''}
         ${onClick ? 'cursor-pointer' : ''}

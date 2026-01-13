@@ -69,6 +69,11 @@ export interface PlayerState {
 // UNIT INTERFACES
 // ============================================================================
 
+export interface VisualTheme {
+  primary: [string, string]; // [from-color, to-color]
+  hover: [string, string]; // [from-color, to-color]
+}
+
 export interface RiderState {
   name: RiderName;
   hp: number;
@@ -88,6 +93,7 @@ export interface RiderDefinition {
   passive: string;
   woundedEffect: string;
   criticalEffect: string;
+  visualTheme: VisualTheme;
 }
 
 export interface DragonState {
@@ -106,6 +112,7 @@ export interface DragonDefinition {
   attackCost: number;
   attackDamage: number;
   ability: string;
+  visualTheme: VisualTheme;
 }
 
 // ============================================================================

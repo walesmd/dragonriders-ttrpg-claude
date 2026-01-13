@@ -7,14 +7,6 @@ interface DragonSelectProps {
   player: 1 | 2;
 }
 
-const DRAGON_COLORS: Record<string, string> = {
-  Emberfang: 'from-orange-600 to-red-800 hover:from-orange-500 hover:to-red-700',
-  Cryowyrm: 'from-blue-500 to-cyan-700 hover:from-blue-400 hover:to-cyan-600',
-  Voltwing: 'from-yellow-500 to-amber-700 hover:from-yellow-400 hover:to-amber-600',
-  Steelhorn: 'from-gray-500 to-zinc-700 hover:from-gray-400 hover:to-zinc-600',
-  Voidmaw: 'from-purple-600 to-indigo-900 hover:from-purple-500 hover:to-indigo-800',
-};
-
 export default function DragonSelect({ player }: DragonSelectProps) {
   const selectDragon = useSetupStore((s) => s.selectDragon);
   const player1Dragon = useSetupStore((s) => s.player1Dragon);
@@ -60,6 +52,7 @@ export default function DragonSelect({ player }: DragonSelectProps) {
           {dragonNames.map((name) => {
             const dragon = DRAGONS[name];
             const isSelected = player1Dragon === name && player === 2;
+            const gradientClasses = `from-${dragon.visualTheme.primary[0]} to-${dragon.visualTheme.primary[1]} hover:from-${dragon.visualTheme.hover[0]} hover:to-${dragon.visualTheme.hover[1]}`;
 
             return (
               <button
@@ -68,7 +61,7 @@ export default function DragonSelect({ player }: DragonSelectProps) {
                 disabled={isSelected}
                 className={`
                   p-4 rounded-xl text-left transition-all duration-200
-                  bg-gradient-to-br ${DRAGON_COLORS[name]}
+                  bg-gradient-to-br ${gradientClasses}
                   ${isSelected ? 'opacity-40 cursor-not-allowed' : 'hover:scale-105 cursor-pointer'}
                 `}
               >

@@ -7,14 +7,6 @@ interface RiderSelectProps {
   player: 1 | 2;
 }
 
-const RIDER_COLORS: Record<string, string> = {
-  Talia: 'from-emerald-600 to-emerald-800 hover:from-emerald-500 hover:to-emerald-700',
-  Kael: 'from-amber-600 to-amber-800 hover:from-amber-500 hover:to-amber-700',
-  Bronn: 'from-slate-600 to-slate-800 hover:from-slate-500 hover:to-slate-700',
-  Lyra: 'from-cyan-600 to-cyan-800 hover:from-cyan-500 hover:to-cyan-700',
-  Morrik: 'from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700',
-};
-
 export default function RiderSelect({ player }: RiderSelectProps) {
   const selectRider = useSetupStore((s) => s.selectRider);
   const player1Rider = useSetupStore((s) => s.player1Rider);
@@ -53,6 +45,7 @@ export default function RiderSelect({ player }: RiderSelectProps) {
           {riderNames.map((name) => {
             const rider = RIDERS[name];
             const isSelected = player1Rider === name && player === 2;
+            const gradientClasses = `from-${rider.visualTheme.primary[0]} to-${rider.visualTheme.primary[1]} hover:from-${rider.visualTheme.hover[0]} hover:to-${rider.visualTheme.hover[1]}`;
 
             return (
               <button
@@ -61,7 +54,7 @@ export default function RiderSelect({ player }: RiderSelectProps) {
                 disabled={isSelected}
                 className={`
                   p-4 rounded-xl text-left transition-all duration-200
-                  bg-gradient-to-br ${RIDER_COLORS[name]}
+                  bg-gradient-to-br ${gradientClasses}
                   ${isSelected ? 'opacity-40 cursor-not-allowed' : 'hover:scale-105 cursor-pointer'}
                 `}
               >
