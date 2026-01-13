@@ -1,0 +1,1674 @@
+{
+  "gameId": "1768287411666-4t25m7a",
+  "timestamp": "2026-01-13T06:56:51.666Z",
+  "version": "1.0",
+  "mode": "ai",
+  "aiDifficulty": "expert",
+  "setup": {
+    "player1": {
+      "rider": "Lyra",
+      "dragon": "Cryowyrm",
+      "deck": [
+        "Dual Strike",
+        "Strike",
+        "Dual Strike",
+        "Energy Surge",
+        "Energy Surge",
+        "Strike",
+        "Sabotage",
+        "Thaw",
+        "Freeze Ray",
+        "Rider Heal",
+        "Weakening Strike",
+        "Energy Drain",
+        "Sabotage",
+        "Energy Drain",
+        "Burning Hit",
+        "Chain Bolt",
+        "Precision Strike",
+        "Rider Heal",
+        "Dragon Heal",
+        "Rider Heal"
+      ]
+    },
+    "player2": {
+      "rider": "Talia",
+      "dragon": "Emberfang",
+      "deck": [
+        "Firebreak",
+        "Firebreak",
+        "Burning Hit",
+        "Shield Disruptor",
+        "Precision Strike",
+        "Strike",
+        "Dragon Heal",
+        "Energy Shield",
+        "Heavy Blow",
+        "Crippling Blow",
+        "Rider Heal",
+        "Chain Bolt",
+        "Heavy Blow",
+        "Freeze Ray",
+        "Strike",
+        "Thaw",
+        "Weakening Strike",
+        "Shield Up",
+        "Shield Up",
+        "Weakening Strike"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "turn": 1,
+      "player": 1,
+      "timestamp": 1768287411667,
+      "type": "turn_start",
+      "action": "Turn 1 Start Phase",
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 17,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 4,
+          "deckSize": 16
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 3,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 18,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 4,
+          "deckSize": 16
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "player": 1,
+      "timestamp": 1768287411667,
+      "type": "draw_card",
+      "action": "Drew a card",
+      "details": {
+        "cardDrawn": "Dual Strike"
+      }
+    },
+    {
+      "turn": 1,
+      "player": 1,
+      "timestamp": 1768287411667,
+      "type": "energy_gain",
+      "action": "Gained energy",
+      "details": {
+        "energyGained": 5,
+        "energyTotal": 5,
+        "energyBreakdown": {
+          "base": 3,
+          "riderBonus": 2
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "player": 1,
+      "timestamp": 1768287411668,
+      "type": "action_phase",
+      "action": "Entered Action Phase"
+    },
+    {
+      "turn": 1,
+      "player": 1,
+      "timestamp": 1768287437693,
+      "type": "play_card",
+      "action": "Played Weakening Strike",
+      "details": {
+        "cardName": "Weakening Strike",
+        "cardCost": 2,
+        "effects": [
+          "Dealt 2 damage to enemy Rider"
+        ],
+        "morrikBonus": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 17,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 3,
+          "handSize": 4,
+          "deckSize": 15
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 3,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 16,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 4,
+          "deckSize": 16
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "player": 1,
+      "timestamp": 1768287446179,
+      "type": "play_card",
+      "action": "Played Dual Strike",
+      "details": {
+        "cardName": "Dual Strike",
+        "cardCost": 1,
+        "effects": [
+          "Dealt 0 to Dragon and 1 to Rider"
+        ],
+        "morrikBonus": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 17,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 2,
+          "handSize": 3,
+          "deckSize": 15
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 15,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 4,
+          "deckSize": 16
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "player": 1,
+      "timestamp": 1768287449248,
+      "type": "play_card",
+      "action": "Played Sabotage",
+      "details": {
+        "cardName": "Sabotage",
+        "cardCost": 2,
+        "effects": [
+          "Opponent discarded 2 cards"
+        ],
+        "morrikBonus": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 17,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 2,
+          "deckSize": 15
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 15,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 2,
+          "deckSize": 16
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "player": 2,
+      "timestamp": 1768287451512,
+      "type": "end_turn",
+      "action": "Passed",
+      "details": {
+        "nextPlayer": 2,
+        "nextTurn": 1
+      }
+    },
+    {
+      "turn": 1,
+      "player": 2,
+      "timestamp": 1768287451512,
+      "type": "turn_start",
+      "action": "Turn 1 Start Phase",
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 17,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 2,
+          "deckSize": 15
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 15,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 2,
+          "deckSize": 16
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "player": 2,
+      "timestamp": 1768287451512,
+      "type": "draw_card",
+      "action": "Drew a card",
+      "details": {
+        "cardDrawn": "Shield Disruptor"
+      }
+    },
+    {
+      "turn": 1,
+      "player": 2,
+      "timestamp": 1768287451512,
+      "type": "energy_gain",
+      "action": "Gained energy",
+      "details": {
+        "energyGained": 6,
+        "energyTotal": 6,
+        "energyBreakdown": {
+          "base": 3,
+          "riderBonus": 2,
+          "dragonAliveBonus": 1
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "player": 2,
+      "timestamp": 1768287451512,
+      "type": "action_phase",
+      "action": "Entered Action Phase"
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287453829,
+      "type": "end_turn",
+      "action": "Passed",
+      "details": {
+        "nextPlayer": 1,
+        "nextTurn": 2
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287453829,
+      "type": "turn_start",
+      "action": "Turn 2 Start Phase",
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 12,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 1,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 2,
+          "deckSize": 15
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 15,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 15
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287453830,
+      "type": "draw_card",
+      "action": "Drew a card",
+      "details": {
+        "cardDrawn": "Energy Surge"
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287453830,
+      "type": "energy_gain",
+      "action": "Gained energy",
+      "details": {
+        "energyGained": 5,
+        "energyTotal": 5,
+        "energyBreakdown": {
+          "base": 3,
+          "riderBonus": 2
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287453830,
+      "type": "burn_damage",
+      "action": "Rider took burn damage",
+      "details": {
+        "burnDamage": 1,
+        "burnSource": "rider",
+        "hpAfter": 11
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287453830,
+      "type": "action_phase",
+      "action": "Entered Action Phase"
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287466520,
+      "type": "play_card",
+      "action": "Played Rider Heal",
+      "details": {
+        "cardName": "Rider Heal",
+        "cardCost": 2,
+        "effects": [
+          "Healed Rider for 3 HP"
+        ],
+        "morrikBonus": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 14,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 1,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 3,
+          "handSize": 2,
+          "deckSize": 14
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 15,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 15
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287476615,
+      "type": "attack",
+      "action": "Attacked rider",
+      "details": {
+        "target": "rider",
+        "damage": 3,
+        "damageBeforeReduction": 3,
+        "shieldsAbsorbed": 0,
+        "dragonAbility": "Cryowyrm froze target",
+        "kaelBonus": null,
+        "bronnReduction": 0,
+        "burnApplied": 0,
+        "freezeApplied": true,
+        "energyStolen": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 14,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 1,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 1,
+          "handSize": 2,
+          "deckSize": 14
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 12,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 15
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287478733,
+      "type": "play_card",
+      "action": "Played Energy Surge",
+      "details": {
+        "cardName": "Energy Surge",
+        "cardCost": 1,
+        "effects": [
+          "Gained 3 energy"
+        ],
+        "morrikBonus": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 14,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 1,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 3,
+          "handSize": 1,
+          "deckSize": 14
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 12,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 15
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287479764,
+      "type": "attack",
+      "action": "Attacked rider",
+      "details": {
+        "target": "rider",
+        "damage": 3,
+        "damageBeforeReduction": 3,
+        "shieldsAbsorbed": 0,
+        "dragonAbility": "Cryowyrm froze target",
+        "kaelBonus": null,
+        "bronnReduction": 0,
+        "burnApplied": 0,
+        "freezeApplied": true,
+        "energyStolen": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 14,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 1,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 1,
+          "handSize": 1,
+          "deckSize": 14
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 9,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 15
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287482002,
+      "type": "play_card",
+      "action": "Played Energy Surge",
+      "details": {
+        "cardName": "Energy Surge",
+        "cardCost": 1,
+        "effects": [
+          "Gained 3 energy"
+        ],
+        "morrikBonus": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 14,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 1,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 3,
+          "handSize": 0,
+          "deckSize": 14
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 9,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 15
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 1,
+      "timestamp": 1768287482631,
+      "type": "attack",
+      "action": "Attacked rider",
+      "details": {
+        "target": "rider",
+        "damage": 3,
+        "damageBeforeReduction": 3,
+        "shieldsAbsorbed": 0,
+        "dragonAbility": "Cryowyrm froze target",
+        "kaelBonus": null,
+        "bronnReduction": 0,
+        "burnApplied": 0,
+        "freezeApplied": true,
+        "energyStolen": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 14,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 1,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 1,
+          "handSize": 0,
+          "deckSize": 14
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 6,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": true
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 15
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 2,
+      "timestamp": 1768287486571,
+      "type": "end_turn",
+      "action": "Passed",
+      "details": {
+        "nextPlayer": 2,
+        "nextTurn": 2
+      }
+    },
+    {
+      "turn": 2,
+      "player": 2,
+      "timestamp": 1768287486571,
+      "type": "turn_start",
+      "action": "Turn 2 Start Phase",
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 14,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 1,
+            "wounded": false,
+            "critical": false
+          },
+          "energy": 1,
+          "handSize": 0,
+          "deckSize": 14
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 6,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": true
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 15
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 2,
+      "timestamp": 1768287486571,
+      "type": "draw_card",
+      "action": "Drew a card",
+      "details": {
+        "cardDrawn": "Rider Heal"
+      }
+    },
+    {
+      "turn": 2,
+      "player": 2,
+      "timestamp": 1768287486571,
+      "type": "energy_gain",
+      "action": "Gained energy",
+      "details": {
+        "energyGained": 4,
+        "energyTotal": 4,
+        "energyBreakdown": {
+          "base": 3,
+          "riderBonus": 1
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "player": 2,
+      "timestamp": 1768287486571,
+      "type": "action_phase",
+      "action": "Entered Action Phase"
+    },
+    {
+      "turn": 2,
+      "player": 2,
+      "timestamp": 1768287488391,
+      "type": "freeze_thaw",
+      "action": "Rider thawed and gained freeze immunity"
+    },
+    {
+      "turn": 3,
+      "player": 1,
+      "timestamp": 1768287488391,
+      "type": "end_turn",
+      "action": "Passed",
+      "details": {
+        "nextPlayer": 1,
+        "nextTurn": 3
+      }
+    },
+    {
+      "turn": 3,
+      "player": 1,
+      "timestamp": 1768287488391,
+      "type": "turn_start",
+      "action": "Turn 3 Start Phase",
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 11,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 2,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 1,
+          "handSize": 0,
+          "deckSize": 14
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 9,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 14
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "player": 1,
+      "timestamp": 1768287488391,
+      "type": "draw_card",
+      "action": "Drew a card",
+      "details": {
+        "cardDrawn": "Energy Drain"
+      }
+    },
+    {
+      "turn": 3,
+      "player": 1,
+      "timestamp": 1768287488391,
+      "type": "energy_gain",
+      "action": "Gained energy",
+      "details": {
+        "energyGained": 5,
+        "energyTotal": 6,
+        "energyBreakdown": {
+          "base": 3,
+          "riderBonus": 2
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "player": 1,
+      "timestamp": 1768287488391,
+      "type": "burn_damage",
+      "action": "Rider took burn damage",
+      "details": {
+        "burnDamage": 2,
+        "burnSource": "rider",
+        "hpAfter": 9
+      }
+    },
+    {
+      "turn": 3,
+      "player": 1,
+      "timestamp": 1768287488391,
+      "type": "action_phase",
+      "action": "Entered Action Phase"
+    },
+    {
+      "turn": 3,
+      "player": 1,
+      "timestamp": 1768287494442,
+      "type": "play_card",
+      "action": "Played Energy Drain",
+      "details": {
+        "cardName": "Energy Drain",
+        "cardCost": 2,
+        "effects": [
+          "Opponent lost 0 energy"
+        ],
+        "morrikBonus": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 9,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 2,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 4,
+          "handSize": 0,
+          "deckSize": 13
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 9,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 14
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "player": 1,
+      "timestamp": 1768287496306,
+      "type": "attack",
+      "action": "Attacked rider",
+      "details": {
+        "target": "rider",
+        "damage": 3,
+        "damageBeforeReduction": 3,
+        "shieldsAbsorbed": 0,
+        "dragonAbility": "Cryowyrm froze target",
+        "kaelBonus": null,
+        "bronnReduction": 0,
+        "burnApplied": 0,
+        "freezeApplied": true,
+        "energyStolen": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 9,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 2,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 2,
+          "handSize": 0,
+          "deckSize": 13
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 6,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": true
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 14
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "player": 1,
+      "timestamp": 1768287496974,
+      "type": "attack",
+      "action": "Attacked rider",
+      "details": {
+        "target": "rider",
+        "damage": 3,
+        "damageBeforeReduction": 3,
+        "shieldsAbsorbed": 0,
+        "dragonAbility": "Cryowyrm froze target",
+        "kaelBonus": null,
+        "bronnReduction": 0,
+        "burnApplied": 0,
+        "freezeApplied": true,
+        "energyStolen": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 9,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 2,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 0,
+          "deckSize": 13
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 3,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": true
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 14
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "player": 2,
+      "timestamp": 1768287498291,
+      "type": "end_turn",
+      "action": "Passed",
+      "details": {
+        "nextPlayer": 2,
+        "nextTurn": 3
+      }
+    },
+    {
+      "turn": 3,
+      "player": 2,
+      "timestamp": 1768287498291,
+      "type": "turn_start",
+      "action": "Turn 3 Start Phase",
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 30,
+            "maxHp": 30,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 9,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 2,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 0,
+          "deckSize": 13
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 3,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": true
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 14
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "player": 2,
+      "timestamp": 1768287498291,
+      "type": "draw_card",
+      "action": "Drew a card",
+      "details": {
+        "cardDrawn": "Burning Hit"
+      }
+    },
+    {
+      "turn": 3,
+      "player": 2,
+      "timestamp": 1768287498292,
+      "type": "energy_gain",
+      "action": "Gained energy",
+      "details": {
+        "energyGained": 4,
+        "energyTotal": 4,
+        "energyBreakdown": {
+          "base": 3,
+          "riderBonus": 1
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "player": 2,
+      "timestamp": 1768287498292,
+      "type": "action_phase",
+      "action": "Entered Action Phase"
+    },
+    {
+      "turn": 3,
+      "player": 2,
+      "timestamp": 1768287500104,
+      "type": "freeze_thaw",
+      "action": "Rider thawed and gained freeze immunity"
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287500104,
+      "type": "end_turn",
+      "action": "Passed",
+      "details": {
+        "nextPlayer": 1,
+        "nextTurn": 4
+      }
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287500104,
+      "type": "turn_start",
+      "action": "Turn 4 Start Phase",
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 28,
+            "maxHp": 30,
+            "shields": 0,
+            "frozen": false,
+            "burn": 2
+          },
+          "rider": {
+            "hp": 9,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 2,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 0,
+          "handSize": 0,
+          "deckSize": 13
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 3,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": true,
+            "critical": true
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 13
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287500104,
+      "type": "draw_card",
+      "action": "Drew a card",
+      "details": {
+        "cardDrawn": "Rider Heal"
+      }
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287500104,
+      "type": "energy_gain",
+      "action": "Gained energy",
+      "details": {
+        "energyGained": 5,
+        "energyTotal": 5,
+        "energyBreakdown": {
+          "base": 3,
+          "riderBonus": 2
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287500104,
+      "type": "burn_damage",
+      "action": "Dragon took burn damage",
+      "details": {
+        "burnDamage": 2,
+        "burnSource": "dragon",
+        "hpAfter": 26
+      }
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287500104,
+      "type": "burn_damage",
+      "action": "Rider took burn damage",
+      "details": {
+        "burnDamage": 2,
+        "burnSource": "rider",
+        "hpAfter": 7
+      }
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287500104,
+      "type": "action_phase",
+      "action": "Entered Action Phase"
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287506890,
+      "type": "play_card",
+      "action": "Played Rider Heal",
+      "details": {
+        "cardName": "Rider Heal",
+        "cardCost": 2,
+        "effects": [
+          "Healed Rider for 3 HP"
+        ],
+        "morrikBonus": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 26,
+            "maxHp": 30,
+            "shields": 0,
+            "frozen": false,
+            "burn": 2
+          },
+          "rider": {
+            "hp": 10,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 2,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 3,
+          "handSize": 0,
+          "deckSize": 12
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 3,
+            "maxHp": 18,
+            "frozen": false,
+            "burn": 0,
+            "wounded": true,
+            "critical": true
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 13
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287508604,
+      "type": "attack",
+      "action": "Attacked rider",
+      "details": {
+        "target": "rider",
+        "damage": 3,
+        "damageBeforeReduction": 3,
+        "shieldsAbsorbed": 0,
+        "dragonAbility": "Cryowyrm froze target",
+        "kaelBonus": null,
+        "bronnReduction": 0,
+        "burnApplied": 0,
+        "freezeApplied": true,
+        "energyStolen": 0
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 26,
+            "maxHp": 30,
+            "shields": 0,
+            "frozen": false,
+            "burn": 2
+          },
+          "rider": {
+            "hp": 10,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 2,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 1,
+          "handSize": 0,
+          "deckSize": 12
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 0,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": true
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 13
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "player": 1,
+      "timestamp": 1768287508605,
+      "type": "game_end",
+      "action": "Game ended - Player 1 wins by rider_kill",
+      "details": {
+        "winner": 1,
+        "winType": "rider_kill"
+      },
+      "stateAfter": {
+        "p1": {
+          "dragon": {
+            "hp": 26,
+            "maxHp": 30,
+            "shields": 0,
+            "frozen": false,
+            "burn": 2
+          },
+          "rider": {
+            "hp": 10,
+            "maxHp": 17,
+            "frozen": false,
+            "burn": 2,
+            "wounded": true,
+            "critical": false
+          },
+          "energy": 1,
+          "handSize": 0,
+          "deckSize": 12
+        },
+        "p2": {
+          "dragon": {
+            "hp": 33,
+            "maxHp": 33,
+            "shields": 2,
+            "frozen": false,
+            "burn": 0
+          },
+          "rider": {
+            "hp": 0,
+            "maxHp": 18,
+            "frozen": true,
+            "burn": 0,
+            "wounded": true,
+            "critical": true
+          },
+          "energy": 0,
+          "handSize": 1,
+          "deckSize": 13
+        }
+      }
+    }
+  ],
+  "result": {
+    "winner": 1,
+    "winType": "rider_kill",
+    "totalTurns": 4,
+    "gameDurationMs": 96939,
+    "finalState": {
+      "p1DragonHP": 26,
+      "p1RiderHP": 10,
+      "p2DragonHP": 33,
+      "p2RiderHP": 0
+    },
+    "stats": {
+      "player1": {
+        "totalDamageDealt": 21,
+        "damageToOpponentDragon": 0,
+        "damageToOpponentRider": 20,
+        "cardsPlayed": 8,
+        "attacksMade": 6,
+        "energySpent": 13,
+        "energyGenerated": 20,
+        "burnApplied": 0,
+        "freezesApplied": 6,
+        "healingDone": 6,
+        "shieldsGained": 0
+      },
+      "player2": {
+        "totalDamageDealt": 0,
+        "damageToOpponentDragon": 0,
+        "damageToOpponentRider": 0,
+        "cardsPlayed": 0,
+        "attacksMade": 0,
+        "energySpent": 0,
+        "energyGenerated": 14,
+        "burnApplied": 0,
+        "freezesApplied": 0,
+        "healingDone": 0,
+        "shieldsGained": 0
+      }
+    }
+  }
+}

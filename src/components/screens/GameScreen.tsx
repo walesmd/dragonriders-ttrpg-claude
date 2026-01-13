@@ -36,34 +36,37 @@ export default function GameScreen() {
 
   // Handle AI turns
   const executeAITurn = useCallback(async () => {
-    if (!state || state.phase === 'ended' || state.activePlayer !== 2) return;
+    const currentState = useGameStore.getState().state;
+    if (!currentState || currentState.phase === 'ended' || currentState.activePlayer !== 2) return;
 
     setAiThinking(true);
 
-    const config = getAIConfig(aiDifficulty, state.player2.dragon.name);
+    const config = getAIConfig(aiDifficulty, currentState.player2.dragon.name);
     let actionCount = 0;
     const maxActions = 20;
 
     // Execute actions with delays
     const takeAction = async () => {
-      if (state.winner || actionCount >= maxActions) {
+      // Get fresh state from store on each action
+      const freshState = useGameStore.getState().state;
+      if (!freshState || freshState.winner || actionCount >= maxActions) {
         // End AI turn
-        if (!state.winner) {
-          passTurn(state);
-          useGameStore.setState({ state: { ...state } });
+        if (freshState && !freshState.winner) {
+          passTurn(freshState);
+          useGameStore.setState({ state: { ...freshState } });
         }
         setAiThinking(false);
         return;
       }
 
-      const result = executeAIAction(state, 2, config);
-      useGameStore.setState({ state: { ...state } });
+      const result = executeAIAction(freshState, 2, config);
+      useGameStore.setState({ state: { ...freshState } });
 
       if (result.finished) {
         // End AI turn
-        if (!state.winner) {
-          passTurn(state);
-          useGameStore.setState({ state: { ...state } });
+        if (!freshState.winner) {
+          passTurn(freshState);
+          useGameStore.setState({ state: { ...freshState } });
         }
         setAiThinking(false);
         return;
@@ -77,7 +80,7 @@ export default function GameScreen() {
 
     // Start after initial delay
     setTimeout(takeAction, 800);
-  }, [state, aiDifficulty]);
+  }, [aiDifficulty]);
 
   // Trigger AI turn when it's AI's turn
   useEffect(() => {
