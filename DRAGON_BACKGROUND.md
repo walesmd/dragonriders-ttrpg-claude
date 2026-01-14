@@ -2,6 +2,8 @@
 
 ---
 
+All dragon art assets exist within ./public/assets/cards/dragons. They are named by each dragon. If a dragon does not have an image yet, replace it with Voidmaw's image.
+
 ## **Emberfang — The Cinder Tyrant**
 
 **Short Intro**
