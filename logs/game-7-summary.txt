@@ -1,0 +1,83 @@
+═══════════════════════════════════════════════════════════════════
+                    DRAGON RIDERS GAME LOG
+═══════════════════════════════════════════════════════════════════
+
+Game ID:    1768412289027-bqfib77
+Date:       2026-01-14T17:38:09.027Z
+Mode:       ai (AI: medium)
+Version:    0.10
+
+─── SETUP ───────────────────────────────────────────────────────────
+Player 1:   Talia + Emberfang
+Player 2:   Lyra + Voidmaw
+
+─── GAME ACTIONS ────────────────────────────────────────────────────
+
+╔══ Turn 1 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+6 → 6)
+  ── Entered Action Phase
+  • Played Firebreak [1 energy]
+  • Played Energy Surge [1 energy]
+  • Played Burning Hit [2 energy]
+  • Passed
+  • Drew a card
+  • Gained energy (+5 → 5)
+  • Dragon took burn damage (1 burn → 31 HP)
+  ── Entered Action Phase
+  • Passed
+
+╔══ Turn 2 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+6 → 11)
+  ── Entered Action Phase
+  • Played Sabotage [2 energy]
+  • Played Strike [1 energy]
+  • Played Freeze Ray [2 energy]
+  • Attacked rider (3 dmg) [Emberfang applied 1 Burn]
+  • Attacked rider (3 dmg)
+  • Attacked rider (3 dmg)
+  • Passed
+  • Drew a card
+  • Gained energy (+5 → 5)
+  • Dragon took burn damage (1 burn → 29 HP)
+  • Rider took burn damage (1 burn → 7 HP)
+  • Voidmaw dealt 2 damage (energy advantage) (2 dmg) [Voidmaw energy advantage]
+  ── Entered Action Phase
+  • Dragon thawed and gained freeze immunity
+  • Passed
+
+╔══ Turn 3 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+6 → 6)
+  ── Entered Action Phase
+  • Played Chain Bolt [2 energy]
+  • Attacked rider (3 dmg) [Emberfang applied 1 Burn]
+  • Attacked rider (3 dmg)
+  • Game ended - Player 1 wins by rider_kill
+
+─── RESULT ──────────────────────────────────────────────────────────
+Winner:     Player 1 (rider_kill)
+Turns:      3
+Duration:   34s
+
+Final HP:
+  P1 Dragon: 27  |  P1 Rider: 15
+  P2 Dragon: 27  |  P2 Rider: 0
+
+─── STATISTICS ──────────────────────────────────────────────────────
+
+                          Player 1    Player 2
+  Total Damage:                 19           0
+  → Dragon Damage:               1           0
+  → Rider Damage:               15           0
+  Attacks Made:                  5           0
+  Cards Played:                  7           0
+  Energy Generated:             18          10
+  Energy Spent:                 11           0
+  Burns Applied:                 3           0
+  Freezes Applied:               1           0
+  Healing Done:                  0           0
+  Shields Gained:                0           0
+
+═══════════════════════════════════════════════════════════════════
