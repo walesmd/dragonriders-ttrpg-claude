@@ -43,9 +43,16 @@ export default function RiderCard({
         )}
       </div>
 
-      {/* Rider name and state */}
-      <div className="flex justify-between items-start mb-2">
-        <div>
+      {/* Avatar and Rider name */}
+      <div className="flex gap-2 items-start mb-2">
+        <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/20">
+          <img
+            src={def.imagePath}
+            alt={rider.name}
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+        <div className="flex-1">
           <h3 className="text-lg font-bold text-white">{rider.name}</h3>
           <span className="text-xs text-gray-300">Rider</span>
         </div>

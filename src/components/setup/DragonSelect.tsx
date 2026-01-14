@@ -60,33 +60,48 @@ export default function DragonSelect({ player }: DragonSelectProps) {
                 onClick={() => handleSelect(name)}
                 disabled={isSelected}
                 className={`
-                  p-4 rounded-xl text-left transition-all duration-200
+                  rounded-xl text-left transition-all duration-200 overflow-hidden
                   bg-gradient-to-br ${gradientClasses}
                   ${isSelected ? 'opacity-40 cursor-not-allowed' : 'hover:scale-105 cursor-pointer'}
                 `}
               >
-                <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
-
-                <div className="flex gap-3 text-sm mb-3">
-                  <span className="text-green-300">{dragon.maxHp} HP</span>
-                  <span className="text-blue-300">{dragon.shields} Shields</span>
+                {/* Image Section */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={dragon.imagePath}
+                    alt={name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                  {isSelected && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+                      <span className="text-white font-bold text-xl">Taken by P1</span>
+                    </div>
+                  )}
                 </div>
 
-                <div className="flex gap-3 text-sm mb-3">
-                  <span className="text-red-300">{dragon.attackDamage} DMG</span>
-                  <span className="text-yellow-300">{dragon.attackCost} Cost</span>
-                </div>
+                {/* Info Section */}
+                <div className="p-4">
+                  <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
 
-                <div className="text-xs text-gray-200">
-                  <div className="font-semibold mb-1">Ability:</div>
-                  {dragon.ability}
-                </div>
-
-                {isSelected && (
-                  <div className="mt-2 text-white font-bold text-center bg-black/30 rounded py-1">
-                    Taken by P1
+                  <div className="flex gap-3 text-sm mb-3">
+                    <span className="text-green-300">{dragon.maxHp} HP</span>
+                    <span className="text-blue-300">{dragon.shields} Shields</span>
                   </div>
-                )}
+
+                  <div className="flex gap-3 text-sm mb-3">
+                    <span className="text-red-300">{dragon.attackDamage} DMG</span>
+                    <span className="text-yellow-300">{dragon.attackCost} Cost</span>
+                  </div>
+
+                  <div className="text-xs text-gray-200 mb-3 italic">
+                    "{dragon.shortIntro}"
+                  </div>
+
+                  <div className="text-xs text-gray-200">
+                    <div className="font-semibold mb-1">Ability:</div>
+                    {dragon.ability}
+                  </div>
+                </div>
               </button>
             );
           })}

@@ -2,30 +2,19 @@ import { useState } from 'react';
 import { RIDERS } from '../../data/riders';
 import { DRAGONS } from '../../data/dragons';
 import { CARD_DEFINITIONS } from '../../data/cards';
-import type { RiderName, DragonName } from '../../data/types';
+import type { RiderName, DragonName, RiderDefinition, DragonDefinition } from '../../data/types';
 import Button from '../ui/Button';
+import Modal from '../ui/Modal';
 
 interface CardLibraryProps {
   onBack: () => void;
 }
 
 type Tab = 'riders' | 'dragons' | 'cards';
-
-const RIDER_COLORS: Record<string, string> = {
-  Talia: 'from-emerald-600 to-emerald-800',
-  Kael: 'from-amber-600 to-amber-800',
-  Bronn: 'from-slate-600 to-slate-800',
-  Lyra: 'from-cyan-600 to-cyan-800',
-  Morrik: 'from-purple-600 to-violet-800',
-};
-
-const DRAGON_COLORS: Record<string, string> = {
-  Emberfang: 'from-orange-600 to-red-800',
-  Cryowyrm: 'from-blue-500 to-cyan-700',
-  Voltwing: 'from-yellow-500 to-amber-700',
-  Steelhorn: 'from-gray-500 to-zinc-700',
-  Voidmaw: 'from-purple-600 to-indigo-900',
-};
+type BackstoryModalContent = {
+  type: 'rider' | 'dragon';
+  data: RiderDefinition | DragonDefinition;
+} | null;
 
 const EFFECT_TYPE_COLORS: Record<string, string> = {
   damage: 'border-red-500 bg-red-900/30',
@@ -47,6 +36,7 @@ const EFFECT_TYPE_COLORS: Record<string, string> = {
 
 export default function CardLibrary({ onBack }: CardLibraryProps) {
   const [activeTab, setActiveTab] = useState<Tab>('riders');
+  const [backstoryModal, setBackstoryModal] = useState<BackstoryModalContent>(null);
 
   const riderNames = Object.keys(RIDERS) as RiderName[];
   const dragonNames = Object.keys(DRAGONS) as DragonName[];
@@ -102,37 +92,62 @@ export default function CardLibrary({ onBack }: CardLibraryProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {riderNames.map((name) => {
                 const rider = RIDERS[name];
+                const gradientClasses = `from-${rider.visualTheme.primary[0]} to-${rider.visualTheme.primary[1]}`;
+
                 return (
                   <div
                     key={name}
-                    className={`p-6 rounded-xl bg-gradient-to-br ${RIDER_COLORS[name]}`}
+                    className={`rounded-xl bg-gradient-to-br ${gradientClasses} overflow-hidden`}
                   >
-                    <h3 className="text-2xl font-bold text-white mb-3">{name}</h3>
-
-                    <div className="flex gap-4 text-sm mb-4">
-                      <span className="text-red-300 font-semibold">{rider.maxHp} HP</span>
-                      <span className="text-yellow-300 font-semibold">+{rider.baseEconomy} Economy</span>
+                    {/* Image */}
+                    <div className="relative h-56 overflow-hidden">
+                      <img
+                        src={rider.imagePath}
+                        alt={name}
+                        className="w-full h-full object-cover object-top"
+                      />
                     </div>
 
-                    <div className="space-y-3 text-sm">
-                      <div>
-                        <div className="text-xs font-semibold text-gray-200 mb-1">PASSIVE</div>
-                        <div className="text-gray-100">{rider.passive}</div>
+                    {/* Content */}
+                    <div className="p-6">
+                      <h3 className="text-2xl font-bold text-white mb-3">{name}</h3>
+
+                      <div className="flex gap-4 text-sm mb-4">
+                        <span className="text-red-300 font-semibold">{rider.maxHp} HP</span>
+                        <span className="text-yellow-300 font-semibold">+{rider.baseEconomy} Economy</span>
                       </div>
 
-                      <div>
-                        <div className="text-xs font-semibold text-yellow-200/80 mb-1">
-                          WOUNDED (≤{rider.woundedThreshold} HP)
-                        </div>
-                        <div className="text-yellow-100/80">{rider.woundedEffect}</div>
+                      <div className="text-xs text-gray-100 mb-4 italic">
+                        "{rider.shortIntro}"
                       </div>
 
-                      <div>
-                        <div className="text-xs font-semibold text-red-200/80 mb-1">
-                          CRITICAL (≤{rider.criticalThreshold} HP)
+                      <div className="space-y-3 text-sm mb-4">
+                        <div>
+                          <div className="text-xs font-semibold text-gray-200 mb-1">PASSIVE</div>
+                          <div className="text-gray-100">{rider.passive}</div>
                         </div>
-                        <div className="text-red-100/80">{rider.criticalEffect}</div>
+
+                        <div>
+                          <div className="text-xs font-semibold text-yellow-200/80 mb-1">
+                            WOUNDED (≤{rider.woundedThreshold} HP)
+                          </div>
+                          <div className="text-yellow-100/80">{rider.woundedEffect}</div>
+                        </div>
+
+                        <div>
+                          <div className="text-xs font-semibold text-red-200/80 mb-1">
+                            CRITICAL (≤{rider.criticalThreshold} HP)
+                          </div>
+                          <div className="text-red-100/80">{rider.criticalEffect}</div>
+                        </div>
                       </div>
+
+                      <button
+                        onClick={() => setBackstoryModal({ type: 'rider', data: rider })}
+                        className="w-full bg-black/30 hover:bg-black/50 text-white py-2 rounded-lg text-sm font-medium transition-colors"
+                      >
+                        Read Full Story
+                      </button>
                     </div>
                   </div>
                 );
@@ -144,23 +159,48 @@ export default function CardLibrary({ onBack }: CardLibraryProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {dragonNames.map((name) => {
                 const dragon = DRAGONS[name];
+                const gradientClasses = `from-${dragon.visualTheme.primary[0]} to-${dragon.visualTheme.primary[1]}`;
+
                 return (
                   <div
                     key={name}
-                    className={`p-6 rounded-xl bg-gradient-to-br ${DRAGON_COLORS[name]}`}
+                    className={`rounded-xl bg-gradient-to-br ${gradientClasses} overflow-hidden`}
                   >
-                    <h3 className="text-2xl font-bold text-white mb-3">{name}</h3>
-
-                    <div className="grid grid-cols-2 gap-2 text-sm mb-4">
-                      <span className="text-green-300 font-semibold">{dragon.maxHp} HP</span>
-                      <span className="text-blue-300 font-semibold">{dragon.shields} Shields</span>
-                      <span className="text-red-300 font-semibold">{dragon.attackDamage} Damage</span>
-                      <span className="text-yellow-300 font-semibold">{dragon.attackCost} Cost</span>
+                    {/* Image */}
+                    <div className="relative h-56 overflow-hidden">
+                      <img
+                        src={dragon.imagePath}
+                        alt={name}
+                        className="w-full h-full object-cover object-top"
+                      />
                     </div>
 
-                    <div className="text-sm">
-                      <div className="text-xs font-semibold text-gray-200 mb-1">ABILITY</div>
-                      <div className="text-gray-100">{dragon.ability}</div>
+                    {/* Content */}
+                    <div className="p-6">
+                      <h3 className="text-2xl font-bold text-white mb-3">{name}</h3>
+
+                      <div className="grid grid-cols-2 gap-2 text-sm mb-4">
+                        <span className="text-green-300 font-semibold">{dragon.maxHp} HP</span>
+                        <span className="text-blue-300 font-semibold">{dragon.shields} Shields</span>
+                        <span className="text-red-300 font-semibold">{dragon.attackDamage} Damage</span>
+                        <span className="text-yellow-300 font-semibold">{dragon.attackCost} Cost</span>
+                      </div>
+
+                      <div className="text-xs text-gray-100 mb-4 italic">
+                        "{dragon.shortIntro}"
+                      </div>
+
+                      <div className="text-sm mb-4">
+                        <div className="text-xs font-semibold text-gray-200 mb-1">ABILITY</div>
+                        <div className="text-gray-100">{dragon.ability}</div>
+                      </div>
+
+                      <button
+                        onClick={() => setBackstoryModal({ type: 'dragon', data: dragon })}
+                        className="w-full bg-black/30 hover:bg-black/50 text-white py-2 rounded-lg text-sm font-medium transition-colors"
+                      >
+                        Read Full Story
+                      </button>
                     </div>
                   </div>
                 );
@@ -218,6 +258,105 @@ export default function CardLibrary({ onBack }: CardLibraryProps) {
           )}
         </div>
       </div>
+
+      {/* Backstory Modal */}
+      {backstoryModal && (
+        <Modal
+          isOpen={true}
+          onClose={() => setBackstoryModal(null)}
+          title={backstoryModal.data.name}
+        >
+          <div className="space-y-4">
+            {/* Image */}
+            <div className="relative h-64 rounded-lg overflow-hidden">
+              <img
+                src={backstoryModal.data.imagePath}
+                alt={backstoryModal.data.name}
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
+
+            {/* Short Intro */}
+            <div className="text-gray-300 italic text-center">
+              "{backstoryModal.data.shortIntro}"
+            </div>
+
+            {/* Stats */}
+            <div className="flex gap-4 justify-center text-sm">
+              {backstoryModal.type === 'rider' ? (
+                <>
+                  <span className="text-red-300 font-semibold">
+                    {(backstoryModal.data as RiderDefinition).maxHp} HP
+                  </span>
+                  <span className="text-yellow-300 font-semibold">
+                    +{(backstoryModal.data as RiderDefinition).baseEconomy} Economy
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-green-300 font-semibold">
+                    {(backstoryModal.data as DragonDefinition).maxHp} HP
+                  </span>
+                  <span className="text-blue-300 font-semibold">
+                    {(backstoryModal.data as DragonDefinition).shields} Shields
+                  </span>
+                  <span className="text-red-300 font-semibold">
+                    {(backstoryModal.data as DragonDefinition).attackDamage} DMG
+                  </span>
+                  <span className="text-yellow-300 font-semibold">
+                    {(backstoryModal.data as DragonDefinition).attackCost} Cost
+                  </span>
+                </>
+              )}
+            </div>
+
+            {/* Backstory */}
+            <div className="bg-gray-800 rounded-lg p-4">
+              <h3 className="text-lg font-bold text-white mb-3">Backstory</h3>
+              <div className="text-gray-300 whitespace-pre-wrap leading-relaxed">
+                {backstoryModal.data.backstory}
+              </div>
+            </div>
+
+            {/* Character Details */}
+            {backstoryModal.type === 'rider' && (
+              <div className="bg-gray-800 rounded-lg p-4 space-y-3">
+                <div>
+                  <div className="text-xs font-semibold text-gray-400 mb-1">PASSIVE</div>
+                  <div className="text-gray-200">
+                    {(backstoryModal.data as RiderDefinition).passive}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-yellow-300 mb-1">
+                    WOUNDED (≤{(backstoryModal.data as RiderDefinition).woundedThreshold} HP)
+                  </div>
+                  <div className="text-gray-200">
+                    {(backstoryModal.data as RiderDefinition).woundedEffect}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-red-300 mb-1">
+                    CRITICAL (≤{(backstoryModal.data as RiderDefinition).criticalThreshold} HP)
+                  </div>
+                  <div className="text-gray-200">
+                    {(backstoryModal.data as RiderDefinition).criticalEffect}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {backstoryModal.type === 'dragon' && (
+              <div className="bg-gray-800 rounded-lg p-4">
+                <div className="text-xs font-semibold text-gray-400 mb-1">ABILITY</div>
+                <div className="text-gray-200">
+                  {(backstoryModal.data as DragonDefinition).ability}
+                </div>
+              </div>
+            )}
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

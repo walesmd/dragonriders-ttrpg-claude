@@ -53,38 +53,53 @@ export default function RiderSelect({ player }: RiderSelectProps) {
                 onClick={() => handleSelect(name)}
                 disabled={isSelected}
                 className={`
-                  p-4 rounded-xl text-left transition-all duration-200
+                  rounded-xl text-left transition-all duration-200 overflow-hidden
                   bg-gradient-to-br ${gradientClasses}
                   ${isSelected ? 'opacity-40 cursor-not-allowed' : 'hover:scale-105 cursor-pointer'}
                 `}
               >
-                <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
-
-                <div className="flex gap-4 text-sm mb-3">
-                  <span className="text-red-300">{rider.maxHp} HP</span>
-                  <span className="text-yellow-300">+{rider.baseEconomy} Eco</span>
+                {/* Image Section */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={rider.imagePath}
+                    alt={name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                  {isSelected && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+                      <span className="text-white font-bold text-xl">Taken by P1</span>
+                    </div>
+                  )}
                 </div>
 
-                <div className="text-xs text-gray-200 mb-2">
-                  <div className="font-semibold mb-1">Passive:</div>
-                  {rider.passive}
-                </div>
+                {/* Info Section */}
+                <div className="p-4">
+                  <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
 
-                <div className="text-xs text-yellow-200/70">
-                  <div className="font-semibold">Wounded ({rider.woundedThreshold}HP):</div>
-                  {rider.woundedEffect}
-                </div>
-
-                <div className="text-xs text-red-200/70 mt-1">
-                  <div className="font-semibold">Critical ({rider.criticalThreshold}HP):</div>
-                  {rider.criticalEffect}
-                </div>
-
-                {isSelected && (
-                  <div className="mt-2 text-white font-bold text-center bg-black/30 rounded py-1">
-                    Taken by P1
+                  <div className="flex gap-4 text-sm mb-3">
+                    <span className="text-red-300">{rider.maxHp} HP</span>
+                    <span className="text-yellow-300">+{rider.baseEconomy} Eco</span>
                   </div>
-                )}
+
+                  <div className="text-xs text-gray-200 mb-3 italic">
+                    "{rider.shortIntro}"
+                  </div>
+
+                  <div className="text-xs text-gray-200 mb-2">
+                    <div className="font-semibold mb-1">Passive:</div>
+                    {rider.passive}
+                  </div>
+
+                  <div className="text-xs text-yellow-200/70">
+                    <div className="font-semibold">Wounded ({rider.woundedThreshold}HP):</div>
+                    {rider.woundedEffect}
+                  </div>
+
+                  <div className="text-xs text-red-200/70 mt-1">
+                    <div className="font-semibold">Critical ({rider.criticalThreshold}HP):</div>
+                    {rider.criticalEffect}
+                  </div>
+                </div>
               </button>
             );
           })}

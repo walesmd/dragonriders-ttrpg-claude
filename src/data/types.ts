@@ -94,6 +94,9 @@ export interface RiderDefinition {
   woundedEffect: string;
   criticalEffect: string;
   visualTheme: VisualTheme;
+  imagePath: string;
+  shortIntro: string;
+  backstory: string;
 }
 
 export interface DragonState {
@@ -113,6 +116,9 @@ export interface DragonDefinition {
   attackDamage: number;
   ability: string;
   visualTheme: VisualTheme;
+  imagePath: string;
+  shortIntro: string;
+  backstory: string;
 }
 
 // ============================================================================

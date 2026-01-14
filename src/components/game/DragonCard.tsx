@@ -46,9 +46,16 @@ export default function DragonCard({
         )}
       </div>
 
-      {/* Dragon name */}
-      <div className="flex justify-between items-start mb-2">
-        <div>
+      {/* Avatar and Dragon name */}
+      <div className="flex gap-2 items-start mb-2">
+        <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/20">
+          <img
+            src={def.imagePath}
+            alt={dragon.name}
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+        <div className="flex-1">
           <h3 className="text-xl font-bold text-white">{dragon.name}</h3>
           <span className="text-xs text-gray-300">Dragon</span>
         </div>
