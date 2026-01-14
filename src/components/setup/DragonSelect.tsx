@@ -2,6 +2,7 @@ import { useSetupStore } from '../../store/setupStore';
 import { DRAGONS } from '../../data/dragons';
 import type { DragonName } from '../../data/types';
 import HelpPanel from '../ui/HelpPanel';
+import { getAssetPath } from '../../utils/assets';
 
 interface DragonSelectProps {
   player: 1 | 2;
@@ -68,7 +69,7 @@ export default function DragonSelect({ player }: DragonSelectProps) {
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={dragon.imagePath}
+                    src={getAssetPath(dragon.imagePath)}
                     alt={name}
                     className="w-full h-full object-cover object-top"
                   />

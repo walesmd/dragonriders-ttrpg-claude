@@ -5,6 +5,7 @@ import { CARD_DEFINITIONS } from '../../data/cards';
 import type { RiderName, DragonName, RiderDefinition, DragonDefinition } from '../../data/types';
 import Button from '../ui/Button';
 import Modal from '../ui/Modal';
+import { getAssetPath } from '../../utils/assets';
 
 interface CardLibraryProps {
   onBack: () => void;
@@ -102,7 +103,7 @@ export default function CardLibrary({ onBack }: CardLibraryProps) {
                     {/* Image */}
                     <div className="relative h-56 overflow-hidden">
                       <img
-                        src={rider.imagePath}
+                        src={getAssetPath(rider.imagePath)}
                         alt={name}
                         className="w-full h-full object-cover object-top"
                       />
@@ -169,7 +170,7 @@ export default function CardLibrary({ onBack }: CardLibraryProps) {
                     {/* Image */}
                     <div className="relative h-56 overflow-hidden">
                       <img
-                        src={dragon.imagePath}
+                        src={getAssetPath(dragon.imagePath)}
                         alt={name}
                         className="w-full h-full object-cover object-top"
                       />
@@ -270,7 +271,7 @@ export default function CardLibrary({ onBack }: CardLibraryProps) {
             {/* Image */}
             <div className="relative h-64 rounded-lg overflow-hidden">
               <img
-                src={backstoryModal.data.imagePath}
+                src={getAssetPath(backstoryModal.data.imagePath)}
                 alt={backstoryModal.data.name}
                 className="w-full h-full object-cover object-top"
               />

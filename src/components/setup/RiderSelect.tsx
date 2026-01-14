@@ -2,6 +2,7 @@ import { useSetupStore } from '../../store/setupStore';
 import { RIDERS } from '../../data/riders';
 import type { RiderName } from '../../data/types';
 import HelpPanel from '../ui/HelpPanel';
+import { getAssetPath } from '../../utils/assets';
 
 interface RiderSelectProps {
   player: 1 | 2;
@@ -61,7 +62,7 @@ export default function RiderSelect({ player }: RiderSelectProps) {
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={rider.imagePath}
+                    src={getAssetPath(rider.imagePath)}
                     alt={name}
                     className="w-full h-full object-cover object-top"
                   />
