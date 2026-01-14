@@ -10,10 +10,10 @@ const loadedImages = new Set<string>();
  * The browser will cache it naturally for subsequent uses.
  *
  * @param imagePath - The path to the image (will be passed through getAssetPath)
- * @returns Promise that resolves when image is loaded or rejects on error
+ * @returns Promise that resolves when image is loaded (or fails silently)
  */
 function preloadImage(imagePath: string): Promise<void> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     // Skip if already loaded in this session
     if (loadedImages.has(imagePath)) {
       resolve();
