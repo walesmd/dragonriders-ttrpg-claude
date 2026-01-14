@@ -123,8 +123,10 @@ export default function GameBoard({
 
         {/* Center - Action bar */}
         <ActionBar
-          canAttack={canAct && canPlayerAttack()}
-          attackCost={getAttackCost()}
+          canAttackDragon={canAct && canPlayerAttack('dragon')}
+          canAttackRider={canAct && canPlayerAttack('rider')}
+          attackCostDragon={getAttackCost('dragon')}
+          attackCostRider={getAttackCost('rider')}
           onAttackDragon={handleTargetDragon}
           onAttackRider={handleTargetRider}
           onEndTurn={handleEndTurn}

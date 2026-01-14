@@ -197,12 +197,12 @@ export function executeAttack(
     energyStolen: 0,
   };
 
-  if (!canAttack(state, attacker)) {
+  if (!canAttack(state, attacker, target)) {
     return result;
   }
 
   // Pay cost
-  const cost = getAttackCost(attacker);
+  const cost = getAttackCost(attacker, target);
   attacker.energy -= cost;
 
   // Base damage
