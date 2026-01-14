@@ -1,12 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSetupStore } from '../../store/setupStore';
 import HelpPanel from '../ui/HelpPanel';
 import CardLibrary from './CardLibrary';
 import { LOG_VERSION } from '../../logging/types';
+import { RIDERS } from '../../data/riders';
+import { DRAGONS } from '../../data/dragons';
+import type { RiderName, DragonName } from '../../data/types';
+import { preloadGameAssets } from '../../utils/imagePreloader';
 
 export default function MainMenu() {
   const setGameMode = useSetupStore((s) => s.setGameMode);
   const [showCardLibrary, setShowCardLibrary] = useState(false);
+
+  // Preload game assets in the background while user is on menu
+  useEffect(() => {
+    // Extract image paths from riders and dragons
+    const riderPaths = (Object.keys(RIDERS) as RiderName[]).map(
+      (name) => RIDERS[name].imagePath
+    );
+    const dragonPaths = (Object.keys(DRAGONS) as DragonName[]).map(
+      (name) => DRAGONS[name].imagePath
+    );
+
+    // Start preloading in background (non-blocking)
+    // Order: riders first, then dragons, then cards (when available)
+    preloadGameAssets(riderPaths, dragonPaths).catch(() => {
+      // Silently fail if preloading encounters issues
+      // This is background work and shouldn't impact user experience
+    });
+  }, []); // Run once on mount
 
   if (showCardLibrary) {
     return <CardLibrary onBack={() => setShowCardLibrary(false)} />;
