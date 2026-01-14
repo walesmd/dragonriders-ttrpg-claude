@@ -1,6 +1,7 @@
 import type { RiderState } from '../../data/types';
 import { RIDERS, isWounded, isCritical } from '../../data/riders';
 import HealthBar from '../ui/HealthBar';
+import { getAssetPath } from '../../utils/assets';
 
 interface RiderCardProps {
   rider: RiderState;
@@ -47,7 +48,7 @@ export default function RiderCard({
       <div className="flex gap-2 items-start mb-2">
         <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/20">
           <img
-            src={def.imagePath}
+            src={getAssetPath(def.imagePath)}
             alt={rider.name}
             className="w-full h-full object-cover object-top"
           />

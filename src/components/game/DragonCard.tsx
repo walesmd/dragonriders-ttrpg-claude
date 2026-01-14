@@ -1,6 +1,7 @@
 import type { DragonState } from '../../data/types';
 import { DRAGONS } from '../../data/dragons';
 import HealthBar from '../ui/HealthBar';
+import { getAssetPath } from '../../utils/assets';
 
 interface DragonCardProps {
   dragon: DragonState;
@@ -50,7 +51,7 @@ export default function DragonCard({
       <div className="flex gap-2 items-start mb-2">
         <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/20">
           <img
-            src={def.imagePath}
+            src={getAssetPath(def.imagePath)}
             alt={dragon.name}
             className="w-full h-full object-cover object-top"
           />
