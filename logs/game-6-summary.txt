@@ -1,0 +1,101 @@
+═══════════════════════════════════════════════════════════════════
+                    DRAGON RIDERS GAME LOG
+═══════════════════════════════════════════════════════════════════
+
+Game ID:    1768411692613-mnlo9np
+Date:       2026-01-14T17:28:12.613Z
+Mode:       ai (AI: medium)
+Version:    0.10
+
+─── SETUP ───────────────────────────────────────────────────────────
+Player 1:   Talia + Emberfang
+Player 2:   Lyra + Cryowyrm
+
+─── GAME ACTIONS ────────────────────────────────────────────────────
+
+╔══ Turn 1 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+6 → 6)
+  ── Entered Action Phase
+  • Played Energy Shield [2 energy]
+  • Attacked rider (3 dmg) [Emberfang applied 1 Burn]
+  • Attacked rider (3 dmg)
+  • Passed
+  • Drew a card
+  • Gained energy (+5 → 5)
+  • Rider took burn damage (1 burn → 10 HP)
+  ── Entered Action Phase
+  • Passed
+
+╔══ Turn 2 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+6 → 6)
+  ── Entered Action Phase
+  • Played Sabotage [2 energy]
+  • Attacked rider (3 dmg) [Emberfang applied 1 Burn]
+  • Passed
+  • Drew a card
+  • Gained energy (+5 → 6)
+  • Rider took burn damage (2 burn → 5 HP)
+  ── Entered Action Phase
+  • Passed
+
+╔══ Turn 3 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+6 → 8)
+  ── Entered Action Phase
+  • Played Shield Up [2 energy]
+  • Dragon thawed and gained freeze immunity
+  • Passed
+  • Drew a card
+  • Gained energy (+5 → 6)
+  • Rider took burn damage (2 burn → 3 HP)
+  ── Entered Action Phase
+  • Passed
+
+╔══ Turn 4 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+5 → 11)
+  ── Entered Action Phase
+  • Played Rider Heal [2 energy]
+  • Dragon thawed and gained freeze immunity
+  • Rider thawed and gained freeze immunity
+  • Passed
+  • Drew a card
+  • Gained energy (+5 → 5)
+  • Rider took burn damage (2 burn → 1 HP)
+  ── Entered Action Phase
+  • Passed
+
+╔══ Turn 5 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+6 → 15)
+  ── Entered Action Phase
+  • Played Chain Bolt [2 energy]
+  • Game ended - Player 1 wins by rider_kill
+
+─── RESULT ──────────────────────────────────────────────────────────
+Winner:     Player 1 (rider_kill)
+Turns:      5
+Duration:   127s
+
+Final HP:
+  P1 Dragon: 16  |  P1 Rider: 14
+  P2 Dragon: 30  |  P2 Rider: 0
+
+─── STATISTICS ──────────────────────────────────────────────────────
+
+                          Player 1    Player 2
+  Total Damage:                 10           0
+  → Dragon Damage:               0           0
+  → Rider Damage:                9           0
+  Attacks Made:                  3           0
+  Cards Played:                  5           0
+  Energy Generated:             29          20
+  Energy Spent:                 10           0
+  Burns Applied:                 2           0
+  Freezes Applied:               0           0
+  Healing Done:                  3           0
+  Shields Gained:                2           0
+
+═══════════════════════════════════════════════════════════════════

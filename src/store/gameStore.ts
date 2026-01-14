@@ -90,6 +90,20 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const result = executeAttack(state, state.activePlayer, target);
 
     if (result.success) {
+      // Add to visual action log
+      state.actionLog.push({
+        turn: state.turn,
+        player: state.activePlayer,
+        action: `Attacked ${target === 'dragon' ? 'Dragon' : 'Rider'}`,
+        details: {
+          damage: result.damage?.finalDamage,
+          kaelBonus: result.kaelBonus,
+          dragonAbility: result.dragonAbility,
+          splashDamage: result.splashDamage?.finalDamage,
+        },
+        timestamp: Date.now(),
+      });
+
       // Log the attack via unified logger
       const logger = getLogger();
       logger?.logAttack(state, target, result.damage?.finalDamage || 0, {
@@ -128,6 +142,19 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const result = executeCard(state, state.activePlayer, cardId, target);
 
     if (result.success) {
+      // Add to visual action log
+      state.actionLog.push({
+        turn: state.turn,
+        player: state.activePlayer,
+        action: `Played ${result.cardName || 'Unknown'}`,
+        details: {
+          cost: result.energySpent,
+          morrikBonus: result.morrikBonus,
+          effects: result.effects,
+        },
+        timestamp: Date.now(),
+      });
+
       // Log the card play via unified logger
       const logger = getLogger();
       logger?.logCardPlayed(

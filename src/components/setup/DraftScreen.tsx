@@ -6,6 +6,7 @@ import CardComponent from '../game/CardComponent';
 import HelpPanel from '../ui/HelpPanel';
 
 export default function DraftScreen() {
+  const visiblePool = useSetupStore((s) => s.visiblePool);
   const draftPool = useSetupStore((s) => s.draftPool);
   const player1Deck = useSetupStore((s) => s.player1Deck);
   const player2Deck = useSetupStore((s) => s.player2Deck);
@@ -28,14 +29,14 @@ export default function DraftScreen() {
     if (gameMode === 'ai' && currentDrafter === 2 && player2Deck.length < DECK_SIZE) {
       // AI picks a random card after a short delay
       const timer = setTimeout(() => {
-        if (draftPool.length > 0) {
-          const randomIndex = Math.floor(Math.random() * draftPool.length);
-          draftCard(draftPool[randomIndex].id);
+        if (visiblePool.length > 0) {
+          const randomIndex = Math.floor(Math.random() * visiblePool.length);
+          draftCard(visiblePool[randomIndex].id);
         }
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [gameMode, currentDrafter, player2Deck.length, draftPool, draftCard]);
+  }, [gameMode, currentDrafter, player2Deck.length, visiblePool, draftCard]);
 
   // Start game when draft is complete
   useEffect(() => {
@@ -163,9 +164,22 @@ export default function DraftScreen() {
           </div>
         </div>
 
-        {/* Card pool */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-          {draftPool.map((card) => (
+        {/* Card pool indicator */}
+        <div className="text-center mb-4">
+          <p className="text-sm text-gray-400">
+            Showing <span className="text-yellow-400 font-semibold">{visiblePool.length}</span> cards
+            {draftPool.length > 0 && (
+              <>
+                {' • '}
+                <span className="text-gray-500">{draftPool.length} remaining in pool</span>
+              </>
+            )}
+          </p>
+        </div>
+
+        {/* Card pool - 5 cards max */}
+        <div className="flex justify-center gap-3 flex-wrap">
+          {visiblePool.map((card) => (
             <CardComponent
               key={card.id}
               card={card}
@@ -174,9 +188,19 @@ export default function DraftScreen() {
               playable={!(gameMode === 'ai' && currentDrafter === 2)}
             />
           ))}
+
+          {/* Empty slots when fewer than 5 cards visible */}
+          {Array.from({ length: 5 - visiblePool.length }).map((_, i) => (
+            <div
+              key={`empty-${i}`}
+              className="w-40 h-32 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center"
+            >
+              <span className="text-gray-600 text-sm">Empty</span>
+            </div>
+          ))}
         </div>
 
-        {draftPool.length === 0 && (
+        {visiblePool.length === 0 && draftPool.length === 0 && (
           <div className="text-center text-gray-500 py-8">
             All cards have been drafted!
           </div>

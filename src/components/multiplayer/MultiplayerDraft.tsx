@@ -45,6 +45,10 @@ export default function MultiplayerDraft() {
     .map(id => getCardById(id))
     .filter((c): c is Card => c !== undefined);
 
+  // Client-side split: show first 5 cards as visible pool
+  const visiblePoolCards = draftPoolCards.slice(0, 5);
+  const hiddenPoolCount = draftPoolCards.length - visiblePoolCards.length;
+
   const myDeckCards = myPlayer?.deck
     .map(id => getCardById(id))
     .filter((c): c is Card => c !== undefined) || [];
@@ -149,9 +153,22 @@ export default function MultiplayerDraft() {
           </div>
         </div>
 
-        {/* Card pool */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-          {draftPoolCards.map((card) => (
+        {/* Card pool indicator */}
+        <div className="text-center mb-4">
+          <p className="text-sm text-gray-400">
+            Showing <span className="text-yellow-400 font-semibold">{visiblePoolCards.length}</span> cards
+            {hiddenPoolCount > 0 && (
+              <>
+                {' • '}
+                <span className="text-gray-500">{hiddenPoolCount} remaining in pool</span>
+              </>
+            )}
+          </p>
+        </div>
+
+        {/* Card pool - 5 cards max */}
+        <div className="flex justify-center gap-3 flex-wrap">
+          {visiblePoolCards.map((card) => (
             <CardComponent
               key={card.id}
               card={card}
@@ -160,9 +177,19 @@ export default function MultiplayerDraft() {
               playable={isMyTurn}
             />
           ))}
+
+          {/* Empty slots when fewer than 5 cards visible */}
+          {Array.from({ length: 5 - visiblePoolCards.length }).map((_, i) => (
+            <div
+              key={`empty-${i}`}
+              className="w-40 h-32 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center"
+            >
+              <span className="text-gray-600 text-sm">Empty</span>
+            </div>
+          ))}
         </div>
 
-        {draftPoolCards.length === 0 && roomState.draftPool.length === 0 && (
+        {visiblePoolCards.length === 0 && roomState.draftPool.length === 0 && (
           <div className="text-center text-gray-500 py-8">
             Initializing draft pool...
           </div>

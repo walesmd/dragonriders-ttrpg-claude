@@ -30,7 +30,8 @@ interface SetupState {
   player2Dragon: DragonName | null;
 
   // Draft
-  draftPool: Card[];
+  draftPool: Card[]; // Hidden cards not yet visible
+  visiblePool: Card[]; // 5 visible cards players can draft from
   player1Deck: Card[];
   player2Deck: Card[];
   currentDrafter: 1 | 2;
@@ -55,6 +56,7 @@ const initialState = {
   player1Dragon: null as DragonName | null,
   player2Dragon: null as DragonName | null,
   draftPool: [] as Card[],
+  visiblePool: [] as Card[],
   player1Deck: [] as Card[],
   player2Deck: [] as Card[],
   currentDrafter: 1 as 1 | 2,
@@ -133,8 +135,14 @@ export const useSetupStore = create<SetupState>((set, get) => ({
   initializeDraft: () => {
     const pool = createCardPool();
     const shuffled = shuffleArray(pool);
+
+    // Take first 5 cards as visible pool, rest as hidden pool
+    const visible = shuffled.slice(0, 5);
+    const hidden = shuffled.slice(5);
+
     set({
-      draftPool: shuffled,
+      visiblePool: visible,
+      draftPool: hidden,
       player1Deck: [],
       player2Deck: [],
       currentDrafter: 1,
@@ -143,19 +151,28 @@ export const useSetupStore = create<SetupState>((set, get) => ({
 
   draftCard: (cardId) => {
     const state = get();
-    const cardIndex = state.draftPool.findIndex((c) => c.id === cardId);
+    // Find card in visible pool
+    const cardIndex = state.visiblePool.findIndex((c) => c.id === cardId);
     if (cardIndex === -1) return;
 
-    const card = state.draftPool[cardIndex];
-    const newPool = [...state.draftPool];
-    newPool.splice(cardIndex, 1);
+    const card = state.visiblePool[cardIndex];
+    const newVisiblePool = [...state.visiblePool];
+    newVisiblePool.splice(cardIndex, 1);
+
+    // Refill visible pool from hidden pool if available
+    const newDraftPool = [...state.draftPool];
+    if (newDraftPool.length > 0) {
+      const nextCard = newDraftPool.shift()!; // Take first card from hidden pool
+      newVisiblePool.push(nextCard);
+    }
 
     if (state.currentDrafter === 1) {
       const newDeck = [...state.player1Deck, card];
       const deckComplete = newDeck.length >= DECK_SIZE;
 
       set({
-        draftPool: newPool,
+        draftPool: newDraftPool,
+        visiblePool: newVisiblePool,
         player1Deck: newDeck,
         currentDrafter: deckComplete && state.player2Deck.length < DECK_SIZE ? 2 :
                         !deckComplete ? 2 : 1,
@@ -166,7 +183,8 @@ export const useSetupStore = create<SetupState>((set, get) => ({
       const deckComplete = newDeck.length >= DECK_SIZE;
 
       set({
-        draftPool: newPool,
+        draftPool: newDraftPool,
+        visiblePool: newVisiblePool,
         player2Deck: newDeck,
         currentDrafter: deckComplete && state.player1Deck.length < DECK_SIZE ? 1 :
                         !deckComplete ? 1 : 2,
