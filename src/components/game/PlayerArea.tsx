@@ -47,7 +47,7 @@ export default function PlayerArea({
       >
         <RiderCard
           rider={player.rider}
-          frozen={player.riderFrozen}
+          frozen={player.riderFreezeStacks > 0}
           burn={player.riderBurn}
           isOpponent={isOpponent}
         />
@@ -56,7 +56,7 @@ export default function PlayerArea({
       {/* Dragon */}
       <DragonCard
         dragon={player.dragon}
-        frozen={player.dragonFrozen}
+        frozen={player.dragonFreezeStacks > 0}
         burn={player.dragonBurn}
         isOpponent={isOpponent}
         onClick={needsTarget && selectedCard?.target === 'dragon' && isOpponent ? onTargetDragon : undefined}

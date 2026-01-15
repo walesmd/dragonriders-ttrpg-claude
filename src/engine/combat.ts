@@ -10,11 +10,11 @@ import { isWounded, isCritical } from '../data/riders';
 export function applyFreeze(player: PlayerState, target: TargetType): boolean {
   if (target === 'dragon') {
     if (player.dragonFreezeImmune) return false;
-    player.dragonFrozen = true;
+    player.dragonFreezeStacks = Math.min(2, player.dragonFreezeStacks + 1);
     return true;
   } else {
     if (player.riderFreezeImmune) return false;
-    player.riderFrozen = true;
+    player.riderFreezeStacks = Math.min(2, player.riderFreezeStacks + 1);
     return true;
   }
 }
@@ -29,9 +29,9 @@ export function applyBurn(player: PlayerState, target: TargetType, stacks: numbe
 
 export function clearFreeze(player: PlayerState, target: TargetType): void {
   if (target === 'dragon') {
-    player.dragonFrozen = false;
+    player.dragonFreezeStacks = 0;
   } else {
-    player.riderFrozen = false;
+    player.riderFreezeStacks = 0;
   }
 }
 
@@ -187,6 +187,8 @@ export function executeAttack(
 ): AttackResult {
   const attacker = getPlayer(state, attackerNum);
   const defender = getOpponentPlayer(state, attackerNum);
+  const targetFrozenBefore =
+    target === 'dragon' ? defender.dragonFreezeStacks > 0 : defender.riderFreezeStacks > 0;
 
   const result: AttackResult = {
     success: false,
@@ -209,6 +211,11 @@ export function executeAttack(
 
   // Base damage
   let damage = attacker.dragon.attackDamage;
+
+  // Cryowyrm bonus damage against already frozen targets
+  if (attacker.dragon.name === 'Cryowyrm' && targetFrozenBefore) {
+    damage += 1;
+  }
 
   // Kael first attack bonus
   if (attacker.rider.name === 'Kael' && attacker.firstAttackThisTurn) {
@@ -278,6 +285,7 @@ export function executeAttack(
   }
 
   attacker.firstAttackThisTurn = false;
+  attacker.actionsTakenThisTurn += 1;
   result.success = true;
 
   return result;

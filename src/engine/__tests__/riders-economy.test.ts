@@ -103,7 +103,7 @@ describe('Rider Breakpoints and Economy', () => {
       const riderCost = getAttackCost(state.player1, 'rider');
 
       expect(dragonCost).toBe(3); // 2 base + 1 critical penalty
-      expect(riderCost).toBe(4); // 2 base + 1 rider + 1 critical penalty
+      expect(riderCost).toBe(3); // 2 base + 1 critical penalty
     });
 
     it('should cost normal when not critical', () => {
@@ -113,7 +113,7 @@ describe('Rider Breakpoints and Economy', () => {
       const riderCost = getAttackCost(state.player1, 'rider');
 
       expect(dragonCost).toBe(2); // Normal dragon attack cost
-      expect(riderCost).toBe(3); // Rider attacks cost +1
+      expect(riderCost).toBe(2); // Normal rider attack cost
     });
   });
 

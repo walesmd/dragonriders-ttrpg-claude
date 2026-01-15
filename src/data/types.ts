@@ -54,15 +54,15 @@ export interface PlayerState {
   deck: Card[];
   discard: Card[];
   energy: number;
-  dragonFrozen: boolean;
+  dragonFreezeStacks: number;
   dragonFreezeImmune: boolean;
   dragonBurn: number;
-  riderFrozen: boolean;
+  riderFreezeStacks: number;
   riderFreezeImmune: boolean;
   riderBurn: number;
   firstAttackThisTurn: boolean;
   burnAppliedThisTurn: boolean;
-  cardsPlayedWhileFrozen: number;
+  actionsTakenThisTurn: number;
 }
 
 // ============================================================================

@@ -69,7 +69,7 @@ describe('Dragon Abilities', () => {
       const result = executeAttack(state, 1, 'dragon');
 
       expect(result.frozeTarget).toBe(true);
-      expect(state.player2.dragonFrozen).toBe(true);
+      expect(state.player2.dragonFreezeStacks).toBe(1);
     });
 
     it('should freeze rider target', () => {
@@ -80,7 +80,7 @@ describe('Dragon Abilities', () => {
       const result = executeAttack(state, 1, 'rider');
 
       expect(result.frozeTarget).toBe(true);
-      expect(state.player2.riderFrozen).toBe(true);
+      expect(state.player2.riderFreezeStacks).toBe(1);
     });
 
     it('should not freeze if target is immune', () => {
@@ -92,7 +92,7 @@ describe('Dragon Abilities', () => {
       const result = executeAttack(state, 1, 'dragon');
 
       expect(result.frozeTarget).toBe(false);
-      expect(state.player2.dragonFrozen).toBe(false);
+      expect(state.player2.dragonFreezeStacks).toBe(0);
     });
 
     it('should freeze on every attack', () => {
@@ -102,7 +102,7 @@ describe('Dragon Abilities', () => {
 
       // Clear freeze after first attack to test reapplication
       executeAttack(state, 1, 'dragon');
-      state.player2.dragonFrozen = false;
+      state.player2.dragonFreezeStacks = 0;
 
       const result2 = executeAttack(state, 1, 'dragon');
       expect(result2.frozeTarget).toBe(true);

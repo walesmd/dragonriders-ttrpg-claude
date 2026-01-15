@@ -83,11 +83,6 @@ export function executeCard(
     }
   }
 
-  // Track frozen card play
-  if (player.dragonFrozen) {
-    player.cardsPlayedWhileFrozen++;
-  }
-
   // Remove card from hand
   player.hand.splice(cardIndex, 1);
   player.discard.push(card);
@@ -218,10 +213,10 @@ export function executeCard(
 
     case 'thaw':
       // Remove freeze from dragon or rider (whichever is frozen)
-      if (player.dragonFrozen) {
+      if (player.dragonFreezeStacks > 0) {
         clearFreeze(player, 'dragon');
         result.effects.push('Removed freeze from Dragon');
-      } else if (player.riderFrozen) {
+      } else if (player.riderFreezeStacks > 0) {
         clearFreeze(player, 'rider');
         result.effects.push('Removed freeze from Rider');
       } else {
@@ -255,6 +250,8 @@ export function executeCard(
       result.effects.push('Rider is protected from next status effect');
       break;
   }
+
+  player.actionsTakenThisTurn += 1;
 
   return result;
 }

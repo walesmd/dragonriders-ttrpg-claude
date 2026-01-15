@@ -99,7 +99,7 @@ describe('Card Effects', () => {
 
       expect(result.success).toBe(true);
       expect(result.freezeApplied).toBe(true);
-      expect(state.player2.dragonFrozen).toBe(true);
+      expect(state.player2.dragonFreezeStacks).toBe(1);
     });
 
     it('should not freeze if immune', () => {
@@ -115,7 +115,7 @@ describe('Card Effects', () => {
       expect(result.success).toBe(true);
       // freezeApplied is not set when immunity prevents freeze
       expect(result.freezeApplied).toBeUndefined();
-      expect(state.player2.dragonFrozen).toBe(false);
+      expect(state.player2.dragonFreezeStacks).toBe(0);
     });
   });
 
@@ -293,7 +293,7 @@ describe('Card Effects', () => {
     it('should remove freeze and draw a card', () => {
       const state = createTestGameState();
       state.player1.energy = 10;
-      state.player1.dragonFrozen = true;
+      state.player1.dragonFreezeStacks = 1;
       state.player1.deck = [createTestCard({ name: 'Deck Card' })];
       const card = createTestCard({ effectType: 'thaw', target: 'self' });
       addCardsToHand(state.player1, [card]);
@@ -302,7 +302,7 @@ describe('Card Effects', () => {
 
       executeCard(state, 1, card.id);
 
-      expect(state.player1.dragonFrozen).toBe(false);
+      expect(state.player1.dragonFreezeStacks).toBe(0);
       expect(state.player1.hand.length).toBe(initialHandSize); // -1 for played card, +1 for drawn
     });
   });
@@ -365,14 +365,14 @@ describe('Card Effects', () => {
     it('should track cards played while frozen', () => {
       const state = createTestGameState();
       state.player1.energy = 10;
-      state.player1.dragonFrozen = true;
+      state.player1.dragonFreezeStacks = 1;
       const card = createTestCard({ cost: 1 });
       addCardsToHand(state.player1, [card]);
       advanceToActionPhase(state);
 
       executeCard(state, 1, card.id);
 
-      expect(state.player1.cardsPlayedWhileFrozen).toBe(1);
+      expect(state.player1.actionsTakenThisTurn).toBe(1);
     });
   });
 });

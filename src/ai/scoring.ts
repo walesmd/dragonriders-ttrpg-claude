@@ -220,9 +220,9 @@ function scoreFreezeCard(
   const effectiveTarget = target || card.target;
 
   if (effectiveTarget === 'dragon') {
-    if (opp.dragonFrozen || opp.dragonFreezeImmune) return 5;
+    if (opp.dragonFreezeStacks > 0 || opp.dragonFreezeImmune) return 5;
   } else if (effectiveTarget === 'rider') {
-    if (opp.riderFrozen || opp.riderFreezeImmune) return 5;
+    if (opp.riderFreezeStacks > 0 || opp.riderFreezeImmune) return 5;
   }
 
   let score = 45;
@@ -263,7 +263,7 @@ function scoreHealCard(card: Card, p: PlayerState, config: AIConfig): number {
 }
 
 function scoreThawCard(p: PlayerState): number {
-  if (p.dragonFrozen || p.riderFrozen) return 60;
+  if (p.dragonFreezeStacks > 0 || p.riderFreezeStacks > 0) return 60;
   return 15;
 }
 
