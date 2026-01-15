@@ -52,8 +52,8 @@ interface PlayerState {
   energy: number;
   
   // Status tracking
-  dragonFrozen: boolean;
-  riderFrozen: boolean;
+  dragonFreezeStacks: number;
+  riderFreezeStacks: number;
   dragonFreezeImmune: boolean;
   riderFreezeImmune: boolean;
   dragonBurn: number;
@@ -61,7 +61,7 @@ interface PlayerState {
   
   // Turn tracking
   firstAttackThisTurn: boolean;
-  cardsPlayedWhileFrozen: number;
+  actionsTakenThisTurn: number;
 }
 ```
 
@@ -97,7 +97,7 @@ function startPhase(state: GameState, player: 1 | 2): void {
   
   // 6. Reset turn flags
   p.firstAttackThisTurn = true;
-  p.cardsPlayedWhileFrozen = 0;
+  p.actionsTakenThisTurn = 0;
   
   // 7. Check win conditions
   checkWinConditions(state);
@@ -110,11 +110,11 @@ function actionPhase(state: GameState, player: 1 | 2): void {
   // Player can take actions until they pass or run out of options
   // Actions: Attack (dragon/rider), Play Card
   
-  // Frozen restriction: Can play 1 card, cannot attack
+  // Stagger restriction: While frozen, only one action total
   const p = getPlayer(state, player);
   
-  const canAttack = !p.dragonFrozen && p.dragon.hp > 0;
-  const canPlayCard = !p.dragonFrozen || p.cardsPlayedWhileFrozen < 1;
+  const canAttack = (p.dragonFreezeStacks === 0 || p.actionsTakenThisTurn < 1) && p.dragon.hp > 0;
+  const canPlayCard = p.dragonFreezeStacks === 0 || p.actionsTakenThisTurn < 1;
 }
 ```
 
@@ -128,14 +128,14 @@ function endPhase(state: GameState, player: 1 | 2): void {
     discardCard(p, selectDiscard(p)); // Player chooses or random
   }
   
-  // 2. Remove freeze, grant immunity
-  if (p.dragonFrozen) {
-    p.dragonFrozen = false;
-    p.dragonFreezeImmune = true;
+  // 2. Reduce freeze stacks, grant immunity when cleared
+  if (p.dragonFreezeStacks > 0) {
+    p.dragonFreezeStacks = Math.max(0, p.dragonFreezeStacks - 1);
+    if (p.dragonFreezeStacks === 0) p.dragonFreezeImmune = true;
   }
-  if (p.riderFrozen) {
-    p.riderFrozen = false;
-    p.riderFreezeImmune = true;
+  if (p.riderFreezeStacks > 0) {
+    p.riderFreezeStacks = Math.max(0, p.riderFreezeStacks - 1);
+    if (p.riderFreezeStacks === 0) p.riderFreezeImmune = true;
   }
 }
 
@@ -177,10 +177,10 @@ function dragonAttack(
   if (p.rider.name === 'Kael' && p.firstAttackThisTurn) {
     if (!p.rider.isWounded()) {
       damage += 2;
-      p.dragon.shields += 2;
+      p.rider.shields += 2;
     } else {
       damage += 1;
-      p.dragon.shields += 1;
+      p.rider.shields += 1;
     }
   }
   
@@ -258,10 +258,8 @@ function damageDragon(
     getPlayer(state, attackerPlayer).energy -= 1;
   }
   
-  // Shields absorb first
-  const shieldAbsorb = Math.min(player.dragon.shields, amount);
-  player.dragon.shields -= shieldAbsorb;
-  player.dragon.hp -= (amount - shieldAbsorb);
+  // Dragons have no shields in v0.12
+  player.dragon.hp -= amount;
 }
 
 function damageRider(player: PlayerState, amount: number): void {
@@ -270,8 +268,10 @@ function damageRider(player: PlayerState, amount: number): void {
     amount = Math.max(0, amount - 1);
   }
   
-  // Riders have no shields - direct HP damage
-  player.rider.hp -= amount;
+  // Rider shields absorb first
+  const shieldAbsorb = Math.min(player.rider.shields, amount);
+  player.rider.shields -= shieldAbsorb;
+  player.rider.hp -= (amount - shieldAbsorb);
 }
 ```
 
@@ -280,14 +280,15 @@ function damageRider(player: PlayerState, amount: number): void {
 ## Status Effects
 
 ### Freeze
+Freeze stacks. While a unit has any Freeze stacks, they may take only one action per turn. At end of turn, stacks decrease by 1 and immunity is granted when stacks reach 0.
 ```typescript
 function applyFreeze(player: PlayerState, target: 'dragon' | 'rider'): boolean {
   // Check immunity
   if (target === 'dragon' && player.dragonFreezeImmune) return false;
   if (target === 'rider' && player.riderFreezeImmune) return false;
   
-  if (target === 'dragon') player.dragonFrozen = true;
-  else player.riderFrozen = true;
+  if (target === 'dragon') player.dragonFreezeStacks += 1;
+  else player.riderFreezeStacks += 1;
   
   return true;
 }
@@ -317,6 +318,7 @@ interface Rider {
   name: string;
   hp: number;
   maxHp: number;
+  shields: number;
   economy: number;
   woundedThreshold: number;
   criticalThreshold: number;
@@ -436,7 +438,7 @@ type CardTarget = 'dragon' | 'rider' | 'self' | 'opp' | 'both';
 ## Testing Priorities
 
 1. **Win conditions** - Dragon kill, Rider kill, simultaneous
-2. **Damage calculation** - Shields, Bronn reduction, Steelhorn counter
+2. **Damage calculation** - Rider shields, Bronn reduction, Steelhorn counter
 3. **Freeze mechanics** - Application, immunity, action restriction
 4. **Burn mechanics** - Stacking, start-of-turn damage
 5. **Rider breakpoints** - Threshold effects activating correctly
@@ -510,7 +512,7 @@ type CardTarget = 'dragon' | 'rider' | 'self' | 'opp' | 'both';
 | Morrik | 19 | 2 (+1 per shield card) | ≤14 | ≤8 |
 
 ### Dragons
-| Name | HP | Shields | Attack | Ability |
+| Name | HP | Rider Shields | Attack | Ability |
 |------|-----|---------|--------|---------|
 | Emberfang | 33 | 3 | 3 dmg, 2 cost | +1 burn (first attack) |
 | Cryowyrm | 30 | 2 | 3 dmg, 2 cost | Apply freeze |

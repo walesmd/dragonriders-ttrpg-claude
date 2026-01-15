@@ -77,19 +77,19 @@ interface PlayerState {
   energy: number;
   
   // Dragon status
-  dragonFrozen: boolean;
+  dragonFreezeStacks: number;
   dragonFreezeImmune: boolean;
   dragonBurn: number;
   
   // Rider status
-  riderFrozen: boolean;
+  riderFreezeStacks: number;
   riderFreezeImmune: boolean;
   riderBurn: number;
   
   // Turn state
   firstAttackThisTurn: boolean;
   burnAppliedThisTurn: boolean; // For Emberfang
-  cardsPlayedWhileFrozen: number;
+  actionsTakenThisTurn: number;
 }
 
 // ============================================================================
@@ -100,6 +100,7 @@ interface RiderState {
   name: RiderName;
   hp: number;
   maxHp: number;
+  shields: number;
   baseEconomy: number;
   woundedThreshold: number;
   criticalThreshold: number;
@@ -288,7 +289,7 @@ const CARD_DEFINITIONS: CardDefinition[] = [
   // Rider Damage
   {
     name: 'Weakening Strike',
-    cost: 2,
+    cost: 1,
     effectType: 'damage',
     target: 'rider',
     value: 2,
@@ -298,12 +299,12 @@ const CARD_DEFINITIONS: CardDefinition[] = [
   },
   {
     name: 'Precision Strike',
-    cost: 2,
+    cost: 1,
     effectType: 'damage',
     target: 'rider',
-    value: 2,
+    value: 3,
     secondaryValue: 0,
-    description: 'Deal 2 damage to enemy Rider',
+    description: 'Deal 3 damage to enemy Rider',
     copies: 2,
   },
   {
@@ -389,7 +390,7 @@ const CARD_DEFINITIONS: CardDefinition[] = [
     target: 'self',
     value: 2,
     secondaryValue: 0,
-    description: 'Your Dragon gains 2 Shields',
+    description: 'Your Rider gains 2 Shields',
     copies: 3,
   },
   {
@@ -399,7 +400,7 @@ const CARD_DEFINITIONS: CardDefinition[] = [
     target: 'dragon',
     value: 0,
     secondaryValue: 0,
-    description: 'Destroy all Shields on enemy Dragon',
+    description: 'Destroy all Shields on enemy Rider',
     copies: 1,
   },
   
@@ -463,7 +464,7 @@ const CARD_DEFINITIONS: CardDefinition[] = [
     target: 'self',
     value: 0,
     secondaryValue: 0,
-    description: 'Prevent the next status effect applied to your Dragon',
+    description: 'Prevent the next status effect applied to your Rider',
     copies: 2,
   },
 ];
@@ -563,15 +564,15 @@ function createInitialGameState(
       deck: shuffleArray([...player1Deck]),
       discard: [],
       energy: 0,
-      dragonFrozen: false,
+      dragonFreezeStacks: 0,
       dragonFreezeImmune: false,
       dragonBurn: 0,
-      riderFrozen: false,
+      riderFreezeStacks: 0,
       riderFreezeImmune: false,
       riderBurn: 0,
       firstAttackThisTurn: true,
       burnAppliedThisTurn: false,
-      cardsPlayedWhileFrozen: 0,
+      actionsTakenThisTurn: 0,
     },
     
     player2: {
@@ -581,15 +582,15 @@ function createInitialGameState(
       deck: shuffleArray([...player2Deck]),
       discard: [],
       energy: 0,
-      dragonFrozen: false,
+      dragonFreezeStacks: 0,
       dragonFreezeImmune: false,
       dragonBurn: 0,
-      riderFrozen: false,
+      riderFreezeStacks: 0,
       riderFreezeImmune: false,
       riderBurn: 0,
       firstAttackThisTurn: true,
       burnAppliedThisTurn: false,
-      cardsPlayedWhileFrozen: 0,
+      actionsTakenThisTurn: 0,
     },
     
     winner: null,

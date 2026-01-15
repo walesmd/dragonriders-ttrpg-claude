@@ -53,8 +53,8 @@ function generateActions(state: GameState, player: PlayerNumber): AIAction[] {
   // Can always pass
   actions.push({ type: 'pass' });
   
-  // Check if can attack
-  const canAttack = !p.dragonFrozen && p.dragon.hp > 0;
+  // Check if can attack (stagger: only 1 action while frozen)
+  const canAttack = p.dragon.hp > 0 && (p.dragonFreezeStacks === 0 || p.actionsTakenThisTurn < 1);
   const attackCost = calculateAttackCost(p);
   
   if (canAttack && p.energy >= attackCost) {
@@ -62,8 +62,8 @@ function generateActions(state: GameState, player: PlayerNumber): AIAction[] {
     actions.push({ type: 'attack_rider' });
   }
   
-  // Check if can play cards
-  const canPlayCards = !p.dragonFrozen || p.cardsPlayedWhileFrozen < 1;
+  // Check if can play cards (stagger: only 1 action while frozen)
+  const canPlayCards = p.dragonFreezeStacks === 0 || p.actionsTakenThisTurn < 1;
   
   if (canPlayCards) {
     for (const card of p.hand) {
@@ -94,7 +94,7 @@ function calculateAttackCost(player: PlayerState): number {
 
 function calculateCardCost(player: PlayerState, card: Card): number {
   let cost = card.cost;
-  if (player.rider.name === 'Lyra' && isCritical(player.rider) && card.effectType === 'freeze') {
+  if (player.rider.name === 'Lyra' && isWounded(player.rider) && card.effectType === 'freeze') {
     cost += 1;
   }
   return cost;
@@ -164,9 +164,6 @@ function scoreAttackDragon(
   if (oppDragonPct < 0.3) score += 25;
   else if (oppDragonPct < 0.5) score += 10;
   
-  // Bonus if shields are down
-  if (opp.dragon.shields === 0) score += 8;
-  
   // Bonus for lethal
   if (opp.dragon.hp <= damage) score += 50;
   
@@ -212,6 +209,9 @@ function scoreAttackRider(
   // Bonus for lethal
   if (opp.rider.hp <= damage) score += 60;
   
+  // Bonus if rider shields are down
+  if (opp.rider.shields === 0) score += 8;
+
   // Bonus if would push into wounded/critical
   if (opp.rider.hp > opp.rider.woundedThreshold && 
       opp.rider.hp - damage <= opp.rider.woundedThreshold) {
@@ -346,9 +346,9 @@ function scoreDamageCard(card: Card, p: PlayerState, opp: PlayerState, config: A
 function scoreFreezeCard(card: Card, p: PlayerState, opp: PlayerState, config: AIConfig): number {
   // Check if freeze would apply
   if (card.target === 'dragon') {
-    if (opp.dragonFrozen || opp.dragonFreezeImmune) return 5;
+    if (opp.dragonFreezeStacks > 0 || opp.dragonFreezeImmune) return 5;
   } else {
-    if (opp.riderFrozen || opp.riderFreezeImmune) return 5;
+    if (opp.riderFreezeStacks > 0 || opp.riderFreezeImmune) return 5;
   }
   
   let score = 45;
@@ -364,8 +364,8 @@ function scoreFreezeCard(card: Card, p: PlayerState, opp: PlayerState, config: A
 function scoreShieldCard(card: Card, p: PlayerState, config: AIConfig): number {
   let score = 30;
   
-  // More valuable when dragon is low
-  if (p.dragon.hp < p.dragon.maxHp * 0.5) {
+  // More valuable when rider is low
+  if (p.rider.hp < p.rider.maxHp * 0.5) {
     score += 15;
   }
   
@@ -408,7 +408,7 @@ function scoreHealCard(card: Card, p: PlayerState, config: AIConfig): number {
 }
 
 function scoreThawCard(p: PlayerState): number {
-  if (p.dragonFrozen || p.riderFrozen) {
+  if (p.dragonFreezeStacks > 0 || p.riderFreezeStacks > 0) {
     return 60; // High priority to unfreeze
   }
   return 15; // Just for the draw
@@ -421,8 +421,8 @@ function scoreFirebreakCard(p: PlayerState): number {
 }
 
 function scoreStripCard(opp: PlayerState): number {
-  if (opp.dragon.shields === 0) return 5;
-  return 20 + opp.dragon.shields * 10;
+  if (opp.rider.shields === 0) return 5;
+  return 20 + opp.rider.shields * 10;
 }
 
 function scoreDrainCard(card: Card, p: PlayerState, opp: PlayerState, config: AIConfig): number {

@@ -105,8 +105,8 @@ export default function MainMenu() {
             <div>
               <h4 className="font-bold text-white mb-1">Key Mechanics</h4>
               <p>• Energy: Spend to attack (2) and play cards (varies)</p>
-              <p>• Shields: Absorb damage before HP loss</p>
-              <p>• Freeze: Skip your attack, play only 1 card</p>
+              <p>• Shields: Rider shields absorb damage before HP loss</p>
+              <p>• Freeze: Stacks; while frozen you can take only 1 action</p>
               <p>• Burn: Take damage each turn until removed</p>
             </div>
           </div>

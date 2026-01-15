@@ -42,7 +42,7 @@ export default function DragonSelect({ player }: DragonSelectProps) {
           <HelpPanel title="Dragon Tips">
             <div className="space-y-2">
               <p><strong>Attacking:</strong> Costs 2 energy, deals 3 damage by default</p>
-              <p><strong>Shields:</strong> Starting shields absorb damage before HP loss</p>
+              <p><strong>Rider Shields:</strong> Your chosen Dragon grants starting Rider shields</p>
               <p><strong>Abilities:</strong> Each dragon has a unique combat ability</p>
               <p><strong>Strategy:</strong> Emberfang for DoT, Cryowyrm for control, Voltwing for spread damage, Steelhorn for defense, Voidmaw for energy advantage</p>
             </div>
