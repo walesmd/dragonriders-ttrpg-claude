@@ -1,7 +1,7 @@
 import type { PlayerNumber, WinType, RiderName, DragonName, AIDifficulty } from '../data/types';
 
 // Game version (tracks game rules and AI logic changes, not package version)
-export const LOG_VERSION = '0.10';
+export const LOG_VERSION = '0.11';
 
 // ============================================================================
 // MAIN GAME LOG STRUCTURE
