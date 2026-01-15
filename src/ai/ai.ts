@@ -16,8 +16,10 @@ function generateActions(state: GameState, playerNum: PlayerNumber): AIAction[] 
   actions.push({ type: 'pass' });
 
   // Attack actions
-  if (canAttack(state, player)) {
+  if (canAttack(state, player, 'dragon')) {
     actions.push({ type: 'attack_dragon' });
+  }
+  if (canAttack(state, player, 'rider')) {
     actions.push({ type: 'attack_rider' });
   }
 

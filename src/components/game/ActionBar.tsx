@@ -1,8 +1,10 @@
 import Button from '../ui/Button';
 
 interface ActionBarProps {
-  canAttack: boolean;
-  attackCost: number;
+  canAttackDragon: boolean;
+  canAttackRider: boolean;
+  attackCostDragon: number;
+  attackCostRider: number;
   onAttackDragon: () => void;
   onAttackRider: () => void;
   onEndTurn: () => void;
@@ -14,8 +16,10 @@ interface ActionBarProps {
 }
 
 export default function ActionBar({
-  canAttack,
-  attackCost,
+  canAttackDragon,
+  canAttackRider,
+  attackCostDragon,
+  attackCostRider,
   onAttackDragon,
   onAttackRider,
   onEndTurn,
@@ -38,18 +42,18 @@ export default function ActionBar({
         <>
           <Button
             onClick={onAttackDragon}
-            disabled={!canAttack || disabled}
+            disabled={!canAttackDragon || disabled}
             variant="danger"
           >
-            Attack Dragon ({attackCost})
+            Attack Dragon ({attackCostDragon})
           </Button>
 
           <Button
             onClick={onAttackRider}
-            disabled={!canAttack || disabled}
+            disabled={!canAttackRider || disabled}
             variant="danger"
           >
-            Attack Rider ({attackCost})
+            Attack Rider ({attackCostRider})
           </Button>
 
           <div className="w-px h-8 bg-gray-600" />

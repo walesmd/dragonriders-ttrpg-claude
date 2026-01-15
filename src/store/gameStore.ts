@@ -29,9 +29,9 @@ interface GameStore {
   reset: () => void;
 
   // Helpers
-  canPlayerAttack: () => boolean;
+  canPlayerAttack: (target?: TargetType) => boolean;
   canPlayerPlayCard: (card: Card) => boolean;
-  getAttackCost: () => number;
+  getAttackCost: (target?: TargetType) => number;
   getCardCost: (card: Card) => number;
 }
 
@@ -230,11 +230,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
     });
   },
 
-  canPlayerAttack: () => {
+  canPlayerAttack: (target) => {
     const { state } = get();
     if (!state) return false;
     const player = getPlayer(state, state.activePlayer);
-    return canAttack(state, player);
+    return canAttack(state, player, target);
   },
 
   canPlayerPlayCard: (card) => {
@@ -244,11 +244,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
     return canPlayCard(state, player, card);
   },
 
-  getAttackCost: () => {
+  getAttackCost: (target = 'dragon') => {
     const { state } = get();
     if (!state) return 2;
     const player = getPlayer(state, state.activePlayer);
-    return getAttackCost(player);
+    return getAttackCost(player, target);
   },
 
   getCardCost: (card) => {

@@ -99,17 +99,21 @@ describe('Rider Breakpoints and Economy', () => {
       const state = createTestGameState('Kael', 'Emberfang');
       state.player1.rider.hp = state.player1.rider.criticalThreshold;
 
-      const cost = getAttackCost(state.player1);
+      const dragonCost = getAttackCost(state.player1, 'dragon');
+      const riderCost = getAttackCost(state.player1, 'rider');
 
-      expect(cost).toBe(3); // 2 base + 1 critical penalty
+      expect(dragonCost).toBe(3); // 2 base + 1 critical penalty
+      expect(riderCost).toBe(4); // 2 base + 1 rider + 1 critical penalty
     });
 
     it('should cost normal when not critical', () => {
       const state = createTestGameState('Kael', 'Emberfang');
 
-      const cost = getAttackCost(state.player1);
+      const dragonCost = getAttackCost(state.player1, 'dragon');
+      const riderCost = getAttackCost(state.player1, 'rider');
 
-      expect(cost).toBe(2); // Normal attack cost
+      expect(dragonCost).toBe(2); // Normal dragon attack cost
+      expect(riderCost).toBe(3); // Rider attacks cost +1
     });
   });
 

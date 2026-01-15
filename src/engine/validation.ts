@@ -2,8 +2,12 @@ import type { GameState, PlayerState, Card, TargetType, GameAction } from '../da
 import { getPlayer } from './state';
 import { isCritical, isWounded } from '../data/riders';
 
-export function getAttackCost(player: PlayerState): number {
+export function getAttackCost(player: PlayerState, target: TargetType = 'dragon'): number {
   let cost = player.dragon.attackCost; // Base cost is 2
+
+  if (target === 'rider') {
+    cost += 1;
+  }
 
   // Kael critical: attacks cost +1
   if (player.rider.name === 'Kael' && isCritical(player.rider)) {
@@ -26,16 +30,27 @@ export function getCardCost(player: PlayerState, card: Card): number {
   return cost;
 }
 
-export function canAttack(_state: GameState, player: PlayerState): boolean {
+export function canAttack(
+  _state: GameState,
+  player: PlayerState,
+  target?: TargetType
+): boolean {
   // Dragon must be alive
   if (player.dragon.hp <= 0) return false;
 
   // Cannot attack while frozen
   if (player.dragonFrozen) return false;
 
-  // Must afford attack cost
-  const cost = getAttackCost(player);
-  if (player.energy < cost) return false;
+  if (target) {
+    // Must afford attack cost for target
+    const cost = getAttackCost(player, target);
+    if (player.energy < cost) return false;
+  } else {
+    // Must afford at least one attack
+    const dragonCost = getAttackCost(player, 'dragon');
+    const riderCost = getAttackCost(player, 'rider');
+    if (player.energy < Math.min(dragonCost, riderCost)) return false;
+  }
 
   return true;
 }
@@ -79,8 +94,10 @@ export function getLegalActions(state: GameState): GameAction[] {
   const actions: GameAction[] = [];
 
   // Attack actions
-  if (canAttack(state, player)) {
+  if (canAttack(state, player, 'dragon')) {
     actions.push({ type: 'ATTACK', target: 'dragon' });
+  }
+  if (canAttack(state, player, 'rider')) {
     actions.push({ type: 'ATTACK', target: 'rider' });
   }
 
