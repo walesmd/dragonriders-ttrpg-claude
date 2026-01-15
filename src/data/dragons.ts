@@ -12,7 +12,7 @@ export const DRAGONS: Record<DragonName, DragonDefinition> = {
       primary: ['orange-600', 'red-800'],
       hover: ['orange-500', 'red-700'],
     },
-    imagePath: 'assets/cards/dragons/voidmaw.png',
+    imagePath: 'assets/cards/dragons/emberfang.png',
     shortIntro: `Emberfang doesn't just burn enemies—he makes them keep burning.`,
     backstory: `Emberfang's flames are cursed. Anything struck by his first attack each turn ignites with an eternal ember, a living brand that continues to sear flesh and scale long after the impact. These burns are not simple fire—they are fragments of Emberfang's own fury, refusing to go out.
 
@@ -29,7 +29,7 @@ He was once worshiped as a god of war, and even now his wrath smolders beneath e
       primary: ['blue-500', 'cyan-700'],
       hover: ['blue-400', 'cyan-600'],
     },
-    imagePath: 'assets/cards/dragons/voidmaw.png',
+    imagePath: 'assets/cards/dragons/cryoworm.png',
     shortIntro: `Cryowyrm freezes foes solid, stealing their turns as surely as their heat.`,
     backstory: `Cryowyrm comes from the endless polar rifts, where Dragons evolved not to kill, but to immobilize. His frost is intelligent, seeping into joints, nerves, and magic itself, halting movement and action.
 
@@ -46,7 +46,7 @@ Each time he strikes, he doesn't just deal damage—he *claims time* from his en
       primary: ['yellow-500', 'amber-700'],
       hover: ['yellow-400', 'amber-600'],
     },
-    imagePath: 'assets/cards/dragons/voidmaw.png',
+    imagePath: 'assets/cards/dragons/voltwing.png',
     shortIntro: `Voltwing turns every strike into a lightning storm that hits everything nearby.`,
     backstory: `Voltwing's body is a living conductor of arcane electricity. When he attacks one target, the energy discharges outward, arcing into anything else nearby. No blow is ever clean—every strike creates collateral devastation.
 
@@ -63,7 +63,7 @@ He thrives in chaos, overwhelming careful strategies with unpredictable bursts o
       primary: ['gray-500', 'zinc-700'],
       hover: ['gray-400', 'zinc-600'],
     },
-    imagePath: 'assets/cards/dragons/voidmaw.png',
+    imagePath: 'assets/cards/dragons/steelhorn.png',
     shortIntro: `Every blow against Steelhorn comes at a price.`,
     backstory: `Steelhorn was forged in a forgotten age when Dragons were armored living fortresses. His plated hide is not just tough—it is retaliatory. Every time he is struck, the impact rebounds into his attacker, draining their energy and momentum.
 
