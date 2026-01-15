@@ -197,9 +197,9 @@ export default function GameBoard({
           </div>
           <div>
             <h4 className="font-bold text-white mb-1">Status Effects</h4>
-            <p className="text-xs">• 🧊 <strong>Frozen:</strong> Can't attack, play 1 card max</p>
+            <p className="text-xs">• 🧊 <strong>Frozen:</strong> Stacks; you can take only 1 action</p>
             <p className="text-xs">• 🔥 <strong>Burn:</strong> Damage each turn start</p>
-            <p className="text-xs">• 🛡️ <strong>Shields:</strong> Block damage before HP</p>
+            <p className="text-xs">• 🛡️ <strong>Rider Shields:</strong> Block damage before HP</p>
           </div>
           <div>
             <h4 className="font-bold text-white mb-1">Win Condition</h4>

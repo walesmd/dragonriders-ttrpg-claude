@@ -35,6 +35,7 @@ export default function RiderSelect({ player }: RiderSelectProps) {
           <HelpPanel title="Rider Tips">
             <div className="space-y-2">
               <p><strong>HP:</strong> Riders are an alternate win condition. Protect them!</p>
+              <p><strong>Rider Shields:</strong> Your Dragon grants starting shields that protect Rider HP</p>
               <p><strong>Economy:</strong> Higher base economy = more energy per turn</p>
               <p><strong>Breakpoints:</strong> Riders change abilities when wounded (≤threshold) or critical (≤critical threshold)</p>
               <p><strong>Strategy:</strong> Talia excels at economic advantage, Kael at aggressive attacks, Bronn at defense, Lyra at control, and Morrik at shield synergy</p>

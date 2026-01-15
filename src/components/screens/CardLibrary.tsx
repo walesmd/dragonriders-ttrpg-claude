@@ -299,7 +299,7 @@ export default function CardLibrary({ onBack }: CardLibraryProps) {
                     {(backstoryModal.data as DragonDefinition).maxHp} HP
                   </span>
                   <span className="text-blue-300 font-semibold">
-                    {(backstoryModal.data as DragonDefinition).shields} Shields
+                    {(backstoryModal.data as DragonDefinition).shields} Rider Shields
                   </span>
                   <span className="text-red-300 font-semibold">
                     {(backstoryModal.data as DragonDefinition).attackDamage} DMG
