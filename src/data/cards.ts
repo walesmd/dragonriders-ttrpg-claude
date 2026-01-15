@@ -49,9 +49,9 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     cost: 1,
     effectType: 'damage',
     target: 'rider',
-    value: 2,
+    value: 3,
     secondaryValue: 0,
-    description: 'Deal 2 damage to enemy Rider',
+    description: 'Deal 3 damage to enemy Rider',
     copies: 2,
   },
   {
