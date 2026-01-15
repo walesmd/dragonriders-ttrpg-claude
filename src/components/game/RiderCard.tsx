@@ -57,6 +57,17 @@ export default function RiderCard({
           <h3 className="text-lg font-bold text-white">{rider.name}</h3>
           <span className="text-xs text-gray-300">Rider</span>
         </div>
+
+        {/* Shields */}
+        {rider.shields > 0 && (
+          <div className="flex items-center gap-1 bg-blue-900/50 px-2 py-1 rounded-lg">
+            <svg className="w-4 h-4 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2A11.954 11.954 0 0110 1.944z" clipRule="evenodd" />
+            </svg>
+            <span className="text-blue-200 font-bold">{rider.shields}</span>
+          </div>
+        )}
+
         {statusText && (
           <span className={`text-xs font-bold ${statusColor}`}>{statusText}</span>
         )}

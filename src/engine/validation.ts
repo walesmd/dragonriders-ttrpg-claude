@@ -5,10 +5,6 @@ import { isCritical, isWounded } from '../data/riders';
 export function getAttackCost(player: PlayerState, target: TargetType = 'dragon'): number {
   let cost = player.dragon.attackCost; // Base cost is 2
 
-  if (target === 'rider') {
-    cost += 1;
-  }
-
   // Kael critical: attacks cost +1
   if (player.rider.name === 'Kael' && isCritical(player.rider)) {
     cost += 1;

@@ -86,7 +86,7 @@ export default function DragonSelect({ player }: DragonSelectProps) {
 
                   <div className="flex gap-3 text-sm mb-3">
                     <span className="text-green-300">{dragon.maxHp} HP</span>
-                    <span className="text-blue-300">{dragon.shields} Shields</span>
+                    <span className="text-blue-300">{dragon.shields} Rider Shields</span>
                   </div>
 
                   <div className="flex gap-3 text-sm mb-3">

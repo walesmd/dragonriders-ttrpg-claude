@@ -1,0 +1,135 @@
+═══════════════════════════════════════════════════════════════════
+                    DRAGON RIDERS GAME LOG
+═══════════════════════════════════════════════════════════════════
+
+Game ID:    1768515856572-o8dw7s0
+Date:       2026-01-15T22:24:16.572Z
+Mode:       ai (AI: medium)
+Version:    0.12
+
+─── SETUP ───────────────────────────────────────────────────────────
+Player 1:   Bronn + Cryowyrm
+Player 2:   Kael + Voidmaw
+
+─── GAME ACTIONS ────────────────────────────────────────────────────
+
+╔══ Turn 1 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+4 → 4)
+  ── Entered Action Phase
+  • Played Strike [1 energy]
+  • Attacked rider (1 dmg) [Cryowyrm froze target]
+  • Passed
+  • Drew a card
+  • Gained energy (+4 → 4)
+  • Voidmaw dealt 2 damage (energy advantage) (2 dmg) [Voidmaw energy advantage]
+  ── Entered Action Phase
+  • Rider thawed and gained freeze immunity
+  • Passed
+
+╔══ Turn 2 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+4 → 4)
+  ── Entered Action Phase
+  • Played Burning Hit [2 energy]
+  • Attacked dragon (3 dmg) [Cryowyrm froze target]
+  • Passed
+  • Drew a card
+  • Gained energy (+4 → 4)
+  • Dragon took burn damage (1 burn → 25 HP)
+  • Voidmaw dealt 2 damage (energy advantage) (2 dmg) [Voidmaw energy advantage]
+  ── Entered Action Phase
+  • Dragon thawed and gained freeze immunity
+  • Passed
+
+╔══ Turn 3 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+4 → 4)
+  ── Entered Action Phase
+  • Played Crippling Blow [3 energy]
+  • Passed
+  • Drew a card
+  • Gained energy (+4 → 6)
+  • Dragon took burn damage (1 burn → 24 HP)
+  • Voidmaw dealt 2 damage (energy advantage) (2 dmg) [Voidmaw energy advantage]
+  ── Entered Action Phase
+  • Passed
+
+╔══ Turn 4 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+4 → 4)
+  ── Entered Action Phase
+  • Played Dragon Heal [2 energy]
+  • Attacked dragon (3 dmg) [Cryowyrm froze target]
+  • Passed
+  • Drew a card
+  • Gained energy (+4 → 5)
+  • Dragon took burn damage (1 burn → 20 HP)
+  • Voidmaw dealt 2 damage (energy advantage) (2 dmg) [Voidmaw energy advantage]
+  ── Entered Action Phase
+  • Dragon thawed and gained freeze immunity
+  • Passed
+
+╔══ Turn 5 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+4 → 4)
+  ── Entered Action Phase
+  • Played Heavy Blow [3 energy]
+  • Played Energy Surge [1 energy]
+  • Played Heavy Blow [3 energy]
+  • Passed
+  • Drew a card
+  • Gained energy (+4 → 8)
+  • Dragon took burn damage (1 burn → 11 HP)
+  • Voidmaw dealt 2 damage (energy advantage) (2 dmg) [Voidmaw energy advantage]
+  ── Entered Action Phase
+  • Passed
+
+╔══ Turn 6 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+4 → 4)
+  ── Entered Action Phase
+  • Attacked dragon (3 dmg) [Cryowyrm froze target]
+  • Attacked dragon (3 dmg) [Cryowyrm froze target]
+  • Passed
+  • Drew a card
+  • Gained energy (+4 → 4)
+  • Dragon took burn damage (1 burn → 4 HP)
+  • Voidmaw dealt 2 damage (energy advantage) (2 dmg) [Voidmaw energy advantage]
+  ── Entered Action Phase
+  • Dragon thawed and gained freeze immunity
+  • Passed
+
+╔══ Turn 7 (Player 1) ══════════════════════════════════════╗
+  • Drew a card
+  • Gained energy (+4 → 4)
+  ── Entered Action Phase
+  • Attacked dragon (3 dmg) [Cryowyrm froze target]
+  • Attacked dragon (3 dmg) [Cryowyrm froze target]
+  • Game ended - Player 1 wins by dragon_kill
+
+─── RESULT ──────────────────────────────────────────────────────────
+Winner:     Player 1 (dragon_kill)
+Turns:      7
+Duration:   139s
+
+Final HP:
+  P1 Dragon: 4  |  P1 Rider: 22
+  P2 Dragon: -2  |  P2 Rider: 18
+
+─── STATISTICS ──────────────────────────────────────────────────────
+
+                          Player 1    Player 2
+  Total Damage:                 30           0
+  → Dragon Damage:              29           0
+  → Rider Damage:                1           0
+  Attacks Made:                  7           0
+  Cards Played:                  7           0
+  Energy Generated:             28          24
+  Energy Spent:                 15           0
+  Burns Applied:                 1           0
+  Freezes Applied:               7           0
+  Healing Done:                  3           0
+  Shields Gained:                0           0
+
+═══════════════════════════════════════════════════════════════════

@@ -114,6 +114,7 @@ describe('Dragon Abilities', () => {
       const state = createTestGameState('Talia', 'Voltwing');
       state.player1.energy = 10;
       state.player2.dragon.shields = 0;
+      state.player2.rider.shields = 0;
       advanceToActionPhase(state);
       const initialRiderHp = state.player2.rider.hp;
 
@@ -154,6 +155,7 @@ describe('Dragon Abilities', () => {
       const state = createTestGameState('Talia', 'Voltwing', 'Bronn', 'Cryowyrm');
       state.player1.energy = 10;
       state.player2.dragon.shields = 0;
+      state.player2.rider.shields = 0;
       advanceToActionPhase(state);
 
       const result = executeAttack(state, 1, 'dragon');
@@ -177,16 +179,16 @@ describe('Dragon Abilities', () => {
       expect(state.player1.energy).toBe(7); // 10 - 2 (attack cost) - 1 (steelhorn)
     });
 
-    it('should not counter if damage fully absorbed by shields', () => {
+    it('should always counter (no shields on dragon)', () => {
       const state = createTestGameState('Talia', 'Emberfang', 'Kael', 'Steelhorn');
       state.player1.energy = 10;
-      state.player2.dragon.shields = 10;
+      state.player2.dragon.shields = 0; // Dragons don't have shields anymore
       advanceToActionPhase(state);
 
       const result = executeAttack(state, 1, 'dragon');
 
-      expect(result.damage!.triggeredSteelhorn).toBe(false);
-      expect(state.player1.energy).toBe(8); // Only attack cost
+      expect(result.damage!.triggeredSteelhorn).toBe(true);
+      expect(state.player1.energy).toBe(7); // Attack cost + counter
     });
 
     it('should not drain below 0 energy', () => {
@@ -275,18 +277,18 @@ describe('Dragon Abilities', () => {
     });
   });
 
-  describe('Kael first attack bonus with dragons', () => {
+  describe('Kael first attack bonus with riders', () => {
     it('should add +2 damage and +2 shields on first attack when healthy', () => {
       const state = createTestGameState('Kael', 'Emberfang');
       state.player1.energy = 10;
       state.player2.dragon.shields = 0;
-      const initialShields = state.player1.dragon.shields;
+      const initialShields = state.player1.rider.shields;
       advanceToActionPhase(state);
 
       const result = executeAttack(state, 1, 'dragon');
 
       expect(result.kaelBonus).toEqual({ damage: 2, shields: 2 });
-      expect(state.player1.dragon.shields).toBe(initialShields + 2);
+      expect(state.player1.rider.shields).toBe(initialShields + 2);
       // Base damage is 3 + 2 = 5
       expect(result.damage!.rawDamage).toBe(5);
     });
@@ -296,13 +298,13 @@ describe('Dragon Abilities', () => {
       state.player1.rider.hp = state.player1.rider.woundedThreshold;
       state.player1.energy = 10;
       state.player2.dragon.shields = 0;
-      const initialShields = state.player1.dragon.shields;
+      const initialShields = state.player1.rider.shields;
       advanceToActionPhase(state);
 
       const result = executeAttack(state, 1, 'dragon');
 
       expect(result.kaelBonus).toEqual({ damage: 1, shields: 1 });
-      expect(state.player1.dragon.shields).toBe(initialShields + 1);
+      expect(state.player1.rider.shields).toBe(initialShields + 1);
       expect(result.damage!.rawDamage).toBe(4); // 3 + 1
     });
 

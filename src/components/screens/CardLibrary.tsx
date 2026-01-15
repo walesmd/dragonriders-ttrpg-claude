@@ -182,7 +182,7 @@ export default function CardLibrary({ onBack }: CardLibraryProps) {
 
                       <div className="grid grid-cols-2 gap-2 text-sm mb-4">
                         <span className="text-green-300 font-semibold">{dragon.maxHp} HP</span>
-                        <span className="text-blue-300 font-semibold">{dragon.shields} Shields</span>
+                        <span className="text-blue-300 font-semibold">{dragon.shields} Rider Shields</span>
                         <span className="text-red-300 font-semibold">{dragon.attackDamage} Damage</span>
                         <span className="text-yellow-300 font-semibold">{dragon.attackCost} Cost</span>
                       </div>

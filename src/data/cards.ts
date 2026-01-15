@@ -137,7 +137,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     target: 'self',
     value: 2,
     secondaryValue: 0,
-    description: 'Your Dragon gains 2 Shields',
+    description: 'Your Rider gains 2 Shields',
     copies: 3,
   },
   {
@@ -147,7 +147,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     target: 'dragon',
     value: 0,
     secondaryValue: 0,
-    description: 'Destroy all Shields on enemy Dragon',
+    description: 'Destroy all Shields on enemy Rider',
     copies: 1,
   },
 
@@ -211,7 +211,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     target: 'self',
     value: 0,
     secondaryValue: 0,
-    description: 'Prevent the next status effect applied to your Dragon',
+    description: 'Prevent the next status effect applied to your Rider',
     copies: 2,
   },
 ];

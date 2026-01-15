@@ -25,30 +25,30 @@ describe('Damage Calculation', () => {
       expect(state.player1.dragon.hp).toBe(initialHp - 5);
     });
 
-    it('should absorb damage with shields first', () => {
+    it('should not absorb damage (dragons have no shields)', () => {
       const state = createTestGameState();
-      state.player1.dragon.shields = 3;
+      state.player1.dragon.shields = 0; // Dragons don't have shields anymore
       const initialHp = state.player1.dragon.hp;
 
       const result = damageDragon(state, state.player1, 5);
 
-      expect(result.shieldAbsorbed).toBe(3);
-      expect(result.finalDamage).toBe(2);
+      expect(result.shieldAbsorbed).toBe(0);
+      expect(result.finalDamage).toBe(5);
       expect(state.player1.dragon.shields).toBe(0);
-      expect(state.player1.dragon.hp).toBe(initialHp - 2);
+      expect(state.player1.dragon.hp).toBe(initialHp - 5);
     });
 
-    it('should fully absorb damage with sufficient shields', () => {
+    it('should deal full damage (no shield absorption)', () => {
       const state = createTestGameState();
-      state.player1.dragon.shields = 10;
+      state.player1.dragon.shields = 0; // Dragons don't have shields anymore
       const initialHp = state.player1.dragon.hp;
 
       const result = damageDragon(state, state.player1, 5);
 
-      expect(result.shieldAbsorbed).toBe(5);
-      expect(result.finalDamage).toBe(0);
-      expect(state.player1.dragon.shields).toBe(5);
-      expect(state.player1.dragon.hp).toBe(initialHp);
+      expect(result.shieldAbsorbed).toBe(0);
+      expect(result.finalDamage).toBe(5);
+      expect(state.player1.dragon.shields).toBe(0);
+      expect(state.player1.dragon.hp).toBe(initialHp - 5);
     });
 
     it('should trigger Steelhorn counter when attacking', () => {
@@ -62,15 +62,15 @@ describe('Damage Calculation', () => {
       expect(state.player1.energy).toBe(9); // Lost 1 energy
     });
 
-    it('should not trigger Steelhorn if damage fully absorbed by shields', () => {
+    it('should always trigger Steelhorn (no shields to absorb)', () => {
       const state = createTestGameState('Talia', 'Emberfang', 'Kael', 'Steelhorn');
-      state.player2.dragon.shields = 10;
+      state.player2.dragon.shields = 0; // Dragons don't have shields anymore
       state.player1.energy = 10;
 
       const result = damageDragon(state, state.player2, 5, 1);
 
-      expect(result.triggeredSteelhorn).toBe(false);
-      expect(state.player1.energy).toBe(10); // No energy lost
+      expect(result.triggeredSteelhorn).toBe(true);
+      expect(state.player1.energy).toBe(9); // Energy lost
     });
 
     it('should not trigger Steelhorn if no attacker specified', () => {
@@ -137,8 +137,9 @@ describe('Damage Calculation', () => {
   });
 
   describe('damageRider', () => {
-    it('should deal full damage when no reduction', () => {
+    it('should deal full damage when no reduction or shields', () => {
       const state = createTestGameState();
+      state.player1.rider.shields = 0;
       const initialHp = state.player1.rider.hp;
 
       const result = damageRider(state.player1, 5);
@@ -146,12 +147,13 @@ describe('Damage Calculation', () => {
       expect(result.rawDamage).toBe(5);
       expect(result.damageReduction).toBe(0);
       expect(result.finalDamage).toBe(5);
-      expect(result.shieldAbsorbed).toBe(0); // Riders don't have shields
+      expect(result.shieldAbsorbed).toBe(0);
       expect(state.player1.rider.hp).toBe(initialHp - 5);
     });
 
     it('should apply Bronn damage reduction (normal state)', () => {
       const state = createTestGameState('Bronn', 'Emberfang');
+      state.player1.rider.shields = 0;
 
       const result = damageRider(state.player1, 5);
 
@@ -162,6 +164,7 @@ describe('Damage Calculation', () => {
     it('should not reduce rider damage when Bronn is wounded', () => {
       const state = createTestGameState('Bronn', 'Emberfang');
       state.player1.rider.hp = state.player1.rider.woundedThreshold;
+      state.player1.rider.shields = 0;
 
       const result = damageRider(state.player1, 5);
 
@@ -172,6 +175,7 @@ describe('Damage Calculation', () => {
     it('should not apply Bronn reduction when critical', () => {
       const state = createTestGameState('Bronn', 'Emberfang');
       state.player1.rider.hp = state.player1.rider.criticalThreshold;
+      state.player1.rider.shields = 0;
 
       const result = damageRider(state.player1, 5);
 
@@ -298,55 +302,55 @@ describe('Damage Calculation', () => {
   describe('addShields', () => {
     it('should add shields normally', () => {
       const state = createTestGameState();
-      state.player1.dragon.shields = 2;
+      state.player1.rider.shields = 2;
 
       const added = addShields(state.player1, 3);
 
       expect(added).toBe(3);
-      expect(state.player1.dragon.shields).toBe(5);
+      expect(state.player1.rider.shields).toBe(5);
     });
 
     it('should halve shields for wounded Morrik (round up)', () => {
       const state = createTestGameState('Morrik', 'Emberfang');
       state.player1.rider.hp = state.player1.rider.woundedThreshold;
-      state.player1.dragon.shields = 0;
+      state.player1.rider.shields = 0;
 
       const added = addShields(state.player1, 5);
 
       expect(added).toBe(3); // ceil(5/2)
-      expect(state.player1.dragon.shields).toBe(3);
+      expect(state.player1.rider.shields).toBe(3);
     });
 
     it('should halve odd number shields for wounded Morrik correctly', () => {
       const state = createTestGameState('Morrik', 'Emberfang');
       state.player1.rider.hp = state.player1.rider.woundedThreshold;
-      state.player1.dragon.shields = 0;
+      state.player1.rider.shields = 0;
 
       const added = addShields(state.player1, 3);
 
       expect(added).toBe(2); // ceil(3/2)
-      expect(state.player1.dragon.shields).toBe(2);
+      expect(state.player1.rider.shields).toBe(2);
     });
 
     it('should not halve shields for non-wounded Morrik', () => {
       const state = createTestGameState('Morrik', 'Emberfang');
-      state.player1.dragon.shields = 0;
+      state.player1.rider.shields = 0;
 
       const added = addShields(state.player1, 5);
 
       expect(added).toBe(5);
-      expect(state.player1.dragon.shields).toBe(5);
+      expect(state.player1.rider.shields).toBe(5);
     });
 
     it('should not halve shields for other riders when wounded', () => {
       const state = createTestGameState('Talia', 'Emberfang');
       state.player1.rider.hp = state.player1.rider.woundedThreshold;
-      state.player1.dragon.shields = 0;
+      state.player1.rider.shields = 0;
 
       const added = addShields(state.player1, 5);
 
       expect(added).toBe(5);
-      expect(state.player1.dragon.shields).toBe(5);
+      expect(state.player1.rider.shields).toBe(5);
     });
   });
 });

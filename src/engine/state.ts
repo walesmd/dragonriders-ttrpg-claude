@@ -15,9 +15,16 @@ export function createPlayerState(
   dragonName: DragonName,
   deck: Card[]
 ): PlayerState {
+  const rider = createRider(riderName);
+  const dragon = createDragon(dragonName);
+
+  // Transfer shields from dragon to rider
+  rider.shields = dragon.shields;
+  dragon.shields = 0;
+
   return {
-    rider: createRider(riderName),
-    dragon: createDragon(dragonName),
+    rider,
+    dragon,
     hand: [],
     deck: shuffleArray([...deck]),
     discard: [],

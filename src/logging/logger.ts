@@ -141,6 +141,7 @@ export class GameLogger {
       rider: {
         hp: p.rider.hp,
         maxHp: p.rider.maxHp,
+        shields: p.rider.shields,
         frozen: p.riderFrozen,
         burn: p.riderBurn,
         wounded: p.rider.hp <= p.rider.woundedThreshold || p.rider.forceWounded,

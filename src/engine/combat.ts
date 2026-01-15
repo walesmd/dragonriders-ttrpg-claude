@@ -89,18 +89,15 @@ export function damageDragon(
   const reduction = calculateDamageReduction(defender, 'dragon');
   const reducedAmount = Math.max(0, amount - reduction);
 
-  // Shields absorb first
-  const shieldAbsorbed = Math.min(defender.dragon.shields, reducedAmount);
-  defender.dragon.shields -= shieldAbsorbed;
-  const hpDamage = reducedAmount - shieldAbsorbed;
-  defender.dragon.hp -= hpDamage;
+  // Damage goes directly to HP (no shield absorption)
+  defender.dragon.hp -= reducedAmount;
 
   // Steelhorn counter - attacker loses 1 energy
   let triggeredSteelhorn = false;
   if (
     defender.dragon.name === 'Steelhorn' &&
     attackerPlayer !== undefined &&
-    hpDamage > 0
+    reducedAmount > 0
   ) {
     const attacker = getPlayer(state, attackerPlayer);
     attacker.energy = Math.max(0, attacker.energy - 1);
@@ -110,8 +107,8 @@ export function damageDragon(
   return {
     rawDamage: amount,
     damageReduction: reduction,
-    shieldAbsorbed,
-    finalDamage: hpDamage,
+    shieldAbsorbed: 0,
+    finalDamage: reducedAmount,
     triggeredSteelhorn,
   };
 }
@@ -122,13 +119,18 @@ export function damageRider(
 ): DamageResult {
   const reduction = calculateDamageReduction(defender, 'rider');
   const reducedAmount = Math.max(0, amount - reduction);
-  defender.rider.hp -= reducedAmount;
+
+  // Shields absorb damage before HP
+  const shieldAbsorbed = Math.min(defender.rider.shields, reducedAmount);
+  defender.rider.shields -= shieldAbsorbed;
+  const hpDamage = reducedAmount - shieldAbsorbed;
+  defender.rider.hp -= hpDamage;
 
   return {
     rawDamage: amount,
     damageReduction: reduction,
-    shieldAbsorbed: 0,
-    finalDamage: reducedAmount,
+    shieldAbsorbed,
+    finalDamage: hpDamage,
     triggeredSteelhorn: false,
   };
 }
@@ -159,7 +161,7 @@ export function addShields(player: PlayerState, amount: number): number {
   if (player.rider.name === 'Morrik' && isWounded(player.rider)) {
     finalAmount = Math.ceil(amount / 2);
   }
-  player.dragon.shields += finalAmount;
+  player.rider.shields += finalAmount;
   return finalAmount;
 }
 
@@ -212,11 +214,11 @@ export function executeAttack(
   if (attacker.rider.name === 'Kael' && attacker.firstAttackThisTurn) {
     if (isWounded(attacker.rider)) {
       damage += 1;
-      attacker.dragon.shields += 1;
+      attacker.rider.shields += 1;
       result.kaelBonus = { damage: 1, shields: 1 };
     } else {
       damage += 2;
-      attacker.dragon.shields += 2;
+      attacker.rider.shields += 2;
       result.kaelBonus = { damage: 2, shields: 2 };
     }
   }

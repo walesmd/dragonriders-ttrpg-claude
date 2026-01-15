@@ -78,6 +78,7 @@ export interface RiderState {
   name: RiderName;
   hp: number;
   maxHp: number;
+  shields: number;
   baseEconomy: number;
   woundedThreshold: number;
   criticalThreshold: number;
