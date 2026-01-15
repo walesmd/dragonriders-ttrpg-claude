@@ -1,8 +1,8 @@
 # Dragon Riders — v0.12 Consolidated Balance Analysis
 
 **Date**: January 15, 2026  
-**Current Stable Commit**: `38cc55a` on `v0.12-rider-shields`  
-**Stable Gameplay State (RETURN TO STABLE)**: `e671fe4` on `v0.12-rider-shields`  
+**Current Stable Commit**: `67e8192` on `v0.12-rider-shields`  
+**Stable Gameplay State (RETURN TO STABLE)**: `67e8192` on `v0.12-rider-shields`  
 **Methodology**: AI vs AI (medium difficulty), 2,250 games per iteration
 
 ---
