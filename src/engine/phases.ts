@@ -1,7 +1,7 @@
 import type { GameState } from '../data/types';
 import { getPlayer, getOpponentPlayer, drawCard } from './state';
 import { gainStartOfTurnEnergy, calculateEnergyBreakdown } from './economy';
-import { clearFreezeImmunity, grantFreezeImmunity, clearFreeze, damageDragon } from './combat';
+import { clearFreezeImmunity, grantFreezeImmunity, damageDragon } from './combat';
 import { applyWinCondition } from './winConditions';
 import { getOpponent } from '../utils/helpers';
 import { getLogger } from '../logging';
