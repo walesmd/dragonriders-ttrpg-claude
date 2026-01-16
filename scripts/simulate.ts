@@ -50,10 +50,6 @@ function simulateGame(
     // End turn phase
     executeEndPhase(state);
     if (state.winner) break;
-
-    // Switch to next player
-    state.activePlayer = state.activePlayer === 1 ? 2 : 1;
-    state.turn++;
   }
 
   // Game ended (or hit max turns)

@@ -238,10 +238,12 @@ export function executeCard(
       break;
 
     case 'strip':
-      const shieldsRemoved = opponent.rider.shields;
-      opponent.rider.shields = 0;
-      result.effects.push(`Removed ${shieldsRemoved} shields from enemy Rider`);
-      break;
+      {
+        const shieldsRemoved = opponent.rider.shields;
+        opponent.rider.shields = 0;
+        result.effects.push(`Removed ${shieldsRemoved} shields from enemy Rider`);
+        break;
+      }
 
     case 'energy_shield':
       // This prevents the next status effect - we need a flag

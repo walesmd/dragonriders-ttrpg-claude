@@ -59,9 +59,6 @@ function scoreAttackDragon(p: PlayerState, opp: PlayerState, config: AIConfig): 
   if (oppDragonPct < 0.3) score += 25;
   else if (oppDragonPct < 0.5) score += 10;
 
-  // Bonus if rider shields are down
-  if (opp.rider.shields === 0) score += 8;
-
   // Bonus for lethal
   if (opp.dragon.hp <= damage) score += 50;
 
@@ -91,6 +88,9 @@ function scoreAttackRider(p: PlayerState, opp: PlayerState, config: AIConfig): n
 
   // Bonus for lethal
   if (opp.rider.hp <= damage) score += 60;
+
+  // Bonus if rider shields are down
+  if (opp.rider.shields === 0) score += 8;
 
   // Bonus if would push into wounded
   if (opp.rider.hp > opp.rider.woundedThreshold &&
