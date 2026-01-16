@@ -2,12 +2,8 @@ import type { GameState, PlayerState, Card, TargetType, GameAction } from '../da
 import { getPlayer } from './state';
 import { isCritical, isWounded } from '../data/riders';
 
-export function getAttackCost(player: PlayerState, target: TargetType = 'dragon'): number {
+export function getAttackCost(player: PlayerState, _target: TargetType = 'dragon'): number {
   let cost = player.dragon.attackCost; // Base cost is 2
-
-  if (target === 'rider') {
-    cost += 1;
-  }
 
   // Kael critical: attacks cost +1
   if (player.rider.name === 'Kael' && isCritical(player.rider)) {
@@ -38,8 +34,10 @@ export function canAttack(
   // Dragon must be alive
   if (player.dragon.hp <= 0) return false;
 
-  // Cannot attack while frozen
-  if (player.dragonFrozen) return false;
+  // Staggered: only one action total when frozen
+  if (player.dragonFreezeStacks > 0 && player.actionsTakenThisTurn >= 1) {
+    return false;
+  }
 
   if (target) {
     // Must afford attack cost for target
@@ -70,8 +68,8 @@ export function canPlayCard(_state: GameState, player: PlayerState, card: Card):
     if (card.effectType === 'shield') return false;
   }
 
-  // When dragon frozen: can play max 1 card per turn
-  if (player.dragonFrozen && player.cardsPlayedWhileFrozen >= 1) {
+  // Staggered: only one action total when frozen
+  if (player.dragonFreezeStacks > 0 && player.actionsTakenThisTurn >= 1) {
     return false;
   }
 

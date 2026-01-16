@@ -23,6 +23,7 @@ describe('Card Effects', () => {
     it('should deal damage to rider', () => {
       const state = createTestGameState();
       state.player1.energy = 10;
+      state.player2.rider.shields = 0; // Remove shields for this test
       const card = createTestCard({ effectType: 'damage', target: 'rider', value: 4 });
       addCardsToHand(state.player1, [card]);
       advanceToActionPhase(state);
@@ -98,7 +99,7 @@ describe('Card Effects', () => {
 
       expect(result.success).toBe(true);
       expect(result.freezeApplied).toBe(true);
-      expect(state.player2.dragonFrozen).toBe(true);
+      expect(state.player2.dragonFreezeStacks).toBe(1);
     });
 
     it('should not freeze if immune', () => {
@@ -114,7 +115,7 @@ describe('Card Effects', () => {
       expect(result.success).toBe(true);
       // freezeApplied is not set when immunity prevents freeze
       expect(result.freezeApplied).toBeUndefined();
-      expect(state.player2.dragonFrozen).toBe(false);
+      expect(state.player2.dragonFreezeStacks).toBe(0);
     });
   });
 
@@ -125,20 +126,20 @@ describe('Card Effects', () => {
       const card = createTestCard({ effectType: 'shield', target: 'self', value: 4 });
       addCardsToHand(state.player1, [card]);
       advanceToActionPhase(state);
-      const initialShields = state.player1.dragon.shields;
+      const initialShields = state.player1.rider.shields;
 
       const result = executeCard(state, 1, card.id);
 
       expect(result.success).toBe(true);
       expect(result.shieldsGained).toBe(4);
-      expect(state.player1.dragon.shields).toBe(initialShields + 4);
+      expect(state.player1.rider.shields).toBe(initialShields + 4);
     });
 
     it('should halve shields for wounded Morrik', () => {
       const state = createTestGameState('Morrik', 'Emberfang');
       state.player1.rider.hp = state.player1.rider.woundedThreshold;
       state.player1.energy = 10;
-      state.player1.dragon.shields = 0;
+      state.player1.rider.shields = 0;
       const card = createTestCard({ effectType: 'shield', target: 'self', value: 5 });
       addCardsToHand(state.player1, [card]);
       advanceToActionPhase(state);
@@ -146,7 +147,7 @@ describe('Card Effects', () => {
       const result = executeCard(state, 1, card.id);
 
       expect(result.shieldsGained).toBe(3); // ceil(5/2)
-      expect(state.player1.dragon.shields).toBe(3);
+      expect(state.player1.rider.shields).toBe(3);
     });
 
     it('should give Morrik +1 energy when healthy', () => {
@@ -254,6 +255,7 @@ describe('Card Effects', () => {
       const state = createTestGameState();
       state.player1.energy = 10;
       state.player2.dragon.shields = 0;
+      state.player2.rider.shields = 0;
       const card = createTestCard({
         effectType: 'chain',
         target: 'both',
@@ -291,7 +293,7 @@ describe('Card Effects', () => {
     it('should remove freeze and draw a card', () => {
       const state = createTestGameState();
       state.player1.energy = 10;
-      state.player1.dragonFrozen = true;
+      state.player1.dragonFreezeStacks = 1;
       state.player1.deck = [createTestCard({ name: 'Deck Card' })];
       const card = createTestCard({ effectType: 'thaw', target: 'self' });
       addCardsToHand(state.player1, [card]);
@@ -300,7 +302,7 @@ describe('Card Effects', () => {
 
       executeCard(state, 1, card.id);
 
-      expect(state.player1.dragonFrozen).toBe(false);
+      expect(state.player1.dragonFreezeStacks).toBe(0);
       expect(state.player1.hand.length).toBe(initialHandSize); // -1 for played card, +1 for drawn
     });
   });
@@ -323,17 +325,17 @@ describe('Card Effects', () => {
   });
 
   describe('Strip cards', () => {
-    it('should remove all shields from opponent dragon', () => {
+    it('should remove all shields from opponent rider', () => {
       const state = createTestGameState();
       state.player1.energy = 10;
-      state.player2.dragon.shields = 5;
+      state.player2.rider.shields = 5;
       const card = createTestCard({ effectType: 'strip', target: 'opp' });
       addCardsToHand(state.player1, [card]);
       advanceToActionPhase(state);
 
       executeCard(state, 1, card.id);
 
-      expect(state.player2.dragon.shields).toBe(0);
+      expect(state.player2.rider.shields).toBe(0);
     });
   });
 
@@ -363,14 +365,14 @@ describe('Card Effects', () => {
     it('should track cards played while frozen', () => {
       const state = createTestGameState();
       state.player1.energy = 10;
-      state.player1.dragonFrozen = true;
+      state.player1.dragonFreezeStacks = 1;
       const card = createTestCard({ cost: 1 });
       addCardsToHand(state.player1, [card]);
       advanceToActionPhase(state);
 
       executeCard(state, 1, card.id);
 
-      expect(state.player1.cardsPlayedWhileFrozen).toBe(1);
+      expect(state.player1.actionsTakenThisTurn).toBe(1);
     });
   });
 });

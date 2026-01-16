@@ -3,7 +3,7 @@ import type { RiderName, RiderState, RiderDefinition } from './types';
 export const RIDERS: Record<RiderName, RiderDefinition> = {
   Talia: {
     name: 'Talia',
-    maxHp: 20,
+    maxHp: 18,
     baseEconomy: 2,
     woundedThreshold: 13,
     criticalThreshold: 7,
@@ -22,7 +22,7 @@ As long as a Dragon fights under her banner, it feeds her resources—mana, gold
   },
   Kael: {
     name: 'Kael',
-    maxHp: 19,
+    maxHp: 17,
     baseEconomy: 1,
     woundedThreshold: 12,
     criticalThreshold: 6,
@@ -41,7 +41,7 @@ That first devastating blow doesn't just hurt—it fortifies his Dragon, layerin
   },
   Bronn: {
     name: 'Bronn',
-    maxHp: 22,
+    maxHp: 20,
     baseEconomy: 1,
     woundedThreshold: 14,
     criticalThreshold: 8,
@@ -60,7 +60,7 @@ When Bronn is healthy, even Dragons struggle to deal full damage near him. But a
   },
   Lyra: {
     name: 'Lyra',
-    maxHp: 19,
+    maxHp: 17,
     baseEconomy: 2,
     woundedThreshold: 12,
     criticalThreshold: 6,
@@ -79,7 +79,7 @@ But her powers are delicate. As she becomes wounded, the magic grows harder to c
   },
   Morrik: {
     name: 'Morrik',
-    maxHp: 21,
+    maxHp: 19,
     baseEconomy: 2,
     woundedThreshold: 14,
     criticalThreshold: 8,
@@ -104,6 +104,7 @@ export function createRider(name: RiderName): RiderState {
     name: def.name,
     hp: def.maxHp,
     maxHp: def.maxHp,
+    shields: 0,
     baseEconomy: def.baseEconomy,
     woundedThreshold: def.woundedThreshold,
     criticalThreshold: def.criticalThreshold,

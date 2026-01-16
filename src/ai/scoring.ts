@@ -59,9 +59,6 @@ function scoreAttackDragon(p: PlayerState, opp: PlayerState, config: AIConfig): 
   if (oppDragonPct < 0.3) score += 25;
   else if (oppDragonPct < 0.5) score += 10;
 
-  // Bonus if shields are down
-  if (opp.dragon.shields === 0) score += 8;
-
   // Bonus for lethal
   if (opp.dragon.hp <= damage) score += 50;
 
@@ -91,6 +88,9 @@ function scoreAttackRider(p: PlayerState, opp: PlayerState, config: AIConfig): n
 
   // Bonus for lethal
   if (opp.rider.hp <= damage) score += 60;
+
+  // Bonus if rider shields are down
+  if (opp.rider.shields === 0) score += 8;
 
   // Bonus if would push into wounded
   if (opp.rider.hp > opp.rider.woundedThreshold &&
@@ -220,9 +220,9 @@ function scoreFreezeCard(
   const effectiveTarget = target || card.target;
 
   if (effectiveTarget === 'dragon') {
-    if (opp.dragonFrozen || opp.dragonFreezeImmune) return 5;
+    if (opp.dragonFreezeStacks > 0 || opp.dragonFreezeImmune) return 5;
   } else if (effectiveTarget === 'rider') {
-    if (opp.riderFrozen || opp.riderFreezeImmune) return 5;
+    if (opp.riderFreezeStacks > 0 || opp.riderFreezeImmune) return 5;
   }
 
   let score = 45;
@@ -263,7 +263,7 @@ function scoreHealCard(card: Card, p: PlayerState, config: AIConfig): number {
 }
 
 function scoreThawCard(p: PlayerState): number {
-  if (p.dragonFrozen || p.riderFrozen) return 60;
+  if (p.dragonFreezeStacks > 0 || p.riderFreezeStacks > 0) return 60;
   return 15;
 }
 
@@ -274,8 +274,8 @@ function scoreFirebreakCard(p: PlayerState): number {
 }
 
 function scoreStripCard(opp: PlayerState): number {
-  if (opp.dragon.shields === 0) return 5;
-  return 20 + opp.dragon.shields * 10;
+  if (opp.rider.shields === 0) return 5;
+  return 20 + opp.rider.shields * 10;
 }
 
 function scoreDrainCard(p: PlayerState, opp: PlayerState): number {

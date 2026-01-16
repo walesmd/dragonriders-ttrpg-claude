@@ -1,7 +1,7 @@
 import type { PlayerNumber, WinType, RiderName, DragonName, AIDifficulty } from '../data/types';
 
 // Game version (tracks game rules and AI logic changes, not package version)
-export const LOG_VERSION = '0.11';
+export const LOG_VERSION = '0.12';
 
 // ============================================================================
 // MAIN GAME LOG STRUCTURE
@@ -146,6 +146,7 @@ export interface PlayerSnapshot {
   rider: {
     hp: number;
     maxHp: number;
+    shields: number;
     frozen: boolean;
     burn: number;
     wounded: boolean;

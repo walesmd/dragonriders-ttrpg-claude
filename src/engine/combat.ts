@@ -10,11 +10,11 @@ import { isWounded, isCritical } from '../data/riders';
 export function applyFreeze(player: PlayerState, target: TargetType): boolean {
   if (target === 'dragon') {
     if (player.dragonFreezeImmune) return false;
-    player.dragonFrozen = true;
+    player.dragonFreezeStacks = Math.min(2, player.dragonFreezeStacks + 1);
     return true;
   } else {
     if (player.riderFreezeImmune) return false;
-    player.riderFrozen = true;
+    player.riderFreezeStacks = Math.min(2, player.riderFreezeStacks + 1);
     return true;
   }
 }
@@ -29,9 +29,9 @@ export function applyBurn(player: PlayerState, target: TargetType, stacks: numbe
 
 export function clearFreeze(player: PlayerState, target: TargetType): void {
   if (target === 'dragon') {
-    player.dragonFrozen = false;
+    player.dragonFreezeStacks = 0;
   } else {
-    player.riderFrozen = false;
+    player.riderFreezeStacks = 0;
   }
 }
 
@@ -89,18 +89,15 @@ export function damageDragon(
   const reduction = calculateDamageReduction(defender, 'dragon');
   const reducedAmount = Math.max(0, amount - reduction);
 
-  // Shields absorb first
-  const shieldAbsorbed = Math.min(defender.dragon.shields, reducedAmount);
-  defender.dragon.shields -= shieldAbsorbed;
-  const hpDamage = reducedAmount - shieldAbsorbed;
-  defender.dragon.hp -= hpDamage;
+  // Damage goes directly to HP (no shield absorption)
+  defender.dragon.hp -= reducedAmount;
 
   // Steelhorn counter - attacker loses 1 energy
   let triggeredSteelhorn = false;
   if (
     defender.dragon.name === 'Steelhorn' &&
     attackerPlayer !== undefined &&
-    hpDamage > 0
+    reducedAmount > 0
   ) {
     const attacker = getPlayer(state, attackerPlayer);
     attacker.energy = Math.max(0, attacker.energy - 1);
@@ -110,8 +107,8 @@ export function damageDragon(
   return {
     rawDamage: amount,
     damageReduction: reduction,
-    shieldAbsorbed,
-    finalDamage: hpDamage,
+    shieldAbsorbed: 0,
+    finalDamage: reducedAmount,
     triggeredSteelhorn,
   };
 }
@@ -122,13 +119,18 @@ export function damageRider(
 ): DamageResult {
   const reduction = calculateDamageReduction(defender, 'rider');
   const reducedAmount = Math.max(0, amount - reduction);
-  defender.rider.hp -= reducedAmount;
+
+  // Shields absorb damage before HP
+  const shieldAbsorbed = Math.min(defender.rider.shields, reducedAmount);
+  defender.rider.shields -= shieldAbsorbed;
+  const hpDamage = reducedAmount - shieldAbsorbed;
+  defender.rider.hp -= hpDamage;
 
   return {
     rawDamage: amount,
     damageReduction: reduction,
-    shieldAbsorbed: 0,
-    finalDamage: reducedAmount,
+    shieldAbsorbed,
+    finalDamage: hpDamage,
     triggeredSteelhorn: false,
   };
 }
@@ -159,7 +161,7 @@ export function addShields(player: PlayerState, amount: number): number {
   if (player.rider.name === 'Morrik' && isWounded(player.rider)) {
     finalAmount = Math.ceil(amount / 2);
   }
-  player.dragon.shields += finalAmount;
+  player.rider.shields += finalAmount;
   return finalAmount;
 }
 
@@ -185,6 +187,8 @@ export function executeAttack(
 ): AttackResult {
   const attacker = getPlayer(state, attackerNum);
   const defender = getOpponentPlayer(state, attackerNum);
+  const targetFrozenBefore =
+    target === 'dragon' ? defender.dragonFreezeStacks > 0 : defender.riderFreezeStacks > 0;
 
   const result: AttackResult = {
     success: false,
@@ -208,15 +212,20 @@ export function executeAttack(
   // Base damage
   let damage = attacker.dragon.attackDamage;
 
+  // Cryowyrm bonus damage against already frozen targets
+  if (attacker.dragon.name === 'Cryowyrm' && targetFrozenBefore) {
+    damage += 1;
+  }
+
   // Kael first attack bonus
   if (attacker.rider.name === 'Kael' && attacker.firstAttackThisTurn) {
     if (isWounded(attacker.rider)) {
       damage += 1;
-      attacker.dragon.shields += 1;
+      attacker.rider.shields += 1;
       result.kaelBonus = { damage: 1, shields: 1 };
     } else {
       damage += 2;
-      attacker.dragon.shields += 2;
+      attacker.rider.shields += 2;
       result.kaelBonus = { damage: 2, shields: 2 };
     }
   }
@@ -276,6 +285,7 @@ export function executeAttack(
   }
 
   attacker.firstAttackThisTurn = false;
+  attacker.actionsTakenThisTurn += 1;
   result.success = true;
 
   return result;

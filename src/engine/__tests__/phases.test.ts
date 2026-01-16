@@ -46,13 +46,13 @@ describe('Turn Phases', () => {
       state.turnPhase = 'start';
       state.player1.firstAttackThisTurn = false;
       state.player1.burnAppliedThisTurn = true;
-      state.player1.cardsPlayedWhileFrozen = 5;
+      state.player1.actionsTakenThisTurn = 5;
 
       executeStartPhase(state);
 
       expect(state.player1.firstAttackThisTurn).toBe(true);
       expect(state.player1.burnAppliedThisTurn).toBe(false);
-      expect(state.player1.cardsPlayedWhileFrozen).toBe(0);
+      expect(state.player1.actionsTakenThisTurn).toBe(0);
     });
 
     it('should clear opponent freeze immunity', () => {
@@ -126,20 +126,20 @@ describe('Turn Phases', () => {
 
     it('should clear freeze and grant immunity', () => {
       const state = createTestGameState();
-      state.player1.dragonFrozen = true;
-      state.player1.riderFrozen = true;
+      state.player1.dragonFreezeStacks = 1;
+      state.player1.riderFreezeStacks = 1;
 
       executeEndPhase(state);
 
-      expect(state.player1.dragonFrozen).toBe(false);
-      expect(state.player1.riderFrozen).toBe(false);
+      expect(state.player1.dragonFreezeStacks).toBe(0);
+      expect(state.player1.riderFreezeStacks).toBe(0);
       expect(state.player1.dragonFreezeImmune).toBe(true);
       expect(state.player1.riderFreezeImmune).toBe(true);
     });
 
     it('should not grant immunity if not frozen', () => {
       const state = createTestGameState();
-      state.player1.dragonFrozen = false;
+      state.player1.dragonFreezeStacks = 0;
 
       executeEndPhase(state);
 
@@ -191,14 +191,14 @@ describe('Turn Phases', () => {
       const state = createTestGameState();
       state.activePlayer = 1;
       state.turnPhase = 'action';
-      state.player1.dragonFrozen = true;
+      state.player1.dragonFreezeStacks = 1;
       state.player2.deck = [createTestCard()];
       state.player2.energy = 0;
 
       passTurn(state);
 
       // End phase effects cleared freeze and granted immunity
-      expect(state.player1.dragonFrozen).toBe(false);
+      expect(state.player1.dragonFreezeStacks).toBe(0);
       // But then start phase for player 2 cleared player 1's immunity
       expect(state.player1.dragonFreezeImmune).toBe(false);
 
@@ -272,11 +272,11 @@ describe('Turn Phases', () => {
       state.activePlayer = 1;
 
       // Freeze player 1
-      state.player1.dragonFrozen = true;
+      state.player1.dragonFreezeStacks = 1;
 
       // End player 1's turn - clears freeze, grants immunity
       executeEndPhase(state);
-      expect(state.player1.dragonFrozen).toBe(false);
+      expect(state.player1.dragonFreezeStacks).toBe(0);
       expect(state.player1.dragonFreezeImmune).toBe(true);
       expect(state.activePlayer).toBe(2);
 

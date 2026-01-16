@@ -87,9 +87,9 @@ npm run test:coverage
 - **Emberfang**: Burn on first attack only
 - **Cryowyrm**: Freeze on every attack, respecting immunity
 - **Voltwing**: 2 splash damage to other target
-- **Steelhorn**: Energy counter when taking damage (not when shielded)
+- **Steelhorn**: Energy counter when taking damage
 - **Voidmaw**: Energy steal + bonus damage when ahead
-- **Kael + Dragon**: First attack damage/shield bonus
+- **Kael + Dragon**: First attack damage + rider shield bonus
 
 ### 7. Card Effects (`cards.test.ts`)
 **24 tests** covering:
@@ -106,12 +106,12 @@ npm run test:coverage
 - Firebreak cards (remove all burn)
 - Strip cards (remove all shields)
 - Card validation (cost, hand presence)
-- Frozen card play tracking
+- Frozen action restriction (stagger)
 
 ### 8. Turn Phases (`phases.test.ts`)
 **21 tests** covering:
 - **Start Phase**: Draw card, gain energy, burn damage, reset flags, clear opponent immunity
-- **End Phase**: Discard to hand limit, clear freeze + grant immunity, switch players, turn increment
+- **End Phase**: Discard to hand limit, reduce freeze stacks + grant immunity, switch players, turn increment
 - **Pass Turn**: Full end-to-start phase cycle
 - Freeze immunity timing
 - Energy accumulation across turns

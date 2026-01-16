@@ -123,7 +123,7 @@ export default function MultiplayerSetup() {
                       </div>
                       <div className="text-right text-sm">
                         <div className="text-gray-400">HP: <span className="text-white">{dragon.maxHp}</span></div>
-                        <div className="text-gray-400">Shields: <span className="text-blue-400">{dragon.shields}</span></div>
+                        <div className="text-gray-400">Rider Shields: <span className="text-blue-400">{dragon.shields}</span></div>
                         <div className="text-gray-400">Attack: <span className="text-red-400">{dragon.attackDamage}</span></div>
                       </div>
                     </div>

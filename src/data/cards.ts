@@ -36,7 +36,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
   // Rider Damage
   {
     name: 'Weakening Strike',
-    cost: 2,
+    cost: 1,
     effectType: 'damage',
     target: 'rider',
     value: 2,
@@ -46,12 +46,12 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
   },
   {
     name: 'Precision Strike',
-    cost: 2,
+    cost: 1,
     effectType: 'damage',
     target: 'rider',
-    value: 2,
+    value: 3,
     secondaryValue: 0,
-    description: 'Deal 2 damage to enemy Rider',
+    description: 'Deal 3 damage to enemy Rider',
     copies: 2,
   },
   {
@@ -137,7 +137,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     target: 'self',
     value: 2,
     secondaryValue: 0,
-    description: 'Your Dragon gains 2 Shields',
+    description: 'Your Rider gains 2 Shields',
     copies: 3,
   },
   {
@@ -147,7 +147,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     target: 'dragon',
     value: 0,
     secondaryValue: 0,
-    description: 'Destroy all Shields on enemy Dragon',
+    description: 'Destroy all Shields on enemy Rider',
     copies: 1,
   },
 
@@ -211,7 +211,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     target: 'self',
     value: 0,
     secondaryValue: 0,
-    description: 'Prevent the next status effect applied to your Dragon',
+    description: 'Prevent the next status effect applied to your Rider',
     copies: 2,
   },
 ];

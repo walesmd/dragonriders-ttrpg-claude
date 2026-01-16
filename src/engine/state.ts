@@ -15,22 +15,29 @@ export function createPlayerState(
   dragonName: DragonName,
   deck: Card[]
 ): PlayerState {
+  const rider = createRider(riderName);
+  const dragon = createDragon(dragonName);
+
+  // Transfer shields from dragon to rider with rider-buff tuning
+  rider.shields = Math.max(0, dragon.shields - 1);
+  dragon.shields = 0;
+
   return {
-    rider: createRider(riderName),
-    dragon: createDragon(dragonName),
+    rider,
+    dragon,
     hand: [],
     deck: shuffleArray([...deck]),
     discard: [],
     energy: 0,
-    dragonFrozen: false,
+    dragonFreezeStacks: 0,
     dragonFreezeImmune: false,
     dragonBurn: 0,
-    riderFrozen: false,
+    riderFreezeStacks: 0,
     riderFreezeImmune: false,
     riderBurn: 0,
     firstAttackThisTurn: true,
     burnAppliedThisTurn: false,
-    cardsPlayedWhileFrozen: 0,
+    actionsTakenThisTurn: 0,
   };
 }
 

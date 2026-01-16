@@ -1,4 +1,4 @@
-# Dragon Riders — Complete Game Rules (v0.8)
+# Dragon Riders — Complete Game Rules (v0.12)
 
 ## Overview
 
@@ -44,7 +44,7 @@ Take any number of actions in any order:
 - **Play a Card** (costs Energy as listed)
 - **Pass** (end your turn)
 
-**Freeze Restriction:** If your Dragon is Frozen, you may play 1 card but cannot attack.
+**Freeze Restriction (Stagger):** If your Dragon has any Freeze stacks, you may take only **one** action total (either play a card or attack).
 
 ### 3. End Phase
 1. Discard down to hand limit (5 cards)
@@ -66,11 +66,12 @@ Take any number of actions in any order:
 - When HP reaches 0, that unit is defeated
 - Can be healed but not above maximum
 
-### Shields (Dragons only)
-- Absorb damage before HP
+### Shields (Riders)
+- Riders start with shields based on their chosen Dragon
+- Shields absorb damage before HP
 - Do not regenerate naturally
 - Can be added via cards or abilities
-- Riders do NOT have shields
+- Dragons do NOT have shields
 
 ---
 
@@ -78,13 +79,13 @@ Take any number of actions in any order:
 
 ### Damaging Dragons
 1. Apply any damage reduction (Bronn passive)
-2. Damage hits Shields first
-3. Remaining damage reduces HP
-4. Trigger Steelhorn ability if applicable
+2. Damage reduces HP directly (dragons have no shields)
+3. Trigger Steelhorn ability if applicable
 
 ### Damaging Riders
 1. Apply any damage reduction (Bronn passive, only if not wounded)
-2. Damage reduces HP directly (Riders have no shields)
+2. Damage hits Rider Shields first
+3. Remaining damage reduces HP
 
 ---
 
@@ -97,10 +98,10 @@ Take any number of actions in any order:
 - Removed by Firebreak card
 
 ### Freeze
-- Target can play 1 card but cannot attack
-- Does NOT stack (max 1)
-- Removed at end of frozen target's turn
-- Upon removal, target gains Freeze Immunity
+- Freeze stacks (each application adds 1 stack)
+- While you have any Freeze stacks, you may take only **one** action total
+- At end of your turn, Freeze stacks decrease by 1
+- When stacks reach 0, you gain Freeze Immunity until end of your next turn
 
 ### Freeze Immunity
 - Prevents Freeze from being applied
@@ -176,35 +177,35 @@ All Dragons have Attack Cost 2 and Attack Damage 3.
 | Stat | Value |
 |------|-------|
 | HP | 33 |
-| Shields | 3 |
+| Rider Shields | 3 |
 | Ability | On your first attack each turn, apply 1 Burn to the target |
 
 ### Cryowyrm
 | Stat | Value |
 |------|-------|
 | HP | 30 |
-| Shields | 2 |
-| Ability | On hit, apply Freeze to the target (respects Freeze Immunity) |
+| Rider Shields | 2 |
+| Ability | On hit, apply Freeze to the target (respects Freeze Immunity). Deals +1 damage to already Frozen targets. |
 
 ### Voltwing
 | Stat | Value |
 |------|-------|
 | HP | 35 |
-| Shields | 2 |
+| Rider Shields | 2 |
 | Ability | On attack, deal 2 splash damage to the other enemy (if you attack Dragon, splash hits Rider and vice versa) |
 
 ### Steelhorn
 | Stat | Value |
 |------|-------|
 | HP | 40 |
-| Shields | 4 |
+| Rider Shields | 4 |
 | Ability | Whenever Steelhorn takes damage, the attacker loses 1 Energy |
 
 ### Voidmaw
 | Stat | Value |
 |------|-------|
 | HP | 32 |
-| Shields | 2 |
+| Rider Shields | 2 |
 | Ability | On attack, steal 1 Energy from opponent. At start of your turn, if you have more Energy than opponent, deal 2 damage to their Dragon. |
 
 ---
@@ -221,8 +222,8 @@ All Dragons have Attack Cost 2 and Attack Damage 3.
 ### Rider Damage Cards (6)
 | Card | Cost | Effect | Copies |
 |------|------|--------|--------|
-| Weakening Strike | 2 | Deal 2 damage to enemy Rider | 3 |
-| Precision Strike | 2 | Deal 2 damage to enemy Rider | 2 |
+| Weakening Strike | 1 | Deal 2 damage to enemy Rider | 3 |
+| Precision Strike | 1 | Deal 3 damage to enemy Rider | 2 |
 | Crippling Blow | 3 | Deal 2 damage to enemy Rider, target becomes Wounded until healed | 1 |
 
 ### Multi-Target Cards (4)
@@ -242,8 +243,8 @@ All Dragons have Attack Cost 2 and Attack Damage 3.
 ### Defense Cards (4)
 | Card | Cost | Effect | Copies |
 |------|------|--------|--------|
-| Shield Up | 2 | Your Dragon gains 2 Shields | 3 |
-| Shield Disruptor | 2 | Destroy all Shields on enemy Dragon | 1 |
+| Shield Up | 2 | Your Rider gains 2 Shields | 3 |
+| Shield Disruptor | 2 | Destroy all Shields on enemy Rider | 1 |
 
 ### Healing Cards (6)
 | Card | Cost | Effect | Copies |
@@ -257,7 +258,7 @@ All Dragons have Attack Cost 2 and Attack Damage 3.
 | Energy Surge | 1 | Gain 3 Energy | 2 |
 | Thaw | 1 | Remove Freeze from your Dragon or Rider, draw 1 card | 2 |
 | Firebreak | 1 | Remove all Burn from your Dragon and Rider | 2 |
-| Energy Shield | 2 | Prevent the next status effect applied to your Dragon | 2 |
+| Energy Shield | 2 | Prevent the next status effect applied to your Rider | 2 |
 
 ---
 

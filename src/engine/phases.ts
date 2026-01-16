@@ -55,7 +55,7 @@ export function executeStartPhase(state: GameState): void {
   // 6. Reset turn flags
   player.firstAttackThisTurn = true;
   player.burnAppliedThisTurn = false;
-  player.cardsPlayedWhileFrozen = 0;
+  player.actionsTakenThisTurn = 0;
 
   // 7. Check win conditions
   if (applyWinCondition(state)) {
@@ -84,16 +84,20 @@ export function executeEndPhase(state: GameState): void {
     logger?.logDiscard(state, discarded.name);
   }
 
-  // 2. Handle freeze: remove freeze, grant immunity
-  if (player.dragonFrozen) {
-    clearFreeze(player, 'dragon');
-    grantFreezeImmunity(player, 'dragon');
-    logger?.logFreezeThaw(state, 'dragon');
+  // 2. Handle freeze stacks: decay by 1, grant immunity when cleared
+  if (player.dragonFreezeStacks > 0) {
+    player.dragonFreezeStacks = Math.max(0, player.dragonFreezeStacks - 1);
+    if (player.dragonFreezeStacks === 0) {
+      grantFreezeImmunity(player, 'dragon');
+      logger?.logFreezeThaw(state, 'dragon');
+    }
   }
-  if (player.riderFrozen) {
-    clearFreeze(player, 'rider');
-    grantFreezeImmunity(player, 'rider');
-    logger?.logFreezeThaw(state, 'rider');
+  if (player.riderFreezeStacks > 0) {
+    player.riderFreezeStacks = Math.max(0, player.riderFreezeStacks - 1);
+    if (player.riderFreezeStacks === 0) {
+      grantFreezeImmunity(player, 'rider');
+      logger?.logFreezeThaw(state, 'rider');
+    }
   }
 
   // 3. Switch active player and increment turn
