@@ -5,16 +5,16 @@
  
  ## Card Prompts
  
-### Strike (Dragon Damage, red)
+### Strike (Dragon Damage, red) - DONE
  Prompt: Create a dynamic, close-quarters dragon attack that is quick and precise. Show a dragon rider's weapon or dragon claws striking the enemy dragon’s armored scales, with sparks and a shallow impact crater to communicate moderate damage. Background should hint at a dirty battlefield skirmish, fast motion lines, and a sense of tempo.
  
-### Heavy Blow (Dragon Damage, red)
+### Heavy Blow (Dragon Damage, red) - DONE
  Prompt: Depict a slow, devastating hit against an enemy dragon. Show a massive weapon or a dragon’s crushing limb slamming down, shattering rock and armor plates, with debris flying to show heavier damage. Background should feel brutal and weighty, like a ruined arena or cliffside.
  
-### Burning Hit (Dragon Damage, orange)
+### Burning Hit (Dragon Damage, orange) - DONE
  Prompt: Show a single attack that lands and ignites the enemy dragon. Visualize a weapon or dragon strike trailing flame that bites into scales, leaving a glowing burn wound and embers in the air. Background should feel smoky, scorched, and oppressive.
  
-### Weakening Strike (Rider Damage, red)
+### Weakening Strike (Rider Damage, red) - DONE
  Prompt: Illustrate a rider-focused attack that saps strength. Show a rider being struck in a way that staggers them, with a visible loss of resolve or posture. Use visual cues like dimming light, frayed banners, or a cracked visor to imply weakened morale and capability.
  
 ### Precision Strike (Rider Damage, red)

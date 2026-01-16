@@ -1,4 +1,5 @@
 import type { Card } from '../../data/types';
+import { getAssetPath } from '../../utils/assets';
 
 interface CardComponentProps {
   card: Card;
@@ -76,6 +77,15 @@ export default function CardComponent({
           transition-all duration-200
         `}
       >
+        {/* Image */}
+        <div className="mb-1 h-10 rounded-md overflow-hidden bg-black/20">
+          <img
+            src={getAssetPath(card.imagePath)}
+            alt={card.name}
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+
         {/* Header: Name + Cost */}
         <div className="flex justify-between items-start gap-1 mb-1">
           <h4 className="text-sm font-bold text-white leading-tight">{card.name}</h4>
@@ -125,6 +135,15 @@ export default function CardComponent({
       {/* Name */}
       <div className="mt-2 mb-2">
         <h4 className="text-sm font-bold text-white leading-tight">{card.name}</h4>
+      </div>
+
+      {/* Image */}
+      <div className="mb-2 h-16 rounded-md overflow-hidden bg-black/20">
+        <img
+          src={getAssetPath(card.imagePath)}
+          alt={card.name}
+          className="w-full h-full object-cover object-center"
+        />
       </div>
 
       {/* Effect type badge */}

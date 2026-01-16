@@ -26,6 +26,7 @@ export function createTestCard(overrides: Partial<Card> = {}): Card {
     value: 3,
     secondaryValue: 0,
     description: 'Test card description',
+    imagePath: 'assets/cards/actions/strike.png',
     ...overrides,
   };
 }

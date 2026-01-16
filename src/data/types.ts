@@ -135,6 +135,7 @@ export interface Card {
   value: number;
   secondaryValue: number;
   description: string;
+  imagePath: string;
 }
 
 export interface CardDefinition {
@@ -146,6 +147,7 @@ export interface CardDefinition {
   secondaryValue: number;
   description: string;
   copies: number;
+  imagePath: string;
 }
 
 // ============================================================================

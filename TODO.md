@@ -89,6 +89,7 @@ Check for any mutations in `src/ai/ai.ts` that modify `state.actionLog` directly
 ## Future Improvements
 
 ### Draft Pool Architecture
+- Increase card artwork height in draft pool screen
 - Consider refactoring multiplayer draft to use server-side visible/hidden pool separation for better fairness
 - Current implementation uses client-side slicing which could allow clients to inspect upcoming cards
 

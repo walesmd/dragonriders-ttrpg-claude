@@ -10,6 +10,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 2,
     secondaryValue: 0,
     description: 'Deal 2 damage to enemy Dragon',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 4,
   },
   {
@@ -20,6 +21,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 4,
     secondaryValue: 0,
     description: 'Deal 4 damage to enemy Dragon',
+    imagePath: 'assets/cards/actions/heavy-blow.png',
     copies: 2,
   },
   {
@@ -30,6 +32,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 1,
     secondaryValue: 1,
     description: 'Deal 1 damage to enemy Dragon and apply 1 Burn',
+    imagePath: 'assets/cards/actions/burning-hit.png',
     copies: 2,
   },
 
@@ -42,6 +45,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 2,
     secondaryValue: 0,
     description: 'Deal 2 damage to enemy Rider',
+    imagePath: 'assets/cards/actions/weakening-strike.png',
     copies: 3,
   },
   {
@@ -52,6 +56,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 3,
     secondaryValue: 0,
     description: 'Deal 3 damage to enemy Rider',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
   {
@@ -62,6 +67,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 2,
     secondaryValue: 0,
     description: 'Deal 2 damage to enemy Rider, target becomes Wounded until healed',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 1,
   },
 
@@ -74,6 +80,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 2,
     secondaryValue: 1,
     description: 'Deal 2 damage to enemy Dragon, 1 damage to enemy Rider',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
   {
@@ -84,6 +91,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 1,
     secondaryValue: 1,
     description: 'Deal 1 damage to enemy Dragon and 1 damage to enemy Rider',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
 
@@ -96,6 +104,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 0,
     secondaryValue: 0,
     description: 'Apply Freeze to enemy Dragon',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
   {
@@ -106,6 +115,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 0,
     secondaryValue: 0,
     description: 'Apply Freeze to enemy Rider',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
   {
@@ -116,6 +126,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 2,
     secondaryValue: 0,
     description: 'Opponent loses 2 Energy',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
   {
@@ -126,6 +137,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 2,
     secondaryValue: 0,
     description: 'Opponent discards 2 cards randomly',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
 
@@ -138,6 +150,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 2,
     secondaryValue: 0,
     description: 'Your Rider gains 2 Shields',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 3,
   },
   {
@@ -148,6 +161,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 0,
     secondaryValue: 0,
     description: 'Destroy all Shields on enemy Rider',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 1,
   },
 
@@ -160,6 +174,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 3,
     secondaryValue: 0,
     description: 'Heal your Dragon for 3 HP',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
   {
@@ -170,6 +185,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 3,
     secondaryValue: 0,
     description: 'Heal your Rider for 3 HP',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 4,
   },
 
@@ -182,6 +198,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 3,
     secondaryValue: 0,
     description: 'Gain 3 Energy',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
   {
@@ -192,6 +209,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 1,
     secondaryValue: 0,
     description: 'Remove Freeze from your Dragon or Rider. Draw 1 card.',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
   {
@@ -202,6 +220,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 0,
     secondaryValue: 0,
     description: 'Remove all Burn from your Dragon and Rider',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
   {
@@ -212,6 +231,7 @@ export const CARD_DEFINITIONS: CardDefinition[] = [
     value: 0,
     secondaryValue: 0,
     description: 'Prevent the next status effect applied to your Rider',
+    imagePath: 'assets/cards/actions/strike.png',
     copies: 2,
   },
 ];
@@ -237,6 +257,7 @@ export function createCardPool(): Card[] {
         value: def.value,
         secondaryValue: def.secondaryValue,
         description: def.description,
+        imagePath: def.imagePath,
       });
     }
   }

@@ -238,6 +238,13 @@ export default function CardLibrary({ onBack }: CardLibraryProps) {
                             EFFECT_TYPE_COLORS[card.effectType] || 'border-gray-500 bg-gray-800'
                           }`}
                         >
+                          <div className="mb-3 h-20 rounded-md overflow-hidden bg-black/20">
+                            <img
+                              src={getAssetPath(card.imagePath)}
+                              alt={card.name}
+                              className="w-full h-full object-cover object-center"
+                            />
+                          </div>
                           <div className="flex items-start justify-between mb-2">
                             <h3 className="font-bold text-white text-sm flex-1">{card.name}</h3>
                             <div className="bg-yellow-500 text-gray-900 font-bold text-xs px-2 py-1 rounded ml-2">
